@@ -1,9 +1,9 @@
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.sql.SQLException;
 
-public class GUI
+public class
+GUI
 {
     //Frames
     final JFrame mainFrame = new JFrame();
@@ -24,19 +24,14 @@ public class GUI
     final JButton countryButton = new JButton("Countries");
     final JButton countryLButton = new JButton("Country Languages");
     //Tables
-    CountryTable countryTable = new CountryTable();
-    CityTable cityTable = new CityTable();
-    CountryLanguageTable countryLTable = new CountryLanguageTable();
+    Tables tables = new Tables();
     //Scrolls
-    JScrollPane countryScroll = new JScrollPane(countryTable.getTable());
-    JScrollPane cityScroll = new JScrollPane(cityTable.getTable());
-    JScrollPane countryLScroll = new JScrollPane(countryLTable.getTable());
+    JScrollPane countryScroll = new JScrollPane(tables.getCountryTable());
+    JScrollPane cityScroll = new JScrollPane(tables.getCityTable());
+    JScrollPane countryLScroll = new JScrollPane(tables.getCountryLTable());
 
 
-    //DefaultTableModel model = new DefaultTableModel();
-
-
-    public GUI() throws SQLException, ClassNotFoundException {
+    public GUI() throws ClassNotFoundException, SQLException {
 
         //mainFrame Config
         mainFrame.setResizable(false);
@@ -87,23 +82,21 @@ public class GUI
         countryButton.setFocusable(false);
         cityButton.setFocusable(false);
         countryLButton.setFocusable(false);
-
         //Tables configuration
         tablesPanel.setBackground(Color.WHITE);
         panelCenter.add(tablesPanel,BorderLayout.CENTER);
         //Country Table
-        countryTable.getTable().setVisible(false);
+        tables.getCountryTable().setVisible(false);
         countryScroll.setVisible(false);
         tablesPanel.add(countryScroll);
         countryScroll.setPreferredSize(new Dimension(1000,423));
-
         //City Table
-        cityTable.getTable().setVisible(false);
+        tables.getCityTable().setVisible(false);
         cityScroll.setVisible(false);
         tablesPanel.add(cityScroll);
         //Country Language Table
-        //tablesPanel.add(countryLTable.getTable());
-        countryLTable.getTable().setVisible(false);
+        //tablesPanel.add(tables.getCountryLTable());
+        tables.getCountryLTable().setVisible(false);
         countryLScroll.setVisible(false);
         tablesPanel.add(countryLScroll);
 
@@ -111,29 +104,29 @@ public class GUI
 
         //Buttons Configuration
         countryButton.addActionListener(e -> tablesTitle.setText("Countries Table"));
-        countryButton.addActionListener(e -> countryTable.getTable().setVisible(true));
+        countryButton.addActionListener(e -> tables.getCountryTable().setVisible(true));
         countryButton.addActionListener(e -> countryScroll.setVisible(true));
-        countryButton.addActionListener(e -> cityTable.getTable().setVisible(false));
+        countryButton.addActionListener(e -> tables.getCityTable().setVisible(false));
         countryButton.addActionListener(e -> cityScroll.setVisible(false));
-        countryButton.addActionListener(e->countryLTable.getTable().setVisible(false));
+        countryButton.addActionListener(e->tables.getCountryLTable().setVisible(false));
         countryButton.addActionListener(e -> countryLScroll.setVisible(false));
         countryButton.addActionListener(e -> mainFrame.setSize(1300,750));
 
         cityButton.addActionListener(e -> tablesTitle.setText("Cities Table"));
-        cityButton.addActionListener(e -> cityTable.getTable().setVisible(true));
+        cityButton.addActionListener(e -> tables.getCityTable().setVisible(true));
         cityButton.addActionListener(e -> cityScroll.setVisible(true));
-        cityButton.addActionListener(e->countryLTable.getTable().setVisible(false));
+        cityButton.addActionListener(e->tables.getCountryLTable().setVisible(false));
         cityButton.addActionListener(e -> countryLScroll.setVisible(false));
-        cityButton.addActionListener(e -> countryTable.getTable().setVisible(false));
+        cityButton.addActionListener(e -> tables.getCountryTable().setVisible(false));
         cityButton.addActionListener(e -> countryScroll.setVisible(false));
         cityButton.addActionListener(e -> mainFrame.setSize(800,750));
 
         countryLButton.addActionListener(e -> tablesTitle.setText("Country Languages Table"));
-        countryLButton.addActionListener(e->countryLTable.getTable().setVisible(true));
+        countryLButton.addActionListener(e->tables.getCountryLTable().setVisible(true));
         countryLButton.addActionListener(e -> countryLScroll.setVisible(true));
-        countryLButton.addActionListener(e -> cityTable.getTable().setVisible(false));
+        countryLButton.addActionListener(e -> tables.getCityTable().setVisible(false));
         countryLButton.addActionListener(e -> cityScroll.setVisible(false));
-        countryLButton.addActionListener(e -> countryTable.getTable().setVisible(false));
+        countryLButton.addActionListener(e -> tables.getCountryTable().setVisible(false));
         countryLButton.addActionListener(e -> countryScroll.setVisible(false));
         countryLButton.addActionListener(e -> mainFrame.setSize(800,750));
 
