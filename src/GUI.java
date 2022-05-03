@@ -1,7 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.sql.SQLException;
-
 public class
 GUI
 {
@@ -29,9 +27,9 @@ GUI
     JScrollPane countryScroll = new JScrollPane(tables.getCountryTable());
     JScrollPane cityScroll = new JScrollPane(tables.getCityTable());
     JScrollPane countryLScroll = new JScrollPane(tables.getCountryLTable());
+    ImageIcon ico = new ImageIcon("src/log.png");
 
-
-    public GUI() throws ClassNotFoundException, SQLException {
+    public GUI() throws ClassNotFoundException{
 
         //mainFrame Config
         mainFrame.setResizable(false);
@@ -39,6 +37,7 @@ GUI
         mainFrame.setSize(800,750);
         mainFrame.setTitle("CRUD");
         mainFrame.setLayout(new BorderLayout());
+        mainFrame.setIconImage(ico.getImage());
 
         //Main panels configuration
         panelNorth.setPreferredSize(new Dimension(100,100));
