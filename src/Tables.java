@@ -102,6 +102,7 @@ public class Tables
         cityTable.setDragEnabled(false);
         cityTable.setUpdateSelectionOnSort(false);
         cityTable.getTableHeader().setReorderingAllowed(false);
+        cityTable.getTableHeader().setResizingAllowed(false);
 
         cityTable.setVisible(true);
     }
@@ -151,6 +152,7 @@ public class Tables
         countryLTable.setDragEnabled(false);
         countryLTable.setUpdateSelectionOnSort(false);
         countryLTable.getTableHeader().setReorderingAllowed(false);
+        countryLTable.getTableHeader().setResizingAllowed(false);
 
         countryLTable.setVisible(true);
     }
@@ -221,6 +223,8 @@ public class Tables
         countryTable.setDragEnabled(false);
         countryTable.setUpdateSelectionOnSort(false);
         countryTable.getTableHeader().setReorderingAllowed(false);
+        getCountryTable().getTableHeader().setResizingAllowed(false);
+        countryTable.getTableHeader().setResizingAllowed(false);
 
 
         countryTable.setVisible(true);

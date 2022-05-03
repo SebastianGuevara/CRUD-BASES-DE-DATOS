@@ -6,16 +6,32 @@ import java.sql.SQLException;
 public class DataBase
 {
     private final Connection con;
-    LoginGUI log = new LoginGUI();
+    private String username;
+    private String password;
 
-    public DataBase() throws ClassNotFoundException, SQLException {
+
+    public DataBase() throws SQLException {
+
+        JTextField xField = new JTextField(10);
+        JPasswordField yField = new JPasswordField(10);
+
+        JPanel myPanel = new JPanel();
+        myPanel.setLayout(new BoxLayout(myPanel,BoxLayout.Y_AXIS));
+        myPanel.add(new JLabel("Username:"));
+        myPanel.add(xField);
+        myPanel.add(Box.createVerticalBox()); // a spacer
+        myPanel.add(new JLabel("Password:"));
+        myPanel.add(yField);
+        int result = JOptionPane.showConfirmDialog(null, myPanel,
+                "Login",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE,new ImageIcon());
+        if (result == JOptionPane.OK_OPTION)
+        {
+            username = xField.getText();
+            password = yField.getText();
+        }
 
         String url = "jdbc:mysql://localhost:3306/world";
-        String username = "root";
-        //String password = JOptionPane.showInputDialog(null,"Ingrese clave");
-
-        //Class.forName("jdbc:mysql://localhost:3306/world");
-        con= DriverManager.getConnection(url,log.getUs(),log.getPs());
+        con= DriverManager.getConnection(url,username,password);
         System.out.println("Conectado correctamente");
 
     }
