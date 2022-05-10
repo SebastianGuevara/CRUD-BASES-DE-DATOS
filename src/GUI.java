@@ -5,6 +5,7 @@ GUI
 {
     //Frames
     final JFrame mainFrame = new JFrame();
+    final JFrame createFrame = new JFrame();
     //Panels
     final JPanel panelNorth = new JPanel();
     final JPanel panelSouth = new JPanel();
@@ -21,6 +22,9 @@ GUI
     final JButton cityButton = new JButton("Cities");
     final JButton countryButton = new JButton("Countries");
     final JButton countryLButton = new JButton("Country Languages");
+    final JButton createButton = new JButton("Create");
+    final JButton deleteButton = new JButton("Delete");
+    final JButton updateButton = new JButton("Update");
     //Tables
     Tables tables = new Tables();
     //Scrolls
@@ -28,6 +32,8 @@ GUI
     JScrollPane cityScroll = new JScrollPane(tables.getCityTable());
     JScrollPane countryLScroll = new JScrollPane(tables.getCountryLTable());
     ImageIcon ico = new ImageIcon("src/log.png");
+     //Other variables
+    private String tableSelection = "";
 
     public GUI() throws ClassNotFoundException{
 
@@ -38,6 +44,13 @@ GUI
         mainFrame.setTitle("CRUD");
         mainFrame.setLayout(new BorderLayout());
         mainFrame.setIconImage(ico.getImage());
+
+        //CreateFrame Config
+        createFrame.setResizable(false);
+        createFrame.setSize(400,325);
+        //createFrame.setLayout(new BoxLayout(createFrame,BoxLayout.Y_AXIS));
+        createFrame.setIconImage(ico.getImage());
+        createFrame.setVisible(false);
 
         //Main panels configuration
         panelNorth.setPreferredSize(new Dimension(100,100));
@@ -81,6 +94,15 @@ GUI
         countryButton.setFocusable(false);
         cityButton.setFocusable(false);
         countryLButton.setFocusable(false);
+
+        //Lower panel configuration
+        panelSouth.setLayout(new FlowLayout());
+        panelSouth.add(createButton,FlowLayout.LEFT);
+        panelSouth.add(deleteButton,FlowLayout.CENTER);
+        panelSouth.add(updateButton,FlowLayout.RIGHT);
+        createButton.setFocusable(false);
+        deleteButton.setFocusable(false);
+        updateButton.setFocusable(false);
         //Tables configuration
         tablesPanel.setBackground(Color.WHITE);
         panelCenter.add(tablesPanel,BorderLayout.CENTER);
@@ -101,7 +123,7 @@ GUI
 
 
 
-        //Buttons Configuration
+        //Table Buttons Configuration
         countryButton.addActionListener(e -> tablesTitle.setText("Countries Table"));
         countryButton.addActionListener(e -> tables.getCountryTable().setVisible(true));
         countryButton.addActionListener(e -> countryScroll.setVisible(true));
@@ -110,6 +132,7 @@ GUI
         countryButton.addActionListener(e->tables.getCountryLTable().setVisible(false));
         countryButton.addActionListener(e -> countryLScroll.setVisible(false));
         countryButton.addActionListener(e -> mainFrame.setSize(1300,750));
+        countryButton.addActionListener(e -> tableSelection = "country");
 
         cityButton.addActionListener(e -> tablesTitle.setText("Cities Table"));
         cityButton.addActionListener(e -> tables.getCityTable().setVisible(true));
@@ -119,6 +142,7 @@ GUI
         cityButton.addActionListener(e -> tables.getCountryTable().setVisible(false));
         cityButton.addActionListener(e -> countryScroll.setVisible(false));
         cityButton.addActionListener(e -> mainFrame.setSize(800,750));
+        cityButton.addActionListener(e -> tableSelection = "city" );
 
         countryLButton.addActionListener(e -> tablesTitle.setText("Country Languages Table"));
         countryLButton.addActionListener(e->tables.getCountryLTable().setVisible(true));
@@ -128,6 +152,34 @@ GUI
         countryLButton.addActionListener(e -> tables.getCountryTable().setVisible(false));
         countryLButton.addActionListener(e -> countryScroll.setVisible(false));
         countryLButton.addActionListener(e -> mainFrame.setSize(800,750));
+        countryLButton.addActionListener(e -> tableSelection = "countryL");
+
+        //Create Button Configuration
+        createButton.addActionListener(e ->{
+
+            if(tableSelection.equals("country"))
+            {
+                createFrame.setTitle("CREATE NEW COUNTRY");
+                createFrame.setVisible(true);
+            }
+            else if(tableSelection.equals("city"))
+            {
+                createFrame.setTitle("CREATE NEW CITY");
+                createFrame.setVisible(true);
+            }
+            else if(tableSelection.equals("countryL"))
+            {
+                createFrame.setTitle("CREATE NEW COUNTRY LANGUAGE");
+                System.out.println("HOLA");
+                createFrame.setVisible(true);
+            }
+            else
+            {
+                JOptionPane.showMessageDialog( null,"SELECT A TABLE");
+            }
+
+
+        });
 
         System.out.println(cityScroll.getPreferredSize());
 

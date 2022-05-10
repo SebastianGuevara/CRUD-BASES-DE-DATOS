@@ -52,7 +52,7 @@ public class Tables
     public Tables() throws ClassNotFoundException {
         cityTableConfig();
         countryLanguagesTableConfig();
-        coutnryTableConfig();
+        countryTableConfig();
     }
     private void cityTableConfig()
     {
@@ -153,10 +153,9 @@ public class Tables
         countryLTable.setUpdateSelectionOnSort(false);
         countryLTable.getTableHeader().setReorderingAllowed(false);
         countryLTable.getTableHeader().setResizingAllowed(false);
-
         countryLTable.setVisible(true);
     }
-    private void coutnryTableConfig()
+    private void countryTableConfig()
     {
         DefaultTableModel model = new DefaultTableModel()
         {
