@@ -7,6 +7,7 @@ import java.sql.Statement;
 
 public class Tables
 {
+   // private final GUI gui = new GUI();
     DataBase db;
 
     {
@@ -227,6 +228,10 @@ public class Tables
 
 
         countryTable.setVisible(true);
+    }
+    private void create()
+    {
+        //System.out.println(gui.newCityPopulation);
     }
 
     public JTable getCityTable() {
