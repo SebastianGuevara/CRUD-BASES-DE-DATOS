@@ -75,7 +75,7 @@ public class createGUI
     {
         //Frame config
         createFrame.setResizable(true);
-        createFrame.setSize(400,325);
+        createFrame.setSize(400,260);
         createFrame.setLayout(new BorderLayout());
         createFrame.setIconImage(ico.getImage());
         createFrame.setVisible(false);
@@ -91,6 +91,7 @@ public class createGUI
         mainCreatePanel.setBounds(0,0,500,500);
         mainCreatePanel.setVisible(true);
 
+<<<<<<< HEAD
         this.createCity();
         this.createCountry();
         this.createCountryLanguage();
@@ -274,6 +275,22 @@ public class createGUI
     private void createCity()
     {
         //Create City Panel Configuration
+=======
+        //Create Country Panel Configuration
+        createCountryPanel.setBackground(Color.BLACK);
+        createCountryPanel.setBounds(0,0,400,325);
+
+        this.createCity();
+
+        //Create Country Language Configuration
+        createCountryLPanel.setBackground(Color.RED);
+        createCountryLPanel.setBounds(0,0,400,325);
+    }
+
+    private void createCity()
+    {
+        String[] createCityLabels = {"ID: ","Name: ","Country Code: ","District: ","Population: "};
+>>>>>>> fdf4ea26c4a272c43f6939e6123d40fc241773f4
         GridBagLayout cityLayout = new GridBagLayout();
         GridBagConstraints cityConstraintsID = new GridBagConstraints();
         GridBagConstraints cityConstraintsName = new GridBagConstraints();
@@ -281,7 +298,7 @@ public class createGUI
         GridBagConstraints cityConstraintsDistrict = new GridBagConstraints();
         GridBagConstraints cityConstraintsPopulation = new GridBagConstraints();
         createCityPanel.setLayout(cityLayout);
-        createCityPanel.setBounds(0,0,400,250);
+        createCityPanel.setBounds(0,0,400,225);
 
         cityConstraintsID.gridx = -1;
         cityConstraintsID.gridy = 0;
@@ -348,6 +365,7 @@ public class createGUI
             this.newCityDistrict = cityDistrict.getText();
             this.newCityPopulation = cityPopulation.getText();
         });
+<<<<<<< HEAD
 
     }
     private  void  createCountryLanguage()
@@ -393,6 +411,9 @@ public class createGUI
         createCountryLPanel.add(countryLIsOfficial,countryLIsOfficialConstraints);
         createCountryLPanel.add(countryLPercentageLabel,countryLPercentageConstraints);
         createCountryLPanel.add(countryLPercentage,countryLPercentageConstraints);
+=======
+    }
+>>>>>>> fdf4ea26c4a272c43f6939e6123d40fc241773f4
 
         countryLCode.setPreferredSize(new Dimension(150,20));
 
