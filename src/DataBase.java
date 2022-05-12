@@ -22,6 +22,7 @@ public class DataBase
         myPanel.add(Box.createVerticalBox()); // a spacer
         myPanel.add(new JLabel("Password:"));
         myPanel.add(yField);
+        /*
         int result = JOptionPane.showConfirmDialog(null, myPanel,
                 "Login",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE,new ImageIcon());
         if (result == JOptionPane.OK_OPTION)
@@ -29,9 +30,10 @@ public class DataBase
             username = xField.getText();
             password = yField.getText();
         }
+         */
 
         String url = "jdbc:mysql://localhost:3306/world";
-        con= DriverManager.getConnection(url,username,password);
+        con= DriverManager.getConnection(url,"root","12345");
         System.out.println("Conectado correctamente");
 
     }
