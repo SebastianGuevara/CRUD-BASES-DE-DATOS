@@ -26,7 +26,7 @@ public class createGUI
     {
         //Frame config
         createFrame.setResizable(true);
-        createFrame.setSize(400,325);
+        createFrame.setSize(400,260);
         createFrame.setLayout(new BorderLayout());
         createFrame.setIconImage(ico.getImage());
         createFrame.setVisible(false);
@@ -42,9 +42,19 @@ public class createGUI
         mainCreatePanel.setBounds(0,0,500,500);
         mainCreatePanel.setVisible(true);
 
+        //Create Country Panel Configuration
+        createCountryPanel.setBackground(Color.BLACK);
+        createCountryPanel.setBounds(0,0,400,325);
 
+        this.createCity();
 
-        //Create City Panel Configuration
+        //Create Country Language Configuration
+        createCountryLPanel.setBackground(Color.RED);
+        createCountryLPanel.setBounds(0,0,400,325);
+    }
+
+    private void createCity()
+    {
         String[] createCityLabels = {"ID: ","Name: ","Country Code: ","District: ","Population: "};
         GridBagLayout cityLayout = new GridBagLayout();
         GridBagConstraints cityConstraintsID = new GridBagConstraints();
@@ -53,7 +63,7 @@ public class createGUI
         GridBagConstraints cityConstraintsDistrict = new GridBagConstraints();
         GridBagConstraints cityConstraintsPopulation = new GridBagConstraints();
         createCityPanel.setLayout(cityLayout);
-        createCityPanel.setBounds(0,0,400,250);
+        createCityPanel.setBounds(0,0,400,225);
 
         cityConstraintsID.gridx = -1;
         cityConstraintsID.gridy = 0;
@@ -112,8 +122,6 @@ public class createGUI
         createCityButtonConstraints.anchor = GridBagConstraints.PAGE_END;
         createCityPanel.add(createCityButton,createCityButtonConstraints);
         southCreateCityPanel.setPreferredSize(new Dimension(100,40));
-        //mainCreatePanel.add(southCreateCityPanel,BorderLayout.SOUTH);
-        //southCreateCityPanel.add(createCityButton);
         createCityButton.setFocusable(false);
         createCityButton.addActionListener(e->{
             this.newCityID = cityID.getText();
@@ -122,16 +130,6 @@ public class createGUI
             this.newCityDistrict = cityDistrict.getText();
             this.newCityPopulation = cityPopulation.getText();
         });
-
-        //Create Country Panel Configuration
-        createCountryPanel.setBackground(Color.BLACK);
-        createCountryPanel.setBounds(0,0,400,325);
-
-        //Create Country Language Configuration
-        createCountryLPanel.setBackground(Color.RED);
-        createCountryLPanel.setBounds(0,0,400,325);
-
-
     }
 
     public String getTableSelection() {
