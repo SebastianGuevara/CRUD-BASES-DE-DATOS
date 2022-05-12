@@ -1,3 +1,5 @@
+import documents.JTextFieldCharLimit;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
@@ -336,7 +338,7 @@ public class createGUI
                 if(!Character.isDigit(input)&&!(input==KeyEvent.VK_BACK_SPACE)&&!(input==KeyEvent.VK_DELETE))
                 {
                     e.consume();
-                    JOptionPane.showMessageDialog(null,"This space only accepts numbers");
+                    JOptionPane.showMessageDialog(null,"THIS SPACE ONLY ACCEPTS NUMBERS");
                 }
             }
         });
@@ -356,9 +358,10 @@ public class createGUI
         createCityPanel.add(createCityButton,createCityButtonConstraints);
         southCreateCityPanel.setPreferredSize(new Dimension(100,40));
         createCityButton.setFocusable(false);
+        cityCountryCode.setDocument(new JTextFieldCharLimit(3));
         createCityButton.addActionListener(e->{
             create.newCityName = cityName.getText();
-            create.newCityCode = cityCountryCode.getText();
+            create.newCityCode = cityCountryCode.getText().toUpperCase();
             create.newCityDistrict = cityDistrict.getText();
             create.newCityPopulation = Integer.parseInt(cityPopulation.getText());
             create.addToCity();
@@ -420,18 +423,29 @@ public class createGUI
         countryLCode.setPreferredSize(new Dimension(150,20));
         countryLIsOfficial.setPreferredSize(new Dimension(150,20));
 
+        countryLCode.setDocument(new JTextFieldCharLimit(3));
+        countryLCode.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char input = e.getKeyChar();
+                if(!Character.isLetter(input)&&!(input==KeyEvent.VK_BACK_SPACE)&&!(input==KeyEvent.VK_DELETE))
+                {
+                    e.consume();
+                    JOptionPane.showMessageDialog(null,"THIS SPACE ONLY ACCEPTS LETTERS");
+                }
+            }
+        });
         countryLPercentage.addKeyListener(new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent e) {
                 char input = e.getKeyChar();
-                if(!Character.isDigit(input)&&!(input==KeyEvent.VK_BACK_SPACE)&&!(input==KeyEvent.VK_DELETE))
+                if(!Character.isDigit(input)&&!(input==KeyEvent.VK_BACK_SPACE)&&!(input==KeyEvent.VK_DELETE)&&!(input==KeyEvent.VK_PERIOD))
                 {
                     e.consume();
-                    JOptionPane.showMessageDialog(null,"This space only accepts numbers");
+                    JOptionPane.showMessageDialog(null,"THIS SPACE ONLY ACCEPTS NUMBERS");
                 }
             }
         });
-
         JButton createCountryLButton = new JButton("Enter");
         GridBagConstraints createCountryLButtonConstraints = new GridBagConstraints();
         createCountryLButtonConstraints.gridx = -1;
@@ -440,16 +454,25 @@ public class createGUI
         createCountryLButtonConstraints.anchor = GridBagConstraints.PAGE_END;
         createCountryLPanel.add(createCountryLButton,createCountryLButtonConstraints);
         createCountryLButton.addActionListener(e->{
-            create.newCountryLCode = countryLCode.getText();
-            create.newCountryLLanguage = countryLLanguage.getText();
-            create.newCountryLIsOfficial = Objects.requireNonNull(countryLIsOfficial.getSelectedItem()).toString();
-            create.newCountryLPercentage = Float.parseFloat(countryLPercentage.getText());
-            create.addToCityLanguage();
-            createFrame.dispatchEvent(new WindowEvent(createFrame,WindowEvent.WINDOW_CLOSING));
-            JOptionPane.showMessageDialog(null,"CITY CREATED SUCCESSFULLY");
-            countryLCode.setText("");
-            countryLLanguage.setText("");
-            countryLIsOfficial.setSelectedItem("");
+            if(Float.parseFloat(countryLPercentage.getText())>100)
+            {
+                JOptionPane.showMessageDialog(null,"THE PERCENTAGE THAT YOU ENTER IS NOT VALID");
+            }
+            else
+            {
+                create.newCountryLCode = countryLCode.getText().toUpperCase();
+                create.newCountryLLanguage = countryLLanguage.getText();
+                create.newCountryLIsOfficial = Objects.requireNonNull(countryLIsOfficial.getSelectedItem()).toString();
+                create.newCountryLPercentage = Float.parseFloat(countryLPercentage.getText());
+                create.addToCityLanguage();
+                createFrame.dispatchEvent(new WindowEvent(createFrame,WindowEvent.WINDOW_CLOSING));
+                JOptionPane.showMessageDialog(null,"COUNTRY LANGUAGE CREATED SUCCESSFULLY");
+                countryLCode.setText("");
+                countryLLanguage.setText("");
+                countryLIsOfficial.setSelectedItem("");
+                countryLPercentage.setText("");
+            }
+
         });
     }
     public void setTableSelection(String tableSelection) {
