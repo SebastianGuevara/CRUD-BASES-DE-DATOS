@@ -9,6 +9,13 @@ public class Tables
 {
    // private final GUI gui = new GUI();
     DataBase db;
+    private DefaultTableModel cityModel = new DefaultTableModel()
+    {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return false;
+        }
+    };
 
     {
         try {
@@ -55,23 +62,16 @@ public class Tables
         countryLanguagesTableConfig();
         countryTableConfig();
     }
-    private void cityTableConfig()
+    public void cityTableConfig()
     {
-        DefaultTableModel model = new DefaultTableModel()
-        {
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return false;
-            }
-        };
 
-        model.addColumn("ID");
-        model.addColumn("Name");
-        model.addColumn("CountryCode");
-        model.addColumn("District");
-        model.addColumn("Population");
+        cityModel.addColumn("ID");
+        cityModel.addColumn("Name");
+        cityModel.addColumn("CountryCode");
+        cityModel.addColumn("District");
+        cityModel.addColumn("Population");
 
-        cityTable.setModel(model);
+        cityTable.setModel(cityModel);
         String[] data = new String[5];
 
 
@@ -91,7 +91,7 @@ public class Tables
                 data[3]=result.getString(4);
                 data[4]=result.getString(5);
 
-                model.addRow(data);
+                cityModel.addRow(data);
             }
         } catch (SQLException throwables)
         {
@@ -107,7 +107,7 @@ public class Tables
 
         cityTable.setVisible(true);
     }
-    private void countryLanguagesTableConfig()
+    public void countryLanguagesTableConfig()
     {
         DefaultTableModel model = new DefaultTableModel()
         {
@@ -156,8 +156,9 @@ public class Tables
         countryLTable.getTableHeader().setResizingAllowed(false);
         countryLTable.setVisible(true);
     }
-    private void countryTableConfig()
+    public void countryTableConfig()
     {
+        System.out.println("tst");
         DefaultTableModel model = new DefaultTableModel()
         {
             @Override
@@ -244,5 +245,9 @@ public class Tables
 
     public JTable getCountryTable() {
         return countryTable;
+    }
+
+    public DefaultTableModel getCityModel() {
+        return cityModel;
     }
 }

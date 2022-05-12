@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class DataBase
@@ -35,6 +36,10 @@ public class DataBase
         String url = "jdbc:mysql://localhost:3306/world";
         con= DriverManager.getConnection(url,"root","12345");
         System.out.println("Conectado correctamente");
+        PreparedStatement st1 = con.prepareStatement("SET FOREIGN_KEY_CHECKS=0");
+        PreparedStatement st2 = con.prepareStatement("SET GLOBAL FOREIGN_KEY_CHECKS=0");
+        st1.execute();
+        st2.execute();
 
     }
 

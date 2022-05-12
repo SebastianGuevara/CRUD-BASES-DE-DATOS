@@ -1,5 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.WindowEvent;
 
 public class createGUI
 {
@@ -43,17 +46,15 @@ public class createGUI
     public String newCountryCode,newCountryName,newCountryContinent,newCountryRegion,newCountrySurface,newCountryYear,newCountryPopulation,newCountryLifeExpectancy,newCountryGNP,newCountryGNPOld,newCountryLocalName,newCountryGovernmentForm,newCountryHeadOfState,newCountryCapital,newCountryCode2;
 
     //City Inputs and Labels
-    final JTextField cityID = new JTextField();
     final JTextField cityName = new JTextField();
     final JTextField cityCountryCode = new JTextField();
     final JTextField cityDistrict = new JTextField();
     final JTextField cityPopulation = new JTextField();
-    final JLabel cityIDLabel = new JLabel("City ID:");
     final JLabel cityNameLabel = new JLabel("Name:");
     final JLabel cityCountryCodeLabel = new JLabel("Country Code:");
     final JLabel cityDistrictLabel = new JLabel("District:");
     final JLabel cityPopulationLabel = new JLabel("City Population:");
-    public String newCityID,newCityName,newCityCode,newCityDistrict,newCityPopulation;
+
 
     //Country Language Inputs and Labels
     final JTextField countryLCode = new JTextField();
@@ -70,6 +71,7 @@ public class createGUI
     final JLayeredPane mainCreatePanel = new JLayeredPane();
     private String tableSelection = "";
     ImageIcon ico = new ImageIcon("src/log.png");
+    private final Create create = new Create();
 
     public createGUI()
     {
@@ -275,47 +277,38 @@ public class createGUI
     {
         //Create City Panel Configuration
         GridBagLayout cityLayout = new GridBagLayout();
-        GridBagConstraints cityConstraintsID = new GridBagConstraints();
         GridBagConstraints cityConstraintsName = new GridBagConstraints();
         GridBagConstraints cityConstraintsCode = new GridBagConstraints();
         GridBagConstraints cityConstraintsDistrict = new GridBagConstraints();
         GridBagConstraints cityConstraintsPopulation = new GridBagConstraints();
         createCityPanel.setLayout(cityLayout);
-        createCityPanel.setBounds(0,0,400,250);
+        createCityPanel.setBounds(0,0,400,200);
 
-        cityConstraintsID.gridx = -1;
-        cityConstraintsID.gridy = 0;
-        cityConstraintsID.insets.bottom = 10;
-        cityConstraintsID.insets.right = 7;
-        cityConstraintsID.gridwidth = GridBagConstraints.RELATIVE;
-        cityConstraintsID.fill = GridBagConstraints.HORIZONTAL;
         cityConstraintsName.gridx = -1;
-        cityConstraintsName.gridy = 1;
+        cityConstraintsName.gridy = 0;
         cityConstraintsName.insets.bottom = 10;
         cityConstraintsName.insets.right = 7;
         cityConstraintsName.gridwidth = GridBagConstraints.RELATIVE;
         cityConstraintsName.fill = GridBagConstraints.HORIZONTAL;
         cityConstraintsCode.gridx = -1;
-        cityConstraintsCode.gridy = 2;
+        cityConstraintsCode.gridy = 1;
         cityConstraintsCode.insets.bottom = 10;
         cityConstraintsCode.insets.right = 7;
         cityConstraintsCode.gridwidth = GridBagConstraints.RELATIVE;
         cityConstraintsCode.fill = GridBagConstraints.HORIZONTAL;
         cityConstraintsDistrict.gridx = -1;
-        cityConstraintsDistrict.gridy = 3;
+        cityConstraintsDistrict.gridy = 2;
         cityConstraintsDistrict.insets.bottom = 10;
         cityConstraintsDistrict.insets.right = 7;
         cityConstraintsDistrict.gridwidth = GridBagConstraints.RELATIVE;
         cityConstraintsDistrict.fill = GridBagConstraints.HORIZONTAL;
         cityConstraintsPopulation.gridx = -1;
-        cityConstraintsPopulation.gridy = 4;
+        cityConstraintsPopulation.gridy = 3;
         cityConstraintsPopulation.insets.bottom = 10;
         cityConstraintsPopulation.insets.right = 7;
         cityConstraintsPopulation.gridwidth = GridBagConstraints.RELATIVE;
         cityConstraintsPopulation.fill = GridBagConstraints.HORIZONTAL;
 
-        createCityPanel.add(cityIDLabel,cityConstraintsID);
-        createCityPanel.add(cityID,cityConstraintsID);
         createCityPanel.add(cityNameLabel,cityConstraintsName);
         createCityPanel.add(cityName,cityConstraintsName);
         createCityPanel.add(cityCountryCodeLabel,cityConstraintsCode);
@@ -325,7 +318,18 @@ public class createGUI
         createCityPanel.add(cityPopulationLabel,cityConstraintsPopulation);
         createCityPanel.add(cityPopulation,cityConstraintsPopulation);
 
-        cityID.setPreferredSize(new Dimension(150,20));
+        cityPopulation.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char input = e.getKeyChar();
+                if(!Character.isDigit(input)&&!(input==KeyEvent.VK_BACK_SPACE)&&!(input==KeyEvent.VK_DELETE))
+                {
+                    e.consume();
+                    JOptionPane.showMessageDialog(null,"This space only accepts numbers");
+                }
+            }
+        });
+
         cityName.setPreferredSize(new Dimension(150,20));
         cityCountryCode.setPreferredSize(new Dimension(150,20));
         cityDistrict.setPreferredSize(new Dimension(150,20));
@@ -342,11 +346,14 @@ public class createGUI
         southCreateCityPanel.setPreferredSize(new Dimension(100,40));
         createCityButton.setFocusable(false);
         createCityButton.addActionListener(e->{
-            this.newCityID = cityID.getText();
-            this.newCityName = cityName.getText();
-            this.newCityCode = cityCountryCode.getText();
-            this.newCityDistrict = cityDistrict.getText();
-            this.newCityPopulation = cityPopulation.getText();
+            create.newCityName = cityName.getText();
+            create.newCityCode = cityCountryCode.getText();
+            create.newCityDistrict = cityDistrict.getText();
+            create.newCityPopulation = Integer.parseInt(cityPopulation.getText());
+            create.addToCity();
+            createFrame.dispatchEvent(new WindowEvent(createFrame,WindowEvent.WINDOW_CLOSING));
+            JOptionPane.showMessageDialog(null,"CITY CREATED SUCCESSFULLY");
+
         });
 
     }
@@ -429,7 +436,7 @@ public class createGUI
                 createCityPanel.setVisible(true);
                 createCountryPanel.setVisible(false);
                 createCountryLPanel.setVisible(false);
-                createFrame.setSize(400,280);
+                createFrame.setSize(400,240);
                 createFrame.setVisible(true);
             }
             case "countryL" -> {
