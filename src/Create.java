@@ -3,10 +3,12 @@ import java.sql.*;
 public class Create
 {
     //private Connection con;
-    public String newCityName,newCityCode,newCityDistrict;
     public int newCityPopulation;
+    public String newCityName,newCityCode,newCityDistrict;
+    public String newCountryLCode,newCountryLLanguage,newCountryLIsOfficial;
+    public float newCountryLPercentage;
     private Tables tables;
-
+    public int cityCount;
     {
         try {
             tables = new Tables();
@@ -14,10 +16,14 @@ public class Create
             e.printStackTrace();
         }
     }
+    private Connection con = tables.db.getConnection();
 
-    public Create()
-    {
-
+    public Create() throws SQLException {
+        Statement idStatement = con.createStatement();
+        ResultSet rs = idStatement.executeQuery("select id from city order by id desc limit 1;");
+        rs.next();
+        int count = rs.getInt(1);
+        this.cityCount = count +1;
     }
 
     /*
@@ -59,18 +65,10 @@ public class Create
     public void addToCity()
     {
         String addCity = "INSERT INTO city (ID, Name, CountryCode, District, Population) VALUES (?,?,?,?,?)";
-
-        String countryData[];
-        countryData = new String[15];
-
         try {
-            Connection con = tables.db.getConnection();
+
             PreparedStatement statement = con.prepareStatement(addCity);
-            Statement idStatement = con.createStatement();
-            ResultSet rs = idStatement.executeQuery("select id from city order by id desc limit 1;");
-            rs.next();
-            int count = rs.getInt(1);
-            statement.setInt(1, count+1);
+            statement.setInt(1, this.cityCount);
             statement.setString(2, newCityName);
             statement.setString(3, newCityCode);
             statement.setString(4, newCityDistrict);
@@ -80,8 +78,23 @@ public class Create
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
     }
+    public void addToCityLanguage()
+    {
+        String addCountryLanguage = "INSERT INTO countryLanguage (CountryCode, Language, IsOfficial, Percentage) VALUES (?,?,?,?)";
+        try {
+            PreparedStatement statement = con.prepareStatement(addCountryLanguage);
+            statement.setString(1, newCountryLCode);
+            statement.setString(2, newCountryLLanguage);
+            statement.setString(3, newCountryLIsOfficial);
+            statement.setFloat(4, newCountryLPercentage);
+            statement.execute();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
 }
 

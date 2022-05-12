@@ -3,6 +3,8 @@ import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
+import java.sql.SQLException;
+import java.util.Objects;
 
 public class createGUI
 {
@@ -54,27 +56,27 @@ public class createGUI
     final JLabel cityCountryCodeLabel = new JLabel("Country Code:");
     final JLabel cityDistrictLabel = new JLabel("District:");
     final JLabel cityPopulationLabel = new JLabel("City Population:");
+    final JLabel cityID = new JLabel();
+    final JLabel cityIDLabel = new JLabel("City ID:");
 
 
     //Country Language Inputs and Labels
+    final String[] isOfficialChoices = {"","T","F"};
     final JTextField countryLCode = new JTextField();
     final JTextField countryLLanguage = new JTextField();
-    final JTextField countryLIsOfficial = new JTextField();
+    final JComboBox<String> countryLIsOfficial = new JComboBox<>(isOfficialChoices);
     final JTextField countryLPercentage = new JTextField();
     final JLabel countryLCodeLabel = new JLabel("Code:");
     final JLabel countryLLanguageLabel = new JLabel("Language:");
     final JLabel countryLIsOfficialLabel = new JLabel("Is official:");
     final JLabel countryLPercentageLabel = new JLabel("Percentage: ");
-    public String newCountryLCode,newCountryLLanguage,newCountryLIsOfficial,newCountryLPercentage;
-
     //Other stuff
     final JLayeredPane mainCreatePanel = new JLayeredPane();
     private String tableSelection = "";
     ImageIcon ico = new ImageIcon("src/log.png");
     private final Create create = new Create();
 
-    public createGUI()
-    {
+    public createGUI() throws SQLException {
         //Frame config
         createFrame.setResizable(true);
         createFrame.setSize(400,325);
@@ -277,6 +279,7 @@ public class createGUI
     {
         //Create City Panel Configuration
         GridBagLayout cityLayout = new GridBagLayout();
+        GridBagConstraints cityConstraintsID = new GridBagConstraints();
         GridBagConstraints cityConstraintsName = new GridBagConstraints();
         GridBagConstraints cityConstraintsCode = new GridBagConstraints();
         GridBagConstraints cityConstraintsDistrict = new GridBagConstraints();
@@ -284,31 +287,39 @@ public class createGUI
         createCityPanel.setLayout(cityLayout);
         createCityPanel.setBounds(0,0,400,200);
 
+        cityConstraintsID.gridx = -1;
+        cityConstraintsID.gridy = 0;
+        cityConstraintsID.insets.bottom = 10;
+        cityConstraintsID.insets.right = 7;
+        cityConstraintsID.gridwidth = GridBagConstraints.RELATIVE;
+        cityConstraintsID.fill = GridBagConstraints.HORIZONTAL;
         cityConstraintsName.gridx = -1;
-        cityConstraintsName.gridy = 0;
+        cityConstraintsName.gridy = 1;
         cityConstraintsName.insets.bottom = 10;
         cityConstraintsName.insets.right = 7;
         cityConstraintsName.gridwidth = GridBagConstraints.RELATIVE;
         cityConstraintsName.fill = GridBagConstraints.HORIZONTAL;
         cityConstraintsCode.gridx = -1;
-        cityConstraintsCode.gridy = 1;
+        cityConstraintsCode.gridy = 2;
         cityConstraintsCode.insets.bottom = 10;
         cityConstraintsCode.insets.right = 7;
         cityConstraintsCode.gridwidth = GridBagConstraints.RELATIVE;
         cityConstraintsCode.fill = GridBagConstraints.HORIZONTAL;
         cityConstraintsDistrict.gridx = -1;
-        cityConstraintsDistrict.gridy = 2;
+        cityConstraintsDistrict.gridy = 3;
         cityConstraintsDistrict.insets.bottom = 10;
         cityConstraintsDistrict.insets.right = 7;
         cityConstraintsDistrict.gridwidth = GridBagConstraints.RELATIVE;
         cityConstraintsDistrict.fill = GridBagConstraints.HORIZONTAL;
         cityConstraintsPopulation.gridx = -1;
-        cityConstraintsPopulation.gridy = 3;
+        cityConstraintsPopulation.gridy = 4;
         cityConstraintsPopulation.insets.bottom = 10;
         cityConstraintsPopulation.insets.right = 7;
         cityConstraintsPopulation.gridwidth = GridBagConstraints.RELATIVE;
         cityConstraintsPopulation.fill = GridBagConstraints.HORIZONTAL;
 
+        createCityPanel.add(cityIDLabel,cityConstraintsID);
+        createCityPanel.add(cityID,cityConstraintsID);
         createCityPanel.add(cityNameLabel,cityConstraintsName);
         createCityPanel.add(cityName,cityConstraintsName);
         createCityPanel.add(cityCountryCodeLabel,cityConstraintsCode);
@@ -353,6 +364,11 @@ public class createGUI
             create.addToCity();
             createFrame.dispatchEvent(new WindowEvent(createFrame,WindowEvent.WINDOW_CLOSING));
             JOptionPane.showMessageDialog(null,"CITY CREATED SUCCESSFULLY");
+            cityName.setText("");
+            cityCountryCode.setText("");
+            cityDistrict.setText("");
+            cityPopulation.setText("");
+            create.cityCount++;
 
         });
 
@@ -402,6 +418,19 @@ public class createGUI
         createCountryLPanel.add(countryLPercentage,countryLPercentageConstraints);
 
         countryLCode.setPreferredSize(new Dimension(150,20));
+        countryLIsOfficial.setPreferredSize(new Dimension(150,20));
+
+        countryLPercentage.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char input = e.getKeyChar();
+                if(!Character.isDigit(input)&&!(input==KeyEvent.VK_BACK_SPACE)&&!(input==KeyEvent.VK_DELETE))
+                {
+                    e.consume();
+                    JOptionPane.showMessageDialog(null,"This space only accepts numbers");
+                }
+            }
+        });
 
         JButton createCountryLButton = new JButton("Enter");
         GridBagConstraints createCountryLButtonConstraints = new GridBagConstraints();
@@ -411,10 +440,16 @@ public class createGUI
         createCountryLButtonConstraints.anchor = GridBagConstraints.PAGE_END;
         createCountryLPanel.add(createCountryLButton,createCountryLButtonConstraints);
         createCountryLButton.addActionListener(e->{
-            this.newCountryLCode = countryLCode.getText();
-            this.newCountryLLanguage = countryLLanguage.getText();
-            this.newCountryLIsOfficial = countryLIsOfficial.getText();
-            this.newCountryLPercentage = countryLPercentage.getText();
+            create.newCountryLCode = countryLCode.getText();
+            create.newCountryLLanguage = countryLLanguage.getText();
+            create.newCountryLIsOfficial = Objects.requireNonNull(countryLIsOfficial.getSelectedItem()).toString();
+            create.newCountryLPercentage = Float.parseFloat(countryLPercentage.getText());
+            create.addToCityLanguage();
+            createFrame.dispatchEvent(new WindowEvent(createFrame,WindowEvent.WINDOW_CLOSING));
+            JOptionPane.showMessageDialog(null,"CITY CREATED SUCCESSFULLY");
+            countryLCode.setText("");
+            countryLLanguage.setText("");
+            countryLIsOfficial.setSelectedItem("");
         });
     }
     public void setTableSelection(String tableSelection) {
@@ -438,6 +473,7 @@ public class createGUI
                 createCountryLPanel.setVisible(false);
                 createFrame.setSize(400,240);
                 createFrame.setVisible(true);
+                cityID.setText(String.valueOf(create.cityCount));
             }
             case "countryL" -> {
                 createFrame.setTitle("CREATE NEW COUNTRY LANGUAGE");

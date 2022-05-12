@@ -1,6 +1,8 @@
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.sql.SQLException;
+
 public class
 GUI
 {
@@ -34,7 +36,7 @@ GUI
     ImageIcon ico = new ImageIcon("src/log.png");
     //GUI'S
     createGUI createGUI = new createGUI();
-    public GUI() throws ClassNotFoundException{
+    public GUI() throws ClassNotFoundException, SQLException {
 
         //mainFrame Config
         mainFrame.setResizable(false);
