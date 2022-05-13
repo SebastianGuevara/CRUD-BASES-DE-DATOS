@@ -80,7 +80,7 @@ public class createGUI
 
     public createGUI() throws SQLException {
         //Frame config
-        createFrame.setResizable(true);
+        createFrame.setResizable(false);
         createFrame.setSize(400,325);
         createFrame.setLayout(new BorderLayout());
         createFrame.setIconImage(ico.getImage());

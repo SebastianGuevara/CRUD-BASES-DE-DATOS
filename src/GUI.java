@@ -27,6 +27,7 @@ GUI
     final JButton createButton = new JButton("Create");
     final JButton deleteButton = new JButton("Delete");
     final JButton updateButton = new JButton("Update");
+    final JButton importButton = new JButton("Import");
     //Tables
     Tables tables = new Tables();
     //Scrolls
@@ -46,8 +47,6 @@ GUI
         mainFrame.setLayout(new BorderLayout());
         mainFrame.setIconImage(ico.getImage());
         mainFrame.setLocationRelativeTo(null);
-
-        //CreateFrame Config
 
         //Main panels configuration
         panelNorth.setPreferredSize(new Dimension(100,100));
@@ -99,9 +98,12 @@ GUI
         panelSouth.add(createButton,FlowLayout.LEFT);
         panelSouth.add(deleteButton,FlowLayout.CENTER);
         panelSouth.add(updateButton,FlowLayout.RIGHT);
+        panelSouth.add(importButton,FlowLayout.RIGHT);
         createButton.setFocusable(false);
         deleteButton.setFocusable(false);
         updateButton.setFocusable(false);
+        importButton.setFocusable(false);
+
         //Tables configuration
         tablesPanel.setBackground(Color.WHITE);
         panelCenter.add(tablesPanel,BorderLayout.CENTER);
