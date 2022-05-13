@@ -8,7 +8,7 @@ import java.sql.Statement;
 public class Tables
 {
    // private final GUI gui = new GUI();
-    DataBase db;
+    public DataBase db;
     private DefaultTableModel cityModel = new DefaultTableModel()
     {
         @Override
