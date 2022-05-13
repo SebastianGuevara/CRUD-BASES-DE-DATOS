@@ -7,6 +7,9 @@ public class Create
     public String newCityName,newCityCode,newCityDistrict;
     public String newCountryLCode,newCountryLLanguage,newCountryLIsOfficial;
     public float newCountryLPercentage;
+    public String newCountryCode,newCountryName,newCountryContinent,newCountryRegion,newCountryLocalName,newCountryGovernmentForm,newCountryHeadOfState,newCountryCode2;
+    public float newCountrySurface,newCountryLifeExpectancy,newCountryGNP,newCountryGNPOld;
+    public int newCountryYear,newCountryPopulation,newCountryCapital;
     private Tables tables;
     public int cityCount;
     {
@@ -25,43 +28,33 @@ public class Create
         int count = rs.getInt(1);
         this.cityCount = count +1;
     }
-
-    /*
     public void addToCountry()
     {
 
-        String addCountry = "INSERT INTO country (Code, Name, Continent, Region, SurfaceArea, IndepYear, Population, LifeExpectancy, GNP, GNPOld, LocalName, GovernmentForm, HeadOfState, Capital, Code2) VALUES ()";
-
-        String countryData[];
-        countryData = new String[15];
-
-        PreparedStatement statement = null;
+        String addCountry = "INSERT INTO country (Code, Name, Continent, Region, SurfaceArea, IndepYear, Population, LifeExpectancy, GNP, GNPOld, LocalName, GovernmentForm, HeadOfState, Capital, Code2) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try {
-            statement = con.prepareStatement(addCountry);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        try {
-            statement.setString(1, "hola");
-            statement.setString(2, "hola");
-            statement.setString(3, "hola");
-            statement.setString(4, "hola");
-            statement.setFloat(5, 12);
-            statement.setInt(6, 21);
-            statement.setInt(7, 124);
-            statement.setFloat(8, 23);
-            statement.setFloat(9, 234);
-            statement.setFloat(10, 234);
-            statement.setString(11, "hola");
-            statement.setString(12, "hola");
-            statement.setString(13, "hola");
-            statement.setInt(14, 44);
-            statement.setString(15, "hola");
+            PreparedStatement statement = con.prepareStatement(addCountry);
+            statement.setString(1, newCountryCode);
+            statement.setString(2, newCountryName);
+            statement.setString(3, newCountryContinent);
+            statement.setString(4, newCountryRegion);
+            statement.setFloat(5, newCountrySurface);
+            statement.setInt(6, newCountryYear);
+            statement.setInt(7, newCountryPopulation);
+            statement.setFloat(8, newCountryLifeExpectancy);
+            statement.setFloat(9, newCountryGNP);
+            statement.setFloat(10, newCountryGNPOld);
+            statement.setString(11, newCountryLocalName);
+            statement.setString(12, newCountryGovernmentForm);
+            statement.setString(13, newCountryHeadOfState);
+            statement.setInt(14, newCountryCapital);
+            statement.setString(15, newCountryCode2);
+            statement.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
-*/
+
     public void addToCity()
     {
         String addCity = "INSERT INTO city (ID, Name, CountryCode, District, Population) VALUES (?,?,?,?,?)";

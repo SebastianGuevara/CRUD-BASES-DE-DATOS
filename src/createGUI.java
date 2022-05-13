@@ -17,9 +17,10 @@ public class createGUI
     final JPanel createCountryLPanel = new JPanel();
 
     //Country Inputs and Labels
+    private final String[] continents = {"","Asia","Europe","North America","Africa","Oceania","Antarctica","South America"};
     final JTextField countryCode = new JTextField();
     final JTextField countryName = new JTextField();
-    final JTextField countryContinent = new JTextField();
+    final JComboBox<String> countryContinent = new JComboBox<>(continents);
     final JTextField countryRegion = new JTextField();
     final JTextField countrySurface = new JTextField();
     final JTextField countryYear = new JTextField();
@@ -47,7 +48,6 @@ public class createGUI
     final JLabel countryHeadOfStateLabel = new JLabel("Head of State:");
     final JLabel countryCapitalLabel = new JLabel("Capital:");
     final JLabel countryCode2Label = new JLabel("Code 2:");
-    public String newCountryCode,newCountryName,newCountryContinent,newCountryRegion,newCountrySurface,newCountryYear,newCountryPopulation,newCountryLifeExpectancy,newCountryGNP,newCountryGNPOld,newCountryLocalName,newCountryGovernmentForm,newCountryHeadOfState,newCountryCapital,newCountryCode2;
 
     //City Inputs and Labels
     final JTextField cityName = new JTextField();
@@ -247,6 +247,7 @@ public class createGUI
 
         countryCode.setPreferredSize(new Dimension(150,20));
         countryName.setPreferredSize(new Dimension(150,20));
+        countryContinent.setPreferredSize(new Dimension(150,20));
         countryGovernmentForm.setPreferredSize(new Dimension(150,20));
 
         JButton createCountryButton = new JButton("Enter");
@@ -257,22 +258,127 @@ public class createGUI
         createCountryButtonConstraints.anchor = GridBagConstraints.PAGE_END;
         createCountryPanel.add(createCountryButton,createCountryButtonConstraints);
         createCountryButton.setFocusable(false);
+
+        countryCode.setDocument(new JTextFieldCharLimit(3));
+        countryName.setDocument(new JTextFieldCharLimit(52));
+        countryRegion.setDocument(new JTextFieldCharLimit(26));
+        countrySurface.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char input = e.getKeyChar();
+                if(!Character.isDigit(input)&&!(input==KeyEvent.VK_BACK_SPACE)&&!(input==KeyEvent.VK_DELETE)&&!(input==KeyEvent.VK_PERIOD))
+                {
+                    e.consume();
+                    JOptionPane.showMessageDialog(null,"THIS SPACE ONLY ACCEPTS NUMBERS");
+                }
+            }
+        });
+        countryYear.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char input = e.getKeyChar();
+                if(!Character.isDigit(input)&&!(input==KeyEvent.VK_BACK_SPACE)&&!(input==KeyEvent.VK_DELETE))
+                {
+                    e.consume();
+                    JOptionPane.showMessageDialog(null,"THIS SPACE ONLY ACCEPTS NUMBERS");
+                }
+            }
+        });
+        countryPopulation.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char input = e.getKeyChar();
+                if(!Character.isDigit(input)&&!(input==KeyEvent.VK_BACK_SPACE)&&!(input==KeyEvent.VK_DELETE))
+                {
+                    e.consume();
+                    JOptionPane.showMessageDialog(null,"THIS SPACE ONLY ACCEPTS NUMBERS");
+                }
+            }
+        });
+        countryLifeExpectancy.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char input = e.getKeyChar();
+                if(!Character.isDigit(input)&&!(input==KeyEvent.VK_BACK_SPACE)&&!(input==KeyEvent.VK_DELETE)&&!(input==KeyEvent.VK_PERIOD))
+                {
+                    e.consume();
+                    JOptionPane.showMessageDialog(null,"THIS SPACE ONLY ACCEPTS NUMBERS");
+                }
+            }
+        });
+        countryGNP.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char input = e.getKeyChar();
+                if(!Character.isDigit(input)&&!(input==KeyEvent.VK_BACK_SPACE)&&!(input==KeyEvent.VK_DELETE)&&!(input==KeyEvent.VK_PERIOD))
+                {
+                    e.consume();
+                    JOptionPane.showMessageDialog(null,"THIS SPACE ONLY ACCEPTS NUMBERS");
+                }
+            }
+        });
+        countryGNPOld.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char input = e.getKeyChar();
+                if(!Character.isDigit(input)&&!(input==KeyEvent.VK_BACK_SPACE)&&!(input==KeyEvent.VK_DELETE)&&!(input==KeyEvent.VK_PERIOD))
+                {
+                    e.consume();
+                    JOptionPane.showMessageDialog(null,"THIS SPACE ONLY ACCEPTS NUMBERS");
+                }
+            }
+        });
+        countryLocalName.setDocument(new JTextFieldCharLimit(45));
+        countryGovernmentForm.setDocument(new JTextFieldCharLimit(45));
+        countryHeadOfState.setDocument(new JTextFieldCharLimit(60));
+        countryCapital.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char input = e.getKeyChar();
+                if(!Character.isDigit(input)&&!(input==KeyEvent.VK_BACK_SPACE)&&!(input==KeyEvent.VK_DELETE))
+                {
+                    e.consume();
+                    JOptionPane.showMessageDialog(null,"THIS SPACE ONLY ACCEPTS NUMBERS");
+                }
+            }
+        });
+        countryCode2.setDocument(new JTextFieldCharLimit(2));
+
+
         createCountryButton.addActionListener(e->{
-            this.newCountryCode = countryCode.getText();
-            this.newCountryName = countryName.getText();
-            this.newCountryContinent = countryContinent.getText();
-            this.newCountryRegion = countryRegion.getText();
-            this.newCountrySurface = countrySurface.getText();
-            this.newCountryYear = countryYear.getText();
-            this.newCountryPopulation = countryPopulation.getText();
-            this.newCountryLifeExpectancy = countryLifeExpectancy.getText();
-            this.newCountryGNP = countryGNP.getText();
-            this.newCountryGNPOld = countryGNPOld.getText();
-            this.newCountryLocalName = countryLocalName.getName();
-            this.newCountryGovernmentForm = countryGovernmentForm.getText();
-            this.newCountryHeadOfState = countryHeadOfState.getText();
-            this.newCountryCapital = countryCapital.getText();
-            this.newCountryCode2 = countryCode2.getText();
+            create.newCountryCode = countryCode.getText().toUpperCase();
+            create.newCountryName = countryName.getText();
+            create.newCountryContinent = Objects.requireNonNull(countryContinent.getSelectedItem()).toString();
+            create.newCountryRegion = countryRegion.getText();
+            create.newCountrySurface = Float.parseFloat(countrySurface.getText());
+            create.newCountryYear = Integer.parseInt(countryYear.getText());
+            create.newCountryPopulation = Integer.parseInt(countryPopulation.getText());
+            create.newCountryLifeExpectancy = Float.parseFloat(countryLifeExpectancy.getText());
+            create.newCountryGNP = Float.parseFloat(countryGNP.getText());
+            create.newCountryGNPOld = Float.parseFloat(countryGNPOld.getText());
+            create.newCountryLocalName = countryLocalName.getText();
+            create.newCountryGovernmentForm = countryGovernmentForm.getText();
+            create.newCountryHeadOfState = countryHeadOfState.getText();
+            create.newCountryCapital = Integer.parseInt(countryCapital.getText());
+            create.newCountryCode2 = countryCode2.getText();
+            create.addToCountry();
+            createFrame.dispatchEvent(new WindowEvent(createFrame,WindowEvent.WINDOW_CLOSING));
+            JOptionPane.showMessageDialog(null,"COUNTRY CREATED SUCCESSFULLY");
+            countryCode.setText("");
+            countryName.setText("");
+            countryContinent.setSelectedItem("");
+            countryRegion.setText("");
+            countrySurface.setText("");
+            countryYear.setText("");
+            countryPopulation.setText("");
+            countryLifeExpectancy.setText("");
+            countryGNP.setText("");
+            countryGNPOld.setText("");
+            countryLocalName.setText("");
+            countryGovernmentForm.setText("");
+            countryHeadOfState.setText("");
+            countryCapital.setText("");
+            countryCode2.setText("");
         });
 
 
