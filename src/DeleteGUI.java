@@ -1,13 +1,13 @@
 import javax.swing.*;
 import java.sql.SQLException;
 
-public class deleteGUI
+public class DeleteGUI
 {
     private String tableSelection = "";
     private int countrySelector,citySelector,countryLSelector;
     private final Delete delete = new Delete();
     public String oldCityID,oldCountryCode,oldCountryLLanguage;
-    public deleteGUI() throws SQLException {
+    public DeleteGUI() throws SQLException {
 
     }
     public void setTableSelection(String tableSelection) {

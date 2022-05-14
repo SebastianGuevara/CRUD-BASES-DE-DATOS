@@ -8,7 +8,7 @@ import java.awt.event.WindowEvent;
 import java.sql.SQLException;
 import java.util.Objects;
 
-public class createGUI
+public class CreateGUI
 {
     //Frame stuff
     final JFrame createFrame = new JFrame();
@@ -78,7 +78,7 @@ public class createGUI
     ImageIcon ico = new ImageIcon("src/log.png");
     private final Create create = new Create();
 
-    public createGUI() throws SQLException {
+    public CreateGUI() throws SQLException {
         //Frame config
         createFrame.setResizable(false);
         createFrame.setSize(400,325);

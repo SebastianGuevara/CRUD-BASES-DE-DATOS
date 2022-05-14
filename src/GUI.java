@@ -1,5 +1,4 @@
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.sql.SQLException;
 
@@ -36,8 +35,9 @@ GUI
     JScrollPane countryLScroll = new JScrollPane(tables.getCountryLTable());
     ImageIcon ico = new ImageIcon("src/log.png");
     //GUI'S
-    createGUI createGUI = new createGUI();
-    deleteGUI deleteGUI = new deleteGUI();
+    CreateGUI createGUI = new CreateGUI();
+    DeleteGUI deleteGUI = new DeleteGUI();
+    UpdateGUI updateGUI = new UpdateGUI();
     public GUI() throws ClassNotFoundException, SQLException {
 
         //mainFrame Config
@@ -72,11 +72,6 @@ GUI
         panelCenter.add(tablesTitlePanel,BorderLayout.NORTH);
         tablesTitlePanel.setBackground(Color.WHITE);
         tablesTitlePanel.add(tablesTitle,BorderLayout.CENTER);
-
-
-
-
-
 
         //Upper panel configuration
         panelNorth.setLayout(new BorderLayout(10,10));
@@ -134,6 +129,7 @@ GUI
         countryButton.addActionListener(e -> mainFrame.setSize(1300,750));
         countryButton.addActionListener(e -> createGUI.setTableSelection("country"));
         countryButton.addActionListener(e -> deleteGUI.setTableSelection("country"));
+        countryButton.addActionListener(e -> updateGUI.setTableSelection("country"));
 
         cityButton.addActionListener(e -> tablesTitle.setText("Cities Table"));
         cityButton.addActionListener(e -> tables.getCityTable().setVisible(true));
@@ -145,6 +141,7 @@ GUI
         cityButton.addActionListener(e -> mainFrame.setSize(800,750));
         cityButton.addActionListener(e -> createGUI.setTableSelection("city"));
         cityButton.addActionListener(e -> deleteGUI.setTableSelection("city"));
+        cityButton.addActionListener(e -> updateGUI.setTableSelection("city"));
 
         countryLButton.addActionListener(e -> tablesTitle.setText("Country Languages Table"));
         countryLButton.addActionListener(e->tables.getCountryLTable().setVisible(true));
@@ -156,10 +153,12 @@ GUI
         countryLButton.addActionListener(e -> mainFrame.setSize(800,750));
         countryLButton.addActionListener(e -> createGUI.setTableSelection("countryL"));
         countryLButton.addActionListener(e -> deleteGUI.setTableSelection("countryL"));
+        countryLButton.addActionListener(e -> updateGUI.setTableSelection("countryL"));
 
         //Create Button Configuration
         createButton.addActionListener(e ->createGUI.createSelector());
         deleteButton.addActionListener(e ->deleteGUI.deleteSelector());
+        updateButton.addActionListener(e->updateGUI.updateSelector());
 
 
         mainFrame.setVisible(true);
