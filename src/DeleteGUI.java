@@ -6,7 +6,7 @@ public class DeleteGUI
     private String tableSelection = "";
     private int countrySelector,citySelector,countryLSelector;
     private final Delete delete = new Delete();
-    public String oldCityID,oldCountryCode,oldCountryLLanguage;
+    public String oldCityID,oldCountryCode,oldCountryLLanguage,oldCountryLCode;
     public DeleteGUI() throws SQLException {
 
     }
@@ -59,19 +59,36 @@ public class DeleteGUI
                 }
             }
             case "countryL" -> {
+                JTextField xField = new JTextField(10);
+                JTextField yField = new JTextField(10);
+                JPanel myPanel = new JPanel();
+                myPanel.setLayout(new BoxLayout(myPanel,BoxLayout.Y_AXIS));
+                myPanel.add(new JLabel("Country code:"));
+                myPanel.add(xField);
+                myPanel.add(Box.createVerticalBox()); // a spacer
+                myPanel.add(new JLabel("Language:"));
+                myPanel.add(yField);
                 do {
-                    oldCountryLLanguage = JOptionPane.showInputDialog("ENTER LANGUAGE TO REMOVE");
-                    if(oldCountryLLanguage.length()<30)
+                    int result = JOptionPane.showConfirmDialog(null, myPanel,
+                            "DELETE COUNTRY LANGUAGE",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE);
+                    if (result == JOptionPane.OK_OPTION)
                     {
-                        delete.setOldCountryLLanguage(oldCountryLLanguage);
-                        citySelector = JOptionPane.showConfirmDialog(null,"ARE YOU SURE THAT YOU WANT TO DELETE THAT COUNTRY LANGUAGE?","WARNING",deleteSelectorPane);
+                        delete.setOldCountryLCode(xField.getText());
+                        delete.setOldCountryLLanguage(yField.getText());
+                        oldCountryLCode = xField.getText();
+                        oldCountryLLanguage = yField.getText();
                     }
-                    else
+                    if (oldCountryLLanguage.length()>30)
                     {
                         JOptionPane.showMessageDialog(null,"LANGUAGES HAVE A MAXIMUM OF CHARACTERS OF 30");
                     }
-                } while (oldCountryLLanguage.length()>30);
-                if(citySelector==0)
+                    else if (oldCountryLCode.length()>3)
+                    {
+                        JOptionPane.showMessageDialog(null,"COUNTRY CODE HAVE A MAXIMUM OF CHARACTERS OF 3");
+                    }
+                } while (oldCountryLLanguage.length()>30||oldCountryLCode.length()>3);
+                countryLSelector = JOptionPane.showConfirmDialog(null,"ARE YOU SURE THAT YOU WANT TO DELETE THAT CITY?","WARNING",deleteSelectorPane);
+                if(countryLSelector==0)
                 {
                     delete.deleteFromCountryLanguage();
                 }

@@ -16,7 +16,7 @@ public class Delete
     //deleteGUI deleteGUI = new deleteGUI();
 
     public int cityCount;
-    public String oldCountryCode,oldCountryLLanguage;
+    public String oldCountryCode,oldCountryLLanguage,oldCountryLCode;
     public int oldCityID;
     private final Connection con = db.getConnection();
     public Delete() throws SQLException {
@@ -87,7 +87,7 @@ public class Delete
     {
 
         String deleteCountryLanguage = "delete from countryLanguage where Language=?";
-        String countryLCheck = String.format("select count(language) from countryLanguage where language = '%s'",oldCountryLLanguage);
+        String countryLCheck = String.format("select count(language) from countryLanguage where language = '%s' and countryCode = '%s'",oldCountryLLanguage,oldCountryLCode);
         try
         {
             PreparedStatement statement = con.prepareStatement(deleteCountryLanguage);
@@ -103,6 +103,8 @@ public class Delete
                 }
                 else
                 {
+                    System.out.println(oldCountryLLanguage);
+                    System.out.println(oldCountryLCode);
                     JOptionPane.showMessageDialog(null,"THAT COUNTRY LANGUAGE DOESN'T EXISTS");
                 }
             }
@@ -124,5 +126,9 @@ public class Delete
 
     public void setOldCountryLLanguage(String oldCountryLLanguage) {
         this.oldCountryLLanguage = oldCountryLLanguage;
+    }
+
+    public void setOldCountryLCode(String oldCountryLCode) {
+        this.oldCountryLCode = oldCountryLCode;
     }
 }
