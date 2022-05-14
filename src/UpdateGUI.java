@@ -758,12 +758,16 @@ public class UpdateGUI
                     {
                         JOptionPane.showMessageDialog(null,"COUNTRY CODE HAVE A MAXIMUM OF CHARACTERS OF 3");
                     }
+                    else if(!updateCountryLCode.matches("^[a-zA-z]*$"))
+                    {
+                        JOptionPane.showMessageDialog(null,"COUNTRY CODE ONLY CONTAINS LETTERS");
+                    }
                     else
                     {
                         canUpdateCountryL = true;
                         countryLCount++;
                     }
-                } while (updateCountryLLanguage.length()>30||updateCountryLCode.length()>3);
+                } while (updateCountryLLanguage.length()>30||updateCountryLCode.length()>3||!updateCountryLCode.matches("^[a-zA-z]*$"));
                 String[] fill = update.updateCountryLFill(updateCountryLLanguage,updateCountryLCode);
                 if(canUpdateCountryL)
                 {
