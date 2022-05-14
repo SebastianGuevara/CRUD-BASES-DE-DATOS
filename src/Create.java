@@ -1,4 +1,5 @@
 import java.sql.*;
+import java.util.ArrayList;
 
 public class Create
 {
@@ -86,6 +87,26 @@ public class Create
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+    public ArrayList fillCreateCombo()
+    {
+        String fill = "select code from country";
+        String arrayCount = "select count(code) from country";
+        ArrayList data = new ArrayList();
+        data.add("");
+        try
+        {
+            Statement st = con.createStatement();
+            ResultSet result = st.executeQuery(fill);
+            while(result.next())
+            {
+                data.add(result.getString("code"));
+            }
+        } catch (SQLException throwables)
+        {
+            throwables.printStackTrace();
+        }
+        return data;
     }
 
 

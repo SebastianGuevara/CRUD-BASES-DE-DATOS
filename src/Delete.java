@@ -14,7 +14,6 @@ public class Delete
         }
     }
     //deleteGUI deleteGUI = new deleteGUI();
-
     public int cityCount;
     public String oldCountryCode,oldCountryLLanguage,oldCountryLCode;
     public int oldCityID;
@@ -26,6 +25,7 @@ public class Delete
         int count = rs.getInt(1);
         this.cityCount = count +1;
     }
+
     public void deleteFromCountry()
     {
         String deleteCountry = "delete FROM country WHERE Code=?";

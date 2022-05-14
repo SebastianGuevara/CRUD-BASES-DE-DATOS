@@ -51,7 +51,7 @@ public class CreateGUI
 
     //City Inputs and Labels
     final JTextField cityName = new JTextField();
-    final JTextField cityCountryCode = new JTextField();
+    public final JComboBox<String> cityCountryCode = new JComboBox<>();
     final JTextField cityDistrict = new JTextField();
     final JTextField cityPopulation = new JTextField();
     final JLabel cityNameLabel = new JLabel("Name:");
@@ -64,7 +64,7 @@ public class CreateGUI
 
     //Country Language Inputs and Labels
     final String[] isOfficialChoices = {"","T","F"};
-    final JTextField countryLCode = new JTextField();
+    final JComboBox<String> countryLCode = new JComboBox<>();
     final JTextField countryLLanguage = new JTextField();
     final JComboBox<String> countryLIsOfficial = new JComboBox<>(isOfficialChoices);
     final JTextField countryLPercentage = new JTextField();
@@ -77,6 +77,7 @@ public class CreateGUI
     private String tableSelection = "";
     ImageIcon ico = new ImageIcon("src/log.png");
     private final Create create = new Create();
+    public DefaultComboBoxModel fillCountryCode = new DefaultComboBoxModel();
 
     public CreateGUI() throws SQLException {
         //Frame config
@@ -96,6 +97,11 @@ public class CreateGUI
         mainCreatePanel.add(createCountryLPanel);
         mainCreatePanel.setBounds(0,0,500,500);
         mainCreatePanel.setVisible(true);
+
+        for(int i = 0; i<create.fillCreateCombo().toArray().length;i++)
+        {
+            fillCountryCode.addElement(create.fillCreateCombo().get(i));
+        }
 
         this.createCity();
         this.createCountry();
@@ -344,7 +350,6 @@ public class CreateGUI
         });
         countryCode2.setDocument(new JTextFieldCharLimit(2));
 
-
         createCountryButton.addActionListener(e->{
             create.newCountryCode = countryCode.getText().toUpperCase();
             create.newCountryName = countryName.getText();
@@ -379,6 +384,7 @@ public class CreateGUI
             countryHeadOfState.setText("");
             countryCapital.setText("");
             countryCode2.setText("");
+            fillCountryCode.insertElementAt(create.newCountryCode,1);
         });
 
 
@@ -453,6 +459,7 @@ public class CreateGUI
         cityCountryCode.setPreferredSize(new Dimension(150,20));
         cityDistrict.setPreferredSize(new Dimension(150,20));
         cityPopulation.setPreferredSize(new Dimension(150,20));
+        cityCountryCode.setModel(fillCountryCode);
 
         JPanel southCreateCityPanel = new JPanel();
         JButton createCityButton = new JButton("Enter");
@@ -464,17 +471,16 @@ public class CreateGUI
         createCityPanel.add(createCityButton,createCityButtonConstraints);
         southCreateCityPanel.setPreferredSize(new Dimension(100,40));
         createCityButton.setFocusable(false);
-        cityCountryCode.setDocument(new JTextFieldCharLimit(3));
         createCityButton.addActionListener(e->{
             create.newCityName = cityName.getText();
-            create.newCityCode = cityCountryCode.getText().toUpperCase();
+            create.newCityCode = Objects.requireNonNull(cityCountryCode.getSelectedItem()).toString();
             create.newCityDistrict = cityDistrict.getText();
             create.newCityPopulation = Integer.parseInt(cityPopulation.getText());
             create.addToCity();
             createFrame.dispatchEvent(new WindowEvent(createFrame,WindowEvent.WINDOW_CLOSING));
             JOptionPane.showMessageDialog(null,"CITY CREATED SUCCESSFULLY");
             cityName.setText("");
-            cityCountryCode.setText("");
+            cityCountryCode.setSelectedItem("");
             cityDistrict.setText("");
             cityPopulation.setText("");
             create.cityCount++;
@@ -525,11 +531,11 @@ public class CreateGUI
         createCountryLPanel.add(countryLIsOfficial,countryLIsOfficialConstraints);
         createCountryLPanel.add(countryLPercentageLabel,countryLPercentageConstraints);
         createCountryLPanel.add(countryLPercentage,countryLPercentageConstraints);
+        countryLCode.setModel(fillCountryCode);
 
         countryLCode.setPreferredSize(new Dimension(150,20));
         countryLIsOfficial.setPreferredSize(new Dimension(150,20));
 
-        countryLCode.setDocument(new JTextFieldCharLimit(3));
         countryLCode.addKeyListener(new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent e) {
@@ -566,14 +572,14 @@ public class CreateGUI
             }
             else
             {
-                create.newCountryLCode = countryLCode.getText().toUpperCase();
+                create.newCountryLCode = Objects.requireNonNull(countryLCode.getSelectedItem()).toString();
                 create.newCountryLLanguage = countryLLanguage.getText();
                 create.newCountryLIsOfficial = Objects.requireNonNull(countryLIsOfficial.getSelectedItem()).toString();
                 create.newCountryLPercentage = Float.parseFloat(countryLPercentage.getText());
                 create.addToCityLanguage();
                 createFrame.dispatchEvent(new WindowEvent(createFrame,WindowEvent.WINDOW_CLOSING));
                 JOptionPane.showMessageDialog(null,"COUNTRY LANGUAGE CREATED SUCCESSFULLY");
-                countryLCode.setText("");
+                countryLCode.setSelectedItem("");
                 countryLLanguage.setText("");
                 countryLIsOfficial.setSelectedItem("");
                 countryLPercentage.setText("");

@@ -7,7 +7,8 @@ public class DeleteGUI
     private int countrySelector,citySelector,countryLSelector;
     private final Delete delete = new Delete();
     public String oldCityID,oldCountryCode,oldCountryLLanguage,oldCountryLCode;
-    public DeleteGUI() throws SQLException {
+    public DeleteGUI() throws SQLException
+    {
 
     }
     public void setTableSelection(String tableSelection) {
