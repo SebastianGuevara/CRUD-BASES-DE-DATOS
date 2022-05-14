@@ -28,7 +28,7 @@ public class Update {
 
     public void updateInCountry()
     {
-        String updateCountry = "UPDATE country SET Code=?, Name=?, Continent=?, Region=?, SurfaceArea=?, IndepYear=?, Population=?, LifeExpectancy=?, GNP=?, GNPOld=?, LocalName=?, GovernmentForm=?, HeadOfState=?, Capital=?, Code2=?";
+        String updateCountry = "UPDATE country SET Code=?, Name=?, Continent=?, Region=?, SurfaceArea=?, IndepYear=?, Population=?, LifeExpectancy=?, GNP=?, GNPOld=?, LocalName=?, GovernmentForm=?, HeadOfState=?, Capital=?, Code2=? where code=?";
 
         try {
             PreparedStatement statement = con.prepareStatement(updateCountry);
@@ -47,11 +47,43 @@ public class Update {
             statement.setString(13, updatedCountryHeadOfState);
             statement.setInt(14, updatedCountryCapital);
             statement.setString(15, updatedCountryCode2);
+            statement.setString(16, updatedCountryCode);
             statement.execute();
         }
         catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+    public String[] updateCountryFill(String code)
+    {
+        String fill = String.format("select * from country where code ='%s'",code);
+        String[] data = new String[15];
+        try {
+            Statement st = con.createStatement();
+            ResultSet result = st.executeQuery(fill);
+            while(result.next())
+            {
+                data[0]=result.getString(1);
+                data[1]=result.getString(2);
+                data[2]=result.getString(3);
+                data[3]=result.getString(4);
+                data[4]=result.getString(5);
+                data[5]=result.getString(6);
+                data[6]=result.getString(7);
+                data[7]=result.getString(8);
+                data[8]=result.getString(9);
+                data[9]=result.getString(10);
+                data[10]=result.getString(11);
+                data[11]=result.getString(12);
+                data[12]=result.getString(13);
+                data[13]=result.getString(14);
+                data[14]=result.getString(15);
+            }
+        }
+        catch(SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return data;
     }
 
     public void updateInCity()

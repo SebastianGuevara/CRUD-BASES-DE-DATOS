@@ -19,7 +19,7 @@ public class UpdateGUI
 
     //Country Inputs and Labels
     private final String[] continents = {"","Asia","Europe","North America","Africa","Oceania","Antarctica","South America"};
-    final JTextField countryCode = new JTextField();
+    final JLabel countryCode = new JLabel();
     final JTextField countryName = new JTextField();
     final JComboBox<String> countryContinent = new JComboBox<>(continents);
     final JTextField countryRegion = new JTextField();
@@ -82,6 +82,7 @@ public class UpdateGUI
     private boolean canUpdateCountry = false;
     private boolean canUpdateCity = false;
     private boolean canUpdateCountryL = false;
+    private int countryCount = 0;
     private int cityCount = 0;
     private int countryLCount = 0;
 
@@ -261,7 +262,6 @@ public class UpdateGUI
         updateCountryPanel.add(updateCountryButton,updateCountryButtonConstraints);
         updateCountryButton.setFocusable(false);
 
-        countryCode.setDocument(new JTextFieldCharLimit(3));
         countryName.setDocument(new JTextFieldCharLimit(52));
         countryRegion.setDocument(new JTextFieldCharLimit(26));
         countrySurface.addKeyListener(new KeyAdapter() {
@@ -346,28 +346,47 @@ public class UpdateGUI
         });
         countryCode2.setDocument(new JTextFieldCharLimit(2));
 
+        String[] fill = update.updateCountryFill(updateCountryCode);
+        if(fill[0]!=null)
+        {
+            update.updatedCountryCode = fill[0];
+            countryCode.setText(fill[0]);
+            countryName.setText(fill[1]);
+            countryContinent.setSelectedItem(fill[2]);
+            countryRegion.setText(fill[3]);
+            countrySurface.setText(fill[4]);
+            countryYear.setText(fill[5]);
+            countryPopulation.setText(fill[6]);
+            countryLifeExpectancy.setText(fill[7]);
+            countryGNP.setText(fill[8]);
+            countryGNPOld.setText(fill[9]);
+            countryLocalName.setText(fill[10]);
+            countryGovernmentForm.setText(fill[11]);
+            countryHeadOfState.setText(fill[12]);
+            countryCapital.setText(fill[13]);
+            countryCode2.setText(fill[14]);
+        }
 
         updateCountryButton.addActionListener(e->{
-            /*
-            update.newCountryCode = countryCode.getText().toUpperCase();
-            update.newCountryName = countryName.getText();
-            update.newCountryContinent = Objects.requireNonNull(countryContinent.getSelectedItem()).toString();
-            update.newCountryRegion = countryRegion.getText();
-            update.newCountrySurface = Float.parseFloat(countrySurface.getText());
-            update.newCountryYear = Integer.parseInt(countryYear.getText());
-            update.newCountryPopulation = Integer.parseInt(countryPopulation.getText());
-            update.newCountryLifeExpectancy = Float.parseFloat(countryLifeExpectancy.getText());
-            update.newCountryGNP = Float.parseFloat(countryGNP.getText());
-            update.newCountryGNPOld = Float.parseFloat(countryGNPOld.getText());
-            update.newCountryLocalName = countryLocalName.getText();
-            update.newCountryGovernmentForm = countryGovernmentForm.getText();
-            update.newCountryHeadOfState = countryHeadOfState.getText();
-            update.newCountryCapital = Integer.parseInt(countryCapital.getText());
-            update.newCountryCode2 = countryCode2.getText();
-            update.addToCountry();
-             */
+
+            update.updatedCountryName = countryName.getText();
+            update.updatedCountryContinent = Objects.requireNonNull(countryContinent.getSelectedItem()).toString();
+            update.updatedCountryRegion = countryRegion.getText();
+            update.updatedCountrySurface = Float.parseFloat(countrySurface.getText());
+            update.updatedCountryYear = Integer.parseInt(countryYear.getText());
+            update.updatedCountryPopulation = Integer.parseInt(countryPopulation.getText());
+            update.updatedCountryLifeExpectancy = Float.parseFloat(countryLifeExpectancy.getText());
+            update.updatedCountryGNP = Float.parseFloat(countryGNP.getText());
+            update.updatedCountryGNPOld = Float.parseFloat(countryGNPOld.getText());
+            update.updatedCountryLocalName = countryLocalName.getText();
+            update.updatedCountryGovernmentForm = countryGovernmentForm.getText();
+            update.updatedCountryHeadOfState = countryHeadOfState.getText();
+            update.updatedCountryCapital = Integer.parseInt(countryCapital.getText());
+            update.updatedCountryCode2 = countryCode2.getText();
+            update.updateInCountry();
+
             updateFrame.dispatchEvent(new WindowEvent(updateFrame,WindowEvent.WINDOW_CLOSING));
-            JOptionPane.showMessageDialog(null,"COUNTRY updateD SUCCESSFULLY");
+            JOptionPane.showMessageDialog(null,"COUNTRY UPDATED SUCCESSFULLY");
             countryCode.setText("");
             countryName.setText("");
             countryContinent.setSelectedItem("");
@@ -614,12 +633,62 @@ public class UpdateGUI
     {
         switch (tableSelection) {
             case "country" -> {
-                updateFrame.setTitle("UPDATE NEW COUNTRY");
-                updateCityPanel.setVisible(false);
-                updateCountryPanel.setVisible(true);
-                updateCountryLPanel.setVisible(false);
-                updateFrame.setSize(400,560);
-                updateFrame.setVisible(true);
+                do
+                {
+                    updateCountryCode = JOptionPane.showInputDialog("ENTER COUNTRY CODE TO UPDATE");
+                    if (!updateCountryCode.matches("^[a-zA-z]*$"))
+                    {
+                        JOptionPane.showMessageDialog(null,"COUNTRY CODE ONLY CONTAINS LETTERS");
+                    }
+                    else if (updateCountryCode.length()>3)
+                    {
+                        JOptionPane.showMessageDialog(null,"COUNTRY CODE HAVE A MAXIMUM OF CHARACTERS OF 3");
+                    }
+                    else
+                    {
+                        canUpdateCountry = true;
+                        countryCount++;
+                    }
+                }
+                while (!updateCountryCode.matches("^[a-zA-z]*$")||updateCountryCode.length()>3);
+                String[] fill = update.updateCountryFill(updateCountryCode);
+                if(canUpdateCountry)
+                {
+                    if(countryCount==1)
+                    {
+                        this.updateCountry();
+                    }
+                    if(fill[0]!=null)
+                    {
+                        update.updatedCountryCode = fill[0];
+                        countryCode.setText(fill[0]);
+                        countryName.setText(fill[1]);
+                        countryContinent.setSelectedItem(fill[2]);
+                        countryRegion.setText(fill[3]);
+                        countrySurface.setText(fill[4]);
+                        countryYear.setText(fill[5]);
+                        countryPopulation.setText(fill[6]);
+                        countryLifeExpectancy.setText(fill[7]);
+                        countryGNP.setText(fill[8]);
+                        countryGNPOld.setText(fill[9]);
+                        countryLocalName.setText(fill[10]);
+                        countryGovernmentForm.setText(fill[11]);
+                        countryHeadOfState.setText(fill[12]);
+                        countryCapital.setText(fill[13]);
+                        countryCode2.setText(fill[14]);
+
+                        updateFrame.setTitle("UPDATE NEW COUNTRY");
+                        updateCityPanel.setVisible(false);
+                        updateCountryPanel.setVisible(true);
+                        updateCountryLPanel.setVisible(false);
+                        updateFrame.setSize(400,560);
+                        updateFrame.setVisible(true);
+                    }
+                    else if(canUpdateCountry)
+                    {
+                        JOptionPane.showMessageDialog(null,"THAT COUNTRY DOESN'T EXISTS");
+                    }
+                }
             }
             case "city" -> {
                 do {
