@@ -65,8 +65,8 @@ public class UpdateGUI
 
     //Country Language Inputs and Labels
     final String[] isOfficialChoices = {"","T","F"};
-    final JTextField countryLCode = new JTextField();
-    final JTextField countryLLanguage = new JTextField();
+    final JLabel countryLCode = new JLabel();
+    final JLabel countryLLanguage = new JLabel();
     final JComboBox<String> countryLIsOfficial = new JComboBox<>(isOfficialChoices);
     final JTextField countryLPercentage = new JTextField();
     final JLabel countryLCodeLabel = new JLabel("Code:");
@@ -83,6 +83,7 @@ public class UpdateGUI
     private boolean canUpdateCity = false;
     private boolean canUpdateCountryL = false;
     private int cityCount = 0;
+    private int countryLCount = 0;
 
     public UpdateGUI() throws SQLException {
         //Frame config
@@ -470,12 +471,15 @@ public class UpdateGUI
         cityCountryCode.setDocument(new JTextFieldCharLimit(3));
 
         String[] fill = update.updateCityFill(Integer.parseInt(updateCityID));
-        update.updatedCityID = fill[0];
-        cityName.setText(fill[1]);
-        cityCountryCode.setText(fill[2]);
-        cityDistrict.setText(fill[3]);
-        cityPopulation.setText(fill[4]);
-
+        if(fill[0]!=null)
+        {
+            update.updatedCityID = fill[0];
+            cityID.setText(fill[0]);
+            cityName.setText(fill[1]);
+            cityCountryCode.setText(fill[2]);
+            cityDistrict.setText(fill[3]);
+            cityPopulation.setText(fill[4]);
+        }
 
         updateCityButton.addActionListener(e->{
 
@@ -542,7 +546,6 @@ public class UpdateGUI
         countryLCode.setPreferredSize(new Dimension(150,20));
         countryLIsOfficial.setPreferredSize(new Dimension(150,20));
 
-        countryLCode.setDocument(new JTextFieldCharLimit(3));
         countryLCode.addKeyListener(new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent e) {
@@ -573,7 +576,7 @@ public class UpdateGUI
         updateCountryLButtonConstraints.anchor = GridBagConstraints.PAGE_END;
         updateCountryLPanel.add(updateCountryLButton,updateCountryLButtonConstraints);
 
-        String[] fill = update.updateCountryLFill(updateCountryLLanguage,updateCountryCode);
+        String[] fill = update.updateCountryLFill(updateCountryLLanguage,updateCountryLCode);
         update.updatedCountryLCode= fill[0];
         countryLCode.setText(fill[0]);
         update.updatedCountryLLanguage = fill[1];
@@ -588,7 +591,6 @@ public class UpdateGUI
             }
             else
             {
-
                 update.updatedCountryLCode = countryLCode.getText().toUpperCase();
                 update.updatedCountryLLanguage = countryLLanguage.getText();
                 update.updatedCountryLIsOfficial = Objects.requireNonNull(countryLIsOfficial.getSelectedItem()).toString();
@@ -632,30 +634,34 @@ public class UpdateGUI
                         cityCount++;
                     }
                 } while (!updateCityID.matches("^[0-9]*$"));
+                String[] fill = update.updateCityFill(Integer.parseInt(updateCityID));
                 if(canUpdateCity)
                 {
                     if(cityCount==1)
                     {
                         this.updateCity();
                     }
-                    else
+                    if(fill[0]!=null)
                     {
-                        String[] fill = update.updateCityFill(Integer.parseInt(updateCityID));
                         update.updatedCityID = fill[0];
+                        cityID.setText(fill[0]);
                         cityName.setText(fill[1]);
                         cityCountryCode.setText(fill[2]);
                         cityDistrict.setText(fill[3]);
                         cityPopulation.setText(fill[4]);
-                    }
-                    updateFrame.setTitle("UPDATE CITY");
-                    updateCityPanel.setVisible(true);
-                    updateCountryPanel.setVisible(false);
-                    updateCountryLPanel.setVisible(false);
-                    updateFrame.setSize(400,240);
-                    updateFrame.setVisible(true);
-                }
 
-                //cityID.setText(String.valueOf(update.cityCount));
+                        updateFrame.setTitle("UPDATE CITY");
+                        updateCityPanel.setVisible(true);
+                        updateCountryPanel.setVisible(false);
+                        updateCountryLPanel.setVisible(false);
+                        updateFrame.setSize(400,240);
+                        updateFrame.setVisible(true);
+                    }
+                    else if(canUpdateCity)
+                    {
+                        JOptionPane.showMessageDialog(null,"THAT CITY DOESN'T EXISTS");
+                    }
+                }
             }
             case "countryL" -> {
                 JTextField xField = new JTextField(10);
@@ -669,7 +675,7 @@ public class UpdateGUI
                 myPanel.add(yField);
                 do {
                     int result = JOptionPane.showConfirmDialog(null, myPanel,
-                            "Login",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE,new ImageIcon());
+                            "SEARCH FOR COUNTRY LANGUAGE",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE);
                     if (result == JOptionPane.OK_OPTION)
                     {
                         updateCountryLCode = xField.getText();
@@ -679,34 +685,43 @@ public class UpdateGUI
                     {
                         JOptionPane.showMessageDialog(null,"LANGUAGES HAVE A MAXIMUM OF CHARACTERS OF 30");
                     }
+                    else if (updateCountryLCode.length()>3)
+                    {
+                        JOptionPane.showMessageDialog(null,"COUNTRY CODE HAVE A MAXIMUM OF CHARACTERS OF 3");
+                    }
                     else
                     {
-                        canUpdateCity = true;
-                        cityCount++;
+                        canUpdateCountryL = true;
+                        countryLCount++;
                     }
-                } while (updateCountryLLanguage.length()>30);
-                if(canUpdateCity)
+                } while (updateCountryLLanguage.length()>30||updateCountryLCode.length()>3);
+                String[] fill = update.updateCountryLFill(updateCountryLLanguage,updateCountryLCode);
+                if(canUpdateCountryL)
                 {
-                    if(cityCount==1)
+                    if(countryLCount==1)
                     {
                         this.updateCountryLanguage();
                     }
-                    else
+                    if(fill[0]!=null)
                     {
-                        String[] fill = update.updateCountryLFill(updateCountryLLanguage,updateCountryLCode);
                         update.updatedCountryLCode= fill[0];
                         countryLCode.setText(fill[0]);
                         countryLLanguage.setText(fill[1]);
                         update.updatedCountryLLanguage = fill[1];
                         countryLIsOfficial.setSelectedItem(fill[2]);
                         countryLPercentage.setText(fill[3]);
+                        updateFrame.setTitle("UPDATE COUNTRY LANGUAGE");
+                        updateCityPanel.setVisible(false);
+                        updateCountryPanel.setVisible(false);
+                        updateCountryLPanel.setVisible(true);
+                        updateFrame.setSize(400,240);
+                        updateFrame.setVisible(true);
                     }
-                    updateFrame.setTitle("UPDATE COUNTRY LANGUAGE");
-                    updateCityPanel.setVisible(false);
-                    updateCountryPanel.setVisible(false);
-                    updateCountryLPanel.setVisible(true);
-                    updateFrame.setSize(400,240);
-                    updateFrame.setVisible(true);
+                    else if(canUpdateCountryL)
+                    {
+                        JOptionPane.showMessageDialog(null,"THAT COUNTRY LANGUAGE DOESN'T EXISTS");
+                    }
+
                 }
             }
             default -> JOptionPane.showMessageDialog(null, "SELECT A TABLE");

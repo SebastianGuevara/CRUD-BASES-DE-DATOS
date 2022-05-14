@@ -57,7 +57,6 @@ public class Update {
     public void updateInCity()
     {
         String updateCity = "UPDATE city SET ID=?, Name=?, CountryCode=?, District=?, Population=? where id = ?";
-
         try {
             PreparedStatement statement = con.prepareStatement(updateCity);
             statement.setInt(1, Integer.parseInt(updatedCityID));
@@ -67,10 +66,13 @@ public class Update {
             statement.setInt(5, updatedCityPopulation);
             statement.setInt(6, Integer.parseInt(updatedCityID));
             statement.execute();
+
+
         }
         catch(SQLException e) {
             throw new RuntimeException(e);
         }
+
     }
     public String[] updateCityFill(int cityID)
     {
