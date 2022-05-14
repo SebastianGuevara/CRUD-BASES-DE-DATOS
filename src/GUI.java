@@ -37,6 +37,7 @@ GUI
     ImageIcon ico = new ImageIcon("src/log.png");
     //GUI'S
     createGUI createGUI = new createGUI();
+    deleteGUI deleteGUI = new deleteGUI();
     public GUI() throws ClassNotFoundException, SQLException {
 
         //mainFrame Config
@@ -122,8 +123,6 @@ GUI
         countryLScroll.setVisible(false);
         tablesPanel.add(countryLScroll);
 
-
-
         //Table Buttons Configuration
         countryButton.addActionListener(e -> tablesTitle.setText("Countries Table"));
         countryButton.addActionListener(e -> tables.getCountryTable().setVisible(true));
@@ -134,6 +133,7 @@ GUI
         countryButton.addActionListener(e -> countryLScroll.setVisible(false));
         countryButton.addActionListener(e -> mainFrame.setSize(1300,750));
         countryButton.addActionListener(e -> createGUI.setTableSelection("country"));
+        countryButton.addActionListener(e -> deleteGUI.setTableSelection("country"));
 
         cityButton.addActionListener(e -> tablesTitle.setText("Cities Table"));
         cityButton.addActionListener(e -> tables.getCityTable().setVisible(true));
@@ -144,6 +144,7 @@ GUI
         cityButton.addActionListener(e -> countryScroll.setVisible(false));
         cityButton.addActionListener(e -> mainFrame.setSize(800,750));
         cityButton.addActionListener(e -> createGUI.setTableSelection("city"));
+        cityButton.addActionListener(e -> deleteGUI.setTableSelection("city"));
 
         countryLButton.addActionListener(e -> tablesTitle.setText("Country Languages Table"));
         countryLButton.addActionListener(e->tables.getCountryLTable().setVisible(true));
@@ -154,12 +155,12 @@ GUI
         countryLButton.addActionListener(e -> countryScroll.setVisible(false));
         countryLButton.addActionListener(e -> mainFrame.setSize(800,750));
         countryLButton.addActionListener(e -> createGUI.setTableSelection("countryL"));
+        countryLButton.addActionListener(e -> deleteGUI.setTableSelection("countryL"));
 
         //Create Button Configuration
-        createButton.addActionListener(e ->{
+        createButton.addActionListener(e ->createGUI.createSelector());
+        deleteButton.addActionListener(e ->deleteGUI.deleteSelector());
 
-            createGUI.createSelector();
-        });
 
         mainFrame.setVisible(true);
     }

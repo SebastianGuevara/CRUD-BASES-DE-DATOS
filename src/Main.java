@@ -4,7 +4,5 @@ public class Main
     public static void main(String[] args) throws ClassNotFoundException, SQLException
     {
         new GUI();
-        Delete test = new Delete();
-        test.deleteFromCity();
     }
 }

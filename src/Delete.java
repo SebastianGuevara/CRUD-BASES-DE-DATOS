@@ -1,10 +1,22 @@
+import javax.swing.*;
+import javax.swing.plaf.nimbus.State;
 import java.sql.*;
 
 public class Delete
 {
     private final DataBase db=new DataBase();
+    public Tables tables;
+    {
+        try {
+            tables = new Tables();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+    //deleteGUI deleteGUI = new deleteGUI();
+
     public int cityCount;
-    public String oldCountryCode;
+    public String oldCountryCode,oldCountryLLanguage;
     public int oldCityID;
     private final Connection con = db.getConnection();
     public Delete() throws SQLException {
@@ -17,11 +29,26 @@ public class Delete
     public void deleteFromCountry()
     {
         String deleteCountry = "delete FROM country WHERE Code=?";
+        String countryCheck = String.format("select count(code) from country where code = '%s'",oldCountryCode);
         try
         {
             PreparedStatement statement = con.prepareStatement(deleteCountry);
-            statement.setString(1, oldCountryCode);
-            statement.execute();
+            Statement st = con.createStatement();
+            ResultSet result = st.executeQuery(countryCheck);
+            while(result.next())
+            {
+                if(result.getInt("count(code)")==1)
+                {
+                    statement.setString(1, oldCountryCode);
+                    statement.execute();
+                    JOptionPane.showMessageDialog(null,"COUNTRY REMOVED SUCCESSFULLY");
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null,"THAT COUNTRY DOESN'T EXISTS");
+                }
+            }
+
         }
         catch (SQLException e)
         {
@@ -34,8 +61,22 @@ public class Delete
         try
         {
             PreparedStatement statement = con.prepareStatement(deleteCity);
-            statement.setInt(1, 4080);
-            statement.execute();
+            Statement st = con.createStatement();
+            ResultSet result = st.executeQuery("select count(id) from city where id ="+oldCityID+";");
+            while(result.next())
+            {
+                if(result.getInt("count(id)")==1)
+                {
+                    statement.setInt(1, oldCityID);
+                    statement.execute();
+                    JOptionPane.showMessageDialog(null,"CITY REMOVED SUCCESSFULLY");
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null,"THAT CITY DOESN'T EXISTS");
+                }
+            }
+
         }
         catch (SQLException e)
         {
@@ -44,16 +85,44 @@ public class Delete
     }
     public void deleteFromCountryLanguage()
     {
+
         String deleteCountryLanguage = "delete from countryLanguage where Language=?";
+        String countryLCheck = String.format("select count(language) from countryLanguage where language = '%s'",oldCountryLLanguage);
         try
         {
             PreparedStatement statement = con.prepareStatement(deleteCountryLanguage);
-            statement.setString(1, oldCountryCode);
-            statement.execute();
+            Statement st = con.createStatement();
+            ResultSet result = st.executeQuery(countryLCheck);
+            while(result.next())
+            {
+                if(result.getInt("count(language)")==1)
+                {
+                    statement.setString(1, oldCountryLLanguage);
+                    statement.execute();
+                    JOptionPane.showMessageDialog(null,"COUNTRY LANGUAGE REMOVED SUCCESSFULLY");
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null,"THAT COUNTRY LANGUAGE DOESN'T EXISTS");
+                }
+            }
+
 
         } catch (SQLException e)
         {
             throw new RuntimeException(e);
         }
+    }
+
+    public void setOldCityID(int oldCityID) {
+        this.oldCityID = oldCityID;
+    }
+
+    public void setOldCountryCode(String oldCountryCode) {
+        this.oldCountryCode = oldCountryCode;
+    }
+
+    public void setOldCountryLLanguage(String oldCountryLLanguage) {
+        this.oldCountryLLanguage = oldCountryLLanguage;
     }
 }
