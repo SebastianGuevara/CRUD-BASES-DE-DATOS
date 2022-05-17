@@ -4,6 +4,7 @@ import java.util.ArrayList;
 public class Create
 {
     //private Connection con;
+    private final DataBase db = new DataBase();
     public int newCityPopulation;
     public String newCityName,newCityCode,newCityDistrict;
     public String newCountryLCode,newCountryLLanguage,newCountryLIsOfficial;
@@ -11,16 +12,8 @@ public class Create
     public String newCountryCode,newCountryName,newCountryContinent,newCountryRegion,newCountryLocalName,newCountryGovernmentForm,newCountryHeadOfState,newCountryCode2;
     public float newCountrySurface,newCountryLifeExpectancy,newCountryGNP,newCountryGNPOld;
     public int newCountryYear,newCountryPopulation,newCountryCapital;
-    private Tables tables;
     public int cityCount;
-    {
-        try {
-            tables = new Tables();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-    private Connection con = tables.db.getConnection();
+    private final Connection con = db.getConnection();
 
     public Create() throws SQLException {
         Statement idStatement = con.createStatement();

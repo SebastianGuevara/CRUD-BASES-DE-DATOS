@@ -9,7 +9,7 @@ public class Tables
 {
    // private final GUI gui = new GUI();
     public DataBase db;
-    private DefaultTableModel cityModel = new DefaultTableModel()
+    public DefaultTableModel cityModel = new DefaultTableModel()
     {
         @Override
         public boolean isCellEditable(int row, int column) {

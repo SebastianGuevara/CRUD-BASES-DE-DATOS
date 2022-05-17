@@ -78,8 +78,9 @@ public class CreateGUI
     ImageIcon ico = new ImageIcon("src/log.png");
     private final Create create = new Create();
     public DefaultComboBoxModel fillCountryCode = new DefaultComboBoxModel();
+    private final Main main = new Main();
 
-    public CreateGUI() throws SQLException {
+    public CreateGUI() throws SQLException, ClassNotFoundException {
         //Frame config
         createFrame.setResizable(false);
         createFrame.setSize(400,325);
@@ -484,6 +485,13 @@ public class CreateGUI
             cityDistrict.setText("");
             cityPopulation.setText("");
             create.cityCount++;
+            String[] data = new String[5];
+            data[0]=cityID.getText();
+            data[1]=create.newCityName;
+            data[2]=create.newCityCode;
+            data[3]=create.newCityDistrict;
+            data[4]= String.valueOf(create.newCityPopulation);
+            main.getGUI().getTables().cityModel.addRow(data);
 
         });
 

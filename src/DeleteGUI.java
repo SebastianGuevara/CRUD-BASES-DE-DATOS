@@ -6,9 +6,9 @@ public class DeleteGUI
     private String tableSelection = "";
     private int countrySelector,citySelector,countryLSelector;
     private final Delete delete = new Delete();
+    private Main main = new Main();
     public String oldCityID,oldCountryCode,oldCountryLLanguage,oldCountryLCode;
-    public DeleteGUI() throws SQLException
-    {
+    public DeleteGUI() throws SQLException, ClassNotFoundException {
 
     }
     public void setTableSelection(String tableSelection) {
@@ -57,6 +57,7 @@ public class DeleteGUI
                 if(citySelector==0)
                 {
                     delete.deleteFromCity();
+                    //main.getGUI().getTables().cityModel.removeRow();
                 }
             }
             case "countryL" -> {

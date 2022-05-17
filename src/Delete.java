@@ -5,14 +5,8 @@ import java.sql.*;
 public class Delete
 {
     private final DataBase db=new DataBase();
-    public Tables tables;
-    {
-        try {
-            tables = new Tables();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
+
+
     //deleteGUI deleteGUI = new deleteGUI();
     public int cityCount;
     public String oldCountryCode,oldCountryLLanguage,oldCountryLCode;

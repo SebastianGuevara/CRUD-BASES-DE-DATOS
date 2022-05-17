@@ -38,7 +38,12 @@ GUI
     CreateGUI createGUI = new CreateGUI();
     DeleteGUI deleteGUI = new DeleteGUI();
     UpdateGUI updateGUI = new UpdateGUI();
-    public GUI() throws ClassNotFoundException, SQLException {
+    public GUI() throws ClassNotFoundException, SQLException
+    {
+        System.out.println("Work");
+    }
+    public void GUISetup()
+    {
 
         //mainFrame Config
         mainFrame.setResizable(false);
@@ -164,4 +169,7 @@ GUI
         mainFrame.setVisible(true);
     }
 
+    public Tables getTables() {
+        return tables;
+    }
 }

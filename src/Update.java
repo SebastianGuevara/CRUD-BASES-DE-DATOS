@@ -12,16 +12,6 @@ public class Update {
     public String updatedCountryLCode, updatedCountryLLanguage, updatedCountryLIsOfficial;
     public float updatedCountryLPercentage;
     public float updatedCountrySurface, updatedCountryLifeExpectancy, updatedCountryGNP, updatedCountryGNPOld;
-    private Tables tables;
-
-    {
-        try {
-            tables = new Tables();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-
     public Update() throws SQLException {
 
     }
