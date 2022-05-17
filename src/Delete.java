@@ -5,6 +5,7 @@ import java.sql.*;
 public class Delete
 {
     private final DataBase db=new DataBase();
+    private Main main = new Main();
 
 
     //deleteGUI deleteGUI = new deleteGUI();
@@ -12,7 +13,7 @@ public class Delete
     public String oldCountryCode,oldCountryLLanguage,oldCountryLCode;
     public int oldCityID;
     private final Connection con = db.getConnection();
-    public Delete() throws SQLException {
+    public Delete() throws SQLException, ClassNotFoundException {
         Statement idStatement = con.createStatement();
         ResultSet rs = idStatement.executeQuery("select id from city order by id desc limit 1;");
         rs.next();
@@ -36,6 +37,9 @@ public class Delete
                     statement.setString(1, oldCountryCode);
                     statement.execute();
                     JOptionPane.showMessageDialog(null,"COUNTRY REMOVED SUCCESSFULLY");
+                    main.getGUI().getTables().getCountryModel().setRowCount(0);
+                    main.getGUI().getTables().getCountryModel().setColumnCount(0);
+                    main.getGUI().getTables().countryTableConfig();
                 }
                 else
                 {
@@ -64,6 +68,9 @@ public class Delete
                     statement.setInt(1, oldCityID);
                     statement.execute();
                     JOptionPane.showMessageDialog(null,"CITY REMOVED SUCCESSFULLY");
+                    main.getGUI().getTables().cityModel.setRowCount(0);
+                    main.getGUI().getTables().cityModel.setColumnCount(0);
+                    main.getGUI().getTables().cityTableConfig();
                 }
                 else
                 {
@@ -94,6 +101,9 @@ public class Delete
                     statement.setString(1, oldCountryLLanguage);
                     statement.execute();
                     JOptionPane.showMessageDialog(null,"COUNTRY LANGUAGE REMOVED SUCCESSFULLY");
+                    main.getGUI().getTables().getCountryLananguageModel().setRowCount(0);
+                    main.getGUI().getTables().getCountryLananguageModel().setColumnCount(0);
+                    main.getGUI().getTables().countryLanguagesTableConfig();
                 }
                 else
                 {

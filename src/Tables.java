@@ -107,6 +107,53 @@ public class Tables
 
         cityTable.setVisible(true);
     }
+    public void cityTableSecondConfig()
+    {
+
+        cityModel.addColumn("ID");
+        cityModel.addColumn("Name");
+        cityModel.addColumn("CountryCode");
+        cityModel.addColumn("District");
+        cityModel.addColumn("Population");
+
+        cityModel.setRowCount(0);
+
+        cityTable.setModel(cityModel);
+        String[] data = new String[5];
+
+
+        try
+        {
+
+            Connection con = db.getConnection();
+            Statement st;
+            st = con.createStatement();
+            ResultSet result = st.executeQuery("SELECT * FROM city");
+
+            while(result.next())
+            {
+                data[0]=result.getString(1);
+                data[1]=result.getString(2);
+                data[2]=result.getString(3);
+                data[3]=result.getString(4);
+                data[4]=result.getString(5);
+
+                cityModel.addRow(data);
+            }
+        } catch (SQLException throwables)
+        {
+            throwables.printStackTrace();
+        }
+
+        cityTable.setRowSelectionAllowed(false);
+        cityTable.setCellSelectionEnabled(false);
+        cityTable.setDragEnabled(false);
+        cityTable.setUpdateSelectionOnSort(false);
+        cityTable.getTableHeader().setReorderingAllowed(false);
+        cityTable.getTableHeader().setResizingAllowed(false);
+
+        cityTable.setVisible(true);
+    }
     private final DefaultTableModel countryLananguageModel = new DefaultTableModel()
     {
         @Override

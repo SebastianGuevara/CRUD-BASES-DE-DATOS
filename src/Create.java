@@ -22,8 +22,7 @@ public class Create
         int count = rs.getInt(1);
         this.cityCount = count +1;
     }
-    public void addToCountry()
-    {
+    public void addToCountry() {
 
         String addCountry = "INSERT INTO country (Code, Name, Continent, Region, SurfaceArea, IndepYear, Population, LifeExpectancy, GNP, GNPOld, LocalName, GovernmentForm, HeadOfState, Capital, Code2) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try {

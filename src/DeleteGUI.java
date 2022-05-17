@@ -95,6 +95,7 @@ public class DeleteGUI
                     delete.deleteFromCountryLanguage();
                 }
 
+
             }
             default -> JOptionPane.showMessageDialog(null, "SELECT A TABLE");
         }
