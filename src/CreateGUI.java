@@ -386,6 +386,24 @@ public class CreateGUI
             countryCapital.setText("");
             countryCode2.setText("");
             fillCountryCode.insertElementAt(create.newCountryCode,1);
+
+            String[] data = new String[15];
+            data[0]=create.newCountryCode;
+            data[1]=create.newCountryName;
+            data[2]=create.newCountryContinent;
+            data[3]=create.newCountryRegion;
+            data[4]=String.valueOf(create.newCountrySurface);
+            data[5]=String.valueOf(create.newCountryYear);
+            data[6]=String.valueOf(create.newCountryPopulation);
+            data[7]=String.valueOf(create.newCountryLifeExpectancy);
+            data[8]=String.valueOf(create.newCountryGNP);
+            data[9]=String.valueOf(create.newCountryGNPOld);
+            data[10]=create.newCountryLocalName;
+            data[11]=create.newCountryGovernmentForm;
+            data[12]=create.newCountryHeadOfState;
+            data[13]=String.valueOf(create.newCountrySurface);
+            data[14]=create.newCountryCode2;
+            main.getGUI().getTables().getCountryModel().addRow(data);
         });
 
 
@@ -491,7 +509,7 @@ public class CreateGUI
             data[2]=create.newCityCode;
             data[3]=create.newCityDistrict;
             data[4]= String.valueOf(create.newCityPopulation);
-            main.getGUI().getTables().cityModel.addRow(data);
+            main.getGUI().getTables().getCityModel().addRow(data);
 
         });
 
@@ -591,6 +609,12 @@ public class CreateGUI
                 countryLLanguage.setText("");
                 countryLIsOfficial.setSelectedItem("");
                 countryLPercentage.setText("");
+                String[] data = new String[4];
+                data[0] = create.newCountryLCode;
+                data[1] = create.newCountryLLanguage;
+                data[2] = create.newCountryLIsOfficial;
+                data[3] = String.valueOf(create.newCountryLPercentage);
+                main.getGUI().getTables().getCountryLananguageModel().addRow(data);
             }
 
         });

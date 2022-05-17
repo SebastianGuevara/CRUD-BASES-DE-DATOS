@@ -1,14 +1,16 @@
 import java.sql.SQLException;
 public class Main {
-    private static GUI GUI;
+
+
+    private static final GUI GUI;
 
     static {
         try {
             GUI = new GUI();
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            throw new RuntimeException(e);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 

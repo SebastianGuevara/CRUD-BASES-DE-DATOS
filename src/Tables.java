@@ -107,25 +107,22 @@ public class Tables
 
         cityTable.setVisible(true);
     }
+    private final DefaultTableModel countryLananguageModel = new DefaultTableModel()
+    {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return false;
+        }
+    };
     public void countryLanguagesTableConfig()
     {
-        DefaultTableModel model = new DefaultTableModel()
-        {
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return false;
-            }
-        };
+        countryLananguageModel.addColumn("CountryCode");
+        countryLananguageModel.addColumn("Language");
+        countryLananguageModel.addColumn("IsOfficial");
+        countryLananguageModel.addColumn("Percentage");
 
-        model.addColumn("CountryCode");
-        model.addColumn("Language");
-        model.addColumn("IsOfficial");
-        model.addColumn("Percentage");
-
-        countryLTable.setModel(model);
+        countryLTable.setModel(countryLananguageModel);
         String[] data = new String[4];
-
-
         try
         {
             Connection con = db.getConnection();
@@ -139,9 +136,7 @@ public class Tables
                 data[1]=result.getString(2);
                 data[2]=result.getString(3);
                 data[3]=result.getString(4);
-
-
-                model.addRow(data);
+                countryLananguageModel.addRow(data);
             }
         } catch (SQLException throwables)
         {
@@ -156,34 +151,32 @@ public class Tables
         countryLTable.getTableHeader().setResizingAllowed(false);
         countryLTable.setVisible(true);
     }
+    DefaultTableModel countryModel = new DefaultTableModel()
+    {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return false;
+        }
+    };
     public void countryTableConfig()
     {
-        System.out.println("tst");
-        DefaultTableModel model = new DefaultTableModel()
-        {
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return false;
-            }
-        };
+        countryModel.addColumn("Code");
+        countryModel.addColumn("Name");
+        countryModel.addColumn("Continent");
+        countryModel.addColumn("Region");
+        countryModel.addColumn("SurfaceArea");
+        countryModel.addColumn("IndepYear");
+        countryModel.addColumn("Population");
+        countryModel.addColumn("LifeExpectancy");
+        countryModel.addColumn("GNP");
+        countryModel.addColumn("GNPOld");
+        countryModel.addColumn("LocalName");
+        countryModel.addColumn("GovernmentForm");
+        countryModel.addColumn("HeadOfState");
+        countryModel.addColumn("Capital");
+        countryModel.addColumn("Code2");
 
-        model.addColumn("Code");
-        model.addColumn("Name");
-        model.addColumn("Continent");
-        model.addColumn("Region");
-        model.addColumn("SurfaceArea");
-        model.addColumn("IndepYear");
-        model.addColumn("Population");
-        model.addColumn("LifeExpectancy");
-        model.addColumn("GNP");
-        model.addColumn("GNPOld");
-        model.addColumn("LocalName");
-        model.addColumn("GovernmentForm");
-        model.addColumn("HeadOfState");
-        model.addColumn("Capital");
-        model.addColumn("Code2");
-
-        countryTable.setModel(model);
+        countryTable.setModel(countryModel);
         String[] data = new String[15];
 
 
@@ -212,7 +205,7 @@ public class Tables
                 data[13]=result.getString(14);
                 data[14]=result.getString(15);
 
-                model.addRow(data);
+                countryModel.addRow(data);
             }
         } catch (SQLException throwables)
         {
@@ -249,5 +242,12 @@ public class Tables
 
     public DefaultTableModel getCityModel() {
         return cityModel;
+    }
+
+    public DefaultTableModel getCountryLananguageModel() {
+        return countryLananguageModel;
+    }
+    public DefaultTableModel getCountryModel() {
+        return countryModel;
     }
 }
