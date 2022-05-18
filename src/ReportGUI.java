@@ -357,10 +357,6 @@ public class ReportGUI
         fillCountryLPercentage.removeAllElements();
         fillCountryLPercentage.addAll(report.fillComboBoxCountryLPercentage());
 
-
-
-
-
         countryCheckbox.addActionListener(e->
         {
             if(countryCheckbox.isSelected())

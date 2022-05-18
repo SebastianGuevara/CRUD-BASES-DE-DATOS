@@ -33,22 +33,27 @@ public class Report {
             PreparedStatement statement = con.prepareStatement(searchCountry);
             if(code != null){
                 searchCountry += (" code = '"+ code + "' ");
+                lastChar=searchCountry.charAt(searchCountry.length()-1);
             }
             if (name != null){
                 if(lastChar == 'e') {
                     searchCountry += (" name = '"+ name + "' ");
                 }
                 else {
-                    searchCountry += ("AND name = '"+ name + "'");
+                    searchCountry += ("AND name = '"+ name + "' ");
                 }
+                lastChar=searchCountry.charAt(searchCountry.length()-1);
             }
+            System.out.println(lastChar+" test");
             if (continent != null){
-                if(lastChar == 'e') {
+                if(lastChar == 'e')
+                {
                     searchCountry += (" continent = '"+ continent + "' ");
                 }
                 else {
                     searchCountry += ("AND continent = '"+ continent + "' ");
                 }
+                lastChar=searchCountry.charAt(searchCountry.length()-1);
             }
             if (region != null){
                 if(lastChar == 'e') {
@@ -57,6 +62,7 @@ public class Report {
                 else {
                     searchCountry += ("AND region = '"+ region + "' ");
                 }
+                lastChar=searchCountry.charAt(searchCountry.length()-1);
             }
             System.out.println(searchCountry);
 
