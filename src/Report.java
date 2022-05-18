@@ -35,10 +35,10 @@ public class Report {
                 searchCountry += (" code = '"+ code + "' ");
             }
             if (name != null){
-                if(lastChar == 'e') {
+                if(searchCountry.charAt(searchCountry.length()-1) == 'e') {
                     searchCountry += (" name = '"+ name + "' ");
                 }
-                else {
+                else if (searchCountry.charAt(searchCountry.length()-1) == ' ') {
                     searchCountry += ("AND name = '"+ name + "'");
                 }
             }
