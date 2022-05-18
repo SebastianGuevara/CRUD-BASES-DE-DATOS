@@ -483,7 +483,7 @@ public class Report {
         return data;
     }
     public ArrayList fillComboBoxCityDistrict() {
-        String query = "select district from city order by district";
+        String query = "select district from city group by district order by district";
         ArrayList data = new ArrayList();
 
         try
