@@ -10,7 +10,7 @@ public class Report {
     private final DataBase db= new DataBase();
     private final Connection con = db.getConnection();
     public int cityCount;
-    public String code, name, continent, region, localName, governmentForm, headOfState, code2;
+    public String  localName, governmentForm, headOfState, code2;
     public int indepYear, population, capital;
     public float surfaceArea, lifeExpectancy, GNP, GNPOld;
     public int ID, cityPopulation;
@@ -26,22 +26,40 @@ public class Report {
         this.cityCount = count +1;
     }
 
-    public void reportCountry() {
-        String searchCountry = "select * from country where ";
+    public void reportCountry(String code, String name, String continent, String region) {
+        String searchCountry = "select * from country where";
+        char lastChar = searchCountry.charAt(searchCountry.length()-1);
         try {
             PreparedStatement statement = con.prepareStatement(searchCountry);
             if(code != null){
-                searchCountry += ("code = '"+ code + "'");
+                searchCountry += (" code = '"+ code + "' ");
             }
             if (name != null){
-                searchCountry += ("name = '"+ name + "'");
+                if(lastChar == 'e') {
+                    searchCountry += (" name = '"+ name + "' ");
+                }
+                else {
+                    searchCountry += ("AND name = '"+ name + "'");
+                }
             }
             if (continent != null){
-                searchCountry += ("continent = '"+ continent + "'");
+                if(lastChar == 'e') {
+                    searchCountry += (" continent = '"+ continent + "' ");
+                }
+                else {
+                    searchCountry += ("AND continent = '"+ continent + "' ");
+                }
             }
             if (region != null){
-                searchCountry += ("region = '"+ region + "'");
+                if(lastChar == 'e') {
+                    searchCountry += (" region = '"+ region + "' ");
+                }
+                else {
+                    searchCountry += ("AND region = '"+ region + "' ");
+                }
             }
+            System.out.println(searchCountry);
+
             if (surfaceArea != 0){
                 searchCountry += ("surfaceArea = '"+ surfaceArea + "'");
             }
@@ -78,8 +96,8 @@ public class Report {
             if (code2 != null){
                 searchCountry += ("code2 = '"+ code2 + "'");
             }
-            statement.setString(1,searchCountry);
-            statement.execute();
+            //statement.setString(1,searchCountry);
+            //statement.execute();
         }
 
         catch (SQLException e) {
