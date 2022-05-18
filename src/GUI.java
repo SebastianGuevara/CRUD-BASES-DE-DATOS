@@ -26,7 +26,7 @@ GUI
     final JButton createButton = new JButton("Create");
     final JButton deleteButton = new JButton("Delete");
     final JButton updateButton = new JButton("Update");
-    final JButton importButton = new JButton("Import");
+    final JButton reportButton = new JButton("Report");
     //Tables
     Tables tables = new Tables();
     //Scrolls
@@ -38,6 +38,7 @@ GUI
     CreateGUI createGUI = new CreateGUI();
     DeleteGUI deleteGUI = new DeleteGUI();
     UpdateGUI updateGUI = new UpdateGUI();
+    ReportGUI reportGUI = new ReportGUI();
     public GUI() throws ClassNotFoundException, SQLException
     {
         System.out.println("Work");
@@ -99,11 +100,11 @@ GUI
         panelSouth.add(createButton,FlowLayout.LEFT);
         panelSouth.add(deleteButton,FlowLayout.CENTER);
         panelSouth.add(updateButton,FlowLayout.RIGHT);
-        panelSouth.add(importButton,FlowLayout.RIGHT);
+        panelSouth.add(reportButton,FlowLayout.RIGHT);
         createButton.setFocusable(false);
         deleteButton.setFocusable(false);
         updateButton.setFocusable(false);
-        importButton.setFocusable(false);
+        reportButton.setFocusable(false);
 
         //Tables configuration
         tablesPanel.setBackground(Color.WHITE);
@@ -160,10 +161,11 @@ GUI
         countryLButton.addActionListener(e -> deleteGUI.setTableSelection("countryL"));
         countryLButton.addActionListener(e -> updateGUI.setTableSelection("countryL"));
 
-        //Create Button Configuration
+        //CRUD Buttons Configuration
         createButton.addActionListener(e ->createGUI.createSelector());
         deleteButton.addActionListener(e ->deleteGUI.deleteSelector());
         updateButton.addActionListener(e->updateGUI.updateSelector());
+        reportButton.addActionListener(e->reportGUI.mainSetup());
 
 
         mainFrame.setVisible(true);
