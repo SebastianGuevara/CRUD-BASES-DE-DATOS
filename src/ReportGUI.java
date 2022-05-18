@@ -145,7 +145,6 @@ public class ReportGUI
         cityCentralPanel.setLayout(new BorderLayout());
         countryLCentralPanel.setLayout(new BorderLayout());
 
-
         countryPanel.setLayout(new FlowLayout());
         cityPanel.setLayout(new FlowLayout());
         countryLPanel.setLayout(new FlowLayout());
@@ -303,6 +302,13 @@ public class ReportGUI
         countryCentralPanel.setVisible(false);
         cityCentralPanel.setVisible(false);
         countryLCentralPanel.setVisible(false);
+
+        //COUNTRY
+        fillCountryCode.removeAllElements();
+        fillCountryCode.addAll(report.fillComboBoxCountryName());
+        fillCountryName.removeAllElements();
+        fillCountryName.addAll(report.fillComboBoxCountryName());
+
 
 
         countryCheckbox.addActionListener(e->
