@@ -6,6 +6,18 @@ import java.util.Objects;
 
 public class ReportGUI
 {
+    JPanel countryPanel = new JPanel();
+    JPanel countryNorthPanel = new JPanel();
+    JPanel countryCentralPanel = new JPanel();
+    JPanel cityPanel = new JPanel();
+    JPanel cityNorthPanel = new JPanel();
+    JPanel cityCentralPanel = new JPanel();
+    JPanel countryLPanel = new JPanel();
+    JPanel countryLNorthPanel = new JPanel();
+    JPanel countryLCentralPanel = new JPanel();
+    JLabel countryLabel = new JLabel("Country");
+    JLabel cityLabel = new JLabel("City");
+    JLabel countryLLabel = new JLabel("Country Language");
     private Report report = new Report();
 
     private final JFrame reportFrame = new JFrame();
@@ -89,14 +101,12 @@ public class ReportGUI
         reportFrame.setVisible(false);
         reportFrame.setLocationRelativeTo(null);
         reportFrame.add(mainReportPanel,BorderLayout.CENTER);
+
         enterButton.setFocusable(false);
         southPanel.add(enterButton);
         enterButton.addActionListener(e->{
             System.out.println(Objects.requireNonNull(countryName.getSelectedItem()).toString());
         });
-    }
-    public void mainSetup()
-    {
         mainReportPanel.setLayout(new BorderLayout());
         northPanel.setPreferredSize(new Dimension(100,60));
 
@@ -126,18 +136,6 @@ public class ReportGUI
 
         //Central panel config
         centralPanel.setLayout(new BoxLayout(centralPanel,BoxLayout.Y_AXIS));
-        JPanel countryPanel = new JPanel();
-        JPanel countryNorthPanel = new JPanel();
-        JPanel countryCentralPanel = new JPanel();
-        JPanel cityPanel = new JPanel();
-        JPanel cityNorthPanel = new JPanel();
-        JPanel cityCentralPanel = new JPanel();
-        JPanel countryLPanel = new JPanel();
-        JPanel countryLNorthPanel = new JPanel();
-        JPanel countryLCentralPanel = new JPanel();
-        JLabel countryLabel = new JLabel("Country");
-        JLabel cityLabel = new JLabel("City");
-        JLabel countryLLabel = new JLabel("Country Language");
 
         centralPanel.add(countryCentralPanel);
         centralPanel.add(cityCentralPanel);
@@ -151,9 +149,7 @@ public class ReportGUI
         countryPanel.setLayout(new FlowLayout());
         cityPanel.setLayout(new FlowLayout());
         countryLPanel.setLayout(new FlowLayout());
-        countryCentralPanel.setVisible(false);
-        cityCentralPanel.setVisible(false);
-        countryLCentralPanel.setVisible(false);
+
 
         countryNorthPanel.setPreferredSize(new Dimension(20,20));
         cityNorthPanel.setPreferredSize(new Dimension(20,20));
@@ -297,6 +293,17 @@ public class ReportGUI
         countryLPanel.add(countryLLanguage);
         countryLPanel.add(countryLIsOfficial);
         countryLPanel.add(countryLPercentage);
+    }
+    public void mainSetup()
+    {
+        countryCheckbox.setSelected(false);
+        cityCheckbox.setSelected(false);
+        countryLanguageCheckbox.setSelected(false);
+
+        countryCentralPanel.setVisible(false);
+        cityCentralPanel.setVisible(false);
+        countryLCentralPanel.setVisible(false);
+
 
         countryCheckbox.addActionListener(e->
         {
