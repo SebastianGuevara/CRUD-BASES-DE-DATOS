@@ -1,24 +1,19 @@
 import documents.MyComboBoxRenderer;
-import jdk.swing.interop.SwingInterOpUtils;
-
 import javax.swing.*;
-import javax.swing.JComboBox;
 import java.awt.*;
 
 public class ReportGUI
 {
-    private JFrame reportFrame = new JFrame();
-    private JPanel mainReportPanel = new JPanel();
-    private JPanel northPanel = new JPanel();
-    private JPanel southPanel = new JPanel();
-    private JPanel westPanel = new JPanel();
-    private JPanel eastPanel = new JPanel();
-    private JPanel centralPanel = new JPanel();
+    private final JFrame reportFrame = new JFrame();
+    private final JPanel mainReportPanel = new JPanel();
+    private final JPanel northPanel = new JPanel();
+    private final JPanel southPanel = new JPanel();
+    private final JPanel centralPanel = new JPanel();
 
     //CheckBoxes
-    private JCheckBox countryCheckbox = new JCheckBox("Country");
-    private JCheckBox cityCheckbox = new JCheckBox("City");
-    private JCheckBox countryLanguageCheckbox = new JCheckBox("Country Language");
+    private final JCheckBox countryCheckbox = new JCheckBox("Country");
+    private final JCheckBox cityCheckbox = new JCheckBox("City");
+    private final JCheckBox countryLanguageCheckbox = new JCheckBox("Country Language");
 
     ImageIcon ico = new ImageIcon("src/log.png");
     
@@ -72,26 +67,124 @@ public class ReportGUI
         //Central panel config
         centralPanel.setLayout(new BoxLayout(centralPanel,BoxLayout.Y_AXIS));
         JPanel countryPanel = new JPanel();
+        JPanel countryNorthPanel = new JPanel();
+        JPanel countryCentralPanel = new JPanel();
         JPanel cityPanel = new JPanel();
+        JPanel cityNorthPanel = new JPanel();
+        JPanel cityCentralPanel = new JPanel();
         JPanel countryLPanel = new JPanel();
-        countryPanel.setBackground(Color.red);
-        countryLPanel.setBackground(Color.black);
-        centralPanel.add(countryPanel);
-        centralPanel.add(cityPanel);
-        centralPanel.add(countryLPanel);
+        JPanel countryLNorthPanel = new JPanel();
+        JPanel countryLCentralPanel = new JPanel();
+        JLabel countryLabel = new JLabel("Country");
+        JLabel cityLabel = new JLabel("City");
+        JLabel countryLLabel = new JLabel("Country Language");
+
+        centralPanel.add(countryCentralPanel);
+        centralPanel.add(cityCentralPanel);
+        centralPanel.add(countryLCentralPanel);
+
+        countryCentralPanel.setLayout(new BorderLayout());
+        cityCentralPanel.setLayout(new BorderLayout());
+        countryLCentralPanel.setLayout(new BorderLayout());
+
+
         countryPanel.setLayout(new FlowLayout());
         cityPanel.setLayout(new FlowLayout());
         countryLPanel.setLayout(new FlowLayout());
-        countryPanel.setVisible(false);
-        cityPanel.setVisible(false);
-        countryLPanel.setVisible(false);
+        countryCentralPanel.setVisible(false);
+        cityCentralPanel.setVisible(false);
+        countryLCentralPanel.setVisible(false);
+
+        countryNorthPanel.setPreferredSize(new Dimension(20,20));
+        cityNorthPanel.setPreferredSize(new Dimension(20,20));
+        cityCentralPanel.setPreferredSize(new Dimension(20,10));
+        countryLNorthPanel.setPreferredSize(new Dimension(20,20));
+        countryLCentralPanel.setPreferredSize(new Dimension(20,10));
+
+        countryNorthPanel.add(countryLabel);
+        cityNorthPanel.add(cityLabel);
+        countryLNorthPanel.add(countryLLabel);
+
+        countryCentralPanel.add(countryPanel,BorderLayout.CENTER);
+        countryCentralPanel.add(countryNorthPanel,BorderLayout.NORTH);
+        cityCentralPanel.add(cityPanel,BorderLayout.CENTER);
+        cityCentralPanel.add(cityNorthPanel,BorderLayout.NORTH);
+        countryLCentralPanel.add(countryLPanel,BorderLayout.CENTER);
+        countryLCentralPanel.add(countryLNorthPanel,BorderLayout.NORTH);
+
+
+        //COUNTRY COMBO QUERY CONFIG
+        JComboBox<String> countryCode = new JComboBox<>();
+        JComboBox<String> countryName = new JComboBox<>();
+        JComboBox<String> countryContinent = new JComboBox<>();
+        JComboBox<String> countryRegion = new JComboBox<>();
+        JComboBox<String> countrySurface = new JComboBox<>();
+        JComboBox<String> countryYear = new JComboBox<>();
+        JComboBox<String> countryPopulation= new JComboBox<>();
+        JComboBox<String> countryLifeExpectancy= new JComboBox<>();
+        JComboBox<String> countryGNP = new JComboBox<>();
+        JComboBox<String> countryGNPOld= new JComboBox<>();
+        JComboBox<String> countryLocalName = new JComboBox<>();
+        JComboBox<String> countryGovernmentForm = new JComboBox<>();
+        JComboBox<String> countryHeadOfState = new JComboBox<>();
+        JComboBox<String> countryCapital = new JComboBox<>();
+        JComboBox<String> countryCode2= new JComboBox<>();
+
+        countryCode.setPreferredSize(new Dimension(120,20));
+        countryCode.setRenderer(new MyComboBoxRenderer("Code"));
+        countryName.setPreferredSize(new Dimension(120,20));
+        countryName.setRenderer(new MyComboBoxRenderer("Name"));
+        countryContinent.setPreferredSize(new Dimension(120,20));
+        countryContinent.setRenderer(new MyComboBoxRenderer("Continent"));
+        countryRegion.setPreferredSize(new Dimension(120,20));
+        countryRegion.setRenderer(new MyComboBoxRenderer("Region"));
+        countrySurface.setPreferredSize(new Dimension(120,20));
+        countrySurface.setRenderer(new MyComboBoxRenderer("Surface"));
+        countryYear.setPreferredSize(new Dimension(120,20));
+        countryYear.setRenderer(new MyComboBoxRenderer("Independation Year"));
+        countryPopulation.setPreferredSize(new Dimension(120,20));
+        countryPopulation.setRenderer(new MyComboBoxRenderer("Population"));
+        countryLifeExpectancy.setPreferredSize(new Dimension(120,20));
+        countryLifeExpectancy.setRenderer(new MyComboBoxRenderer("Life Expectancy"));
+        countryGNP.setPreferredSize(new Dimension(120,20));
+        countryGNP.setRenderer(new MyComboBoxRenderer("GNP"));
+        countryGNPOld.setPreferredSize(new Dimension(120,20));
+        countryGNPOld.setRenderer(new MyComboBoxRenderer("Old GNP"));
+        countryLocalName.setPreferredSize(new Dimension(120,20));
+        countryLocalName.setRenderer(new MyComboBoxRenderer("Local Name"));
+        countryGovernmentForm.setPreferredSize(new Dimension(120,20));
+        countryGovernmentForm.setRenderer(new MyComboBoxRenderer("Government Form"));
+        countryHeadOfState.setPreferredSize(new Dimension(120,20));
+        countryHeadOfState.setRenderer(new MyComboBoxRenderer("Head of State"));
+        countryCapital.setPreferredSize(new Dimension(120,20));
+        countryCapital.setRenderer(new MyComboBoxRenderer("Capital"));
+        countryCode2.setPreferredSize(new Dimension(120,20));
+        countryCode2.setRenderer(new MyComboBoxRenderer("Code"));
+
+        countryPanel.add(countryCode);
+        countryPanel.add(countryName);
+        countryPanel.add(countryContinent);
+        countryPanel.add(countryRegion);
+        countryPanel.add(countrySurface);
+        countryPanel.add(countryYear);
+        countryPanel.add(countryPopulation);
+        countryPanel.add(countryLifeExpectancy);
+        countryPanel.add(countryGNP);
+        countryPanel.add(countryGNPOld);
+        countryPanel.add(countryLocalName);
+        countryPanel.add(countryGovernmentForm);
+        countryPanel.add(countryHeadOfState);
+        countryPanel.add(countryCapital);
+        countryPanel.add(countryCode2);
+
+
 
         //CITY COMBO QUERY CONFIG
         JComboBox<String> cityID = new JComboBox<>();
         JComboBox<String> cityName = new JComboBox<>();
         JComboBox<String> cityCode = new JComboBox<>();
         JComboBox<String> cityDistrict = new JComboBox<>();
-        JComboBox<Integer> cityPopulation = new JComboBox<>();
+        JComboBox<String> cityPopulation = new JComboBox<>();
 
         cityID.setPreferredSize(new Dimension(120,20));
         cityID.setRenderer(new MyComboBoxRenderer("ID"));
@@ -135,36 +228,69 @@ public class ReportGUI
         {
             if(countryCheckbox.isSelected())
             {
-                countryPanel.setVisible(true);
+                countryCentralPanel.setVisible(true);
+                reportFrame.setSize(660,325);
+                if(countryCheckbox.isSelected()&&cityCheckbox.isSelected()&&countryLanguageCheckbox.isSelected())
+                {
+                    reportFrame.setSize(658,355);
+                }
+                else if(countryCheckbox.isSelected()&&countryLanguageCheckbox.isSelected())
+                {
+                    reportFrame.setSize(658,332);
+                }
+
             }
             else
             {
-                countryPanel.setVisible(false);
+                countryCentralPanel.setVisible(false);
             }
         });
         cityCheckbox.addActionListener(e->
         {
             if(cityCheckbox.isSelected())
             {
-                cityPanel.setVisible(true);
+                cityCentralPanel.setVisible(true);
                 reportFrame.setSize(660,325);
+                if(countryCheckbox.isSelected()&&cityCheckbox.isSelected()&&countryLanguageCheckbox.isSelected())
+                {
+                    reportFrame.setSize(658,355);
+                }
+                else if(cityCheckbox.isSelected()&&countryLanguageCheckbox.isSelected())
+                {
+                    reportFrame.setSize(658,325);
+                }
             }
             else
             {
-                cityPanel.setVisible(false);
+                cityCentralPanel.setVisible(false);
             }
         });
         countryLanguageCheckbox.addActionListener(e->
         {
             if(countryLanguageCheckbox.isSelected())
             {
-                countryLPanel.setVisible(true);
+                countryLCentralPanel.setVisible(true);
                 reportFrame.setSize(550,325);
+                if(countryCheckbox.isSelected()&&cityCheckbox.isSelected()&&countryLanguageCheckbox.isSelected())
+                {
+                    reportFrame.setSize(658,355);
+                }
+                else if(countryCheckbox.isSelected()&&countryLanguageCheckbox.isSelected())
+                {
+                    reportFrame.setSize(658,332);
+                }
+                else if(cityCheckbox.isSelected()&&countryLanguageCheckbox.isSelected())
+                {
+                    reportFrame.setSize(658,325);
+                }
             }
             else
             {
-                countryLPanel.setVisible(false);
+                countryLCentralPanel.setVisible(false);
             }
+        });
+        enterButton.addActionListener(e->{
+            System.out.println(reportFrame.getSize());
         });
 
 

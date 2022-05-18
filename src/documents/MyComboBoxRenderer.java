@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class MyComboBoxRenderer extends JLabel implements ListCellRenderer
 {
-    private String _title;
+    private final String _title;
 
     public MyComboBoxRenderer(String title)
     {
