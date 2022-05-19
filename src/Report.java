@@ -26,8 +26,8 @@ public class Report {
         this.cityCount = count +1;
     }
 
-    public String reportCountry(String code, String name, String continent, String region, String surfaceArea, String indepYear, String population, String lifeExpectancy,
-    String GNP, String GNPOld, String localName, String governmentForm, String headOfState, String capital, String code2) {
+    public String reportCountry(Object code, Object name, Object continent, Object region, Object surfaceArea, Object indepYear, Object population, Object lifeExpectancy,
+    Object GNP, Object GNPOld, Object localName, Object governmentForm, Object headOfState, Object capital, Object code2) {
         String searchCountry = "select * from country where";
         if(code != null){
             searchCountry += (" code = '"+ code + "' ");
