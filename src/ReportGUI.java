@@ -305,9 +305,9 @@ public class ReportGUI
 
         //COUNTRY
         fillCountryCode.removeAllElements();
-        fillCountryCode.addAll(report.fillComboBoxCountryName());
+        fillCountryCode.addAll(report.fillComboBoxCountryCode());
         fillCountryName.removeAllElements();
-        fillCountryName.addAll(report.fillComboBoxCountryName());
+        fillCountryName.addAll(report.fillComboBoxCountryCode());
         fillCountryContinent.removeAllElements();
         fillCountryContinent.addAll(report.fillComboBoxCountryContinent());
         fillCountryRegion.removeAllElements();

@@ -13,10 +13,7 @@ public class Report {
     public String  localName, governmentForm, headOfState, code2;
     public int indepYear, population, capital;
     public float surfaceArea, lifeExpectancy, GNP, GNPOld;
-    public int ID, cityPopulation;
-    public String cityName, cityCountryCode, district;
-    public String countryCode, language, isOfficial;
-    public float percentage;
+
 
     public Report() throws SQLException {
         Statement idStatement = con.createStatement();
@@ -402,28 +399,65 @@ public class Report {
         return data;
     }
 
-    public void reportCity() {
-        String searchCity = "select * from city where ";
+    public void reportCity(String ID, String name, String code, String district, String population) {
+        String searchCity = "select * from city where";
         try {
             PreparedStatement statement = con.prepareStatement(searchCity);
-            if(ID != 0){
-                searchCity += ("ID = '"+ ID + "'");
+            if(ID != null){
+                if(searchCity.charAt(searchCity.length()-1)=='e')
+                {
+                    searchCity += ("ID = '"+ ID + "' ");
+                }
+                else
+                {
+                    searchCity += (" ID = '"+ ID + "' ");
+                }
             }
-            if (cityName != null){
-                searchCity += ("cityName = '"+ cityName + "'");
+            if (name != null){
+                if(searchCity.charAt(searchCity.length()-1)=='e')
+                {
+                    searchCity += (" cityName = '"+ name + "' ");
+                }
+                else
+                {
+                    searchCity += ("AND cityName = '"+ name + "' ");
+                }
             }
-            if (cityCountryCode != null){
-                searchCity += ("cityCountryCode = '"+ cityCountryCode + "'");
+            if (code != null){
+                if(searchCity.charAt(searchCity.length()-1)=='e')
+                {
+                    searchCity += (" cityCountryCode = '"+ code + "' ");
+                }
+                else
+                {
+                    searchCity += ("AND cityCountryCode = '"+ code + "' ");
+                }
             }
             if (district != null){
-                searchCity += ("district = '"+ district + "'");
+                if(searchCity.charAt(searchCity.length()-1)=='e')
+                {
+                    searchCity += (" district = '"+ district + "' ");
+                }
+                else
+                {
+                    searchCity += ("AND district = '"+ district + "' ");
+                }
             }
-            if (cityPopulation != 0){
-                searchCity += ("cityPopulation = '"+ cityPopulation + "'");
-            }
+            if (population !=  null){
+                if(searchCity.charAt(searchCity.length()-1)=='e')
+                {
+                    searchCity += (" cityPopulation = '"+ population + "' ");
+                }
+                else
+                {
+                    searchCity += ("AND cityPopulation = '"+ population + "' ");
+                }
 
-            statement.setString(1,searchCity);
-            statement.execute();
+            }
+            System.out.println(searchCity);
+
+            //statement.setString(1,searchCity);
+            //statement.execute();
         }
 
         catch (SQLException e) {
@@ -527,7 +561,7 @@ public class Report {
         return data;
     }
 
-    public void reportCountryLanguage() {
+    public void reportCountryLanguage(String countryCode, String language, String isOfficial, String percentage) {
         String searchCountryLanguage = "select * from countryLanguage where ";
         try {
             PreparedStatement statement = con.prepareStatement(searchCountryLanguage);
@@ -540,7 +574,7 @@ public class Report {
             if (isOfficial != null){
                 searchCountryLanguage += ("isOfficial = '"+ isOfficial + "'");
             }
-            if (percentage != 0){
+            if (percentage != null){
                 searchCountryLanguage += ("percentage = '"+ percentage + "'");
             }
 
