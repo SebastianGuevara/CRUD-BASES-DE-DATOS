@@ -17,8 +17,11 @@ public class Report {
     public String cityName, cityCountryCode, district;
     public String countryCode, language, isOfficial;
     public float percentage;
+    public char[] columnsChar = new char[1];
+    private final Main main = new Main();
 
-    public Report() throws SQLException {
+
+    public Report() throws SQLException, ClassNotFoundException {
         Statement idStatement = con.createStatement();
         ResultSet rs = idStatement.executeQuery("select id from city order by id desc limit 1;");
         rs.next();
@@ -28,7 +31,176 @@ public class Report {
 
     public String reportCountry(Object code, Object name, Object continent, Object region, Object surfaceArea, Object indepYear, Object population, Object lifeExpectancy,
     Object GNP, Object GNPOld, Object localName, Object governmentForm, Object headOfState, Object capital, Object code2) {
-        String searchCountry = "select * from country where";
+        String searchColumns = "select ";
+        if(main.getGUI().getReportGUI().countryCodeCheck.isSelected())
+        {
+            if(searchColumns.charAt(searchColumns.length()-2)=='t')
+            {
+                searchColumns += ("code ");
+            }
+            else
+            {
+                searchColumns += (",code ");
+            }
+        }
+        if(main.getGUI().getReportGUI().countryNameCheck.isSelected())
+        {
+            if(searchColumns.charAt(searchColumns.length()-2)=='t')
+            {
+                searchColumns += ("name ");
+            }
+            else
+            {
+                searchColumns += (",name ");
+            }
+        }
+        if(main.getGUI().getReportGUI().countryContinentCheck.isSelected())
+        {
+            if(searchColumns.charAt(searchColumns.length()-2)=='t')
+            {
+                searchColumns += ("continent ");
+            }
+            else
+            {
+                searchColumns += (",continent ");
+            }
+        }
+        if(main.getGUI().getReportGUI().countryRegionCheck.isSelected())
+        {
+            if(searchColumns.charAt(searchColumns.length()-2)=='t')
+            {
+                searchColumns += ("region ");
+            }
+            else
+            {
+                searchColumns += (",region ");
+            }
+        }
+        if(main.getGUI().getReportGUI().countrySurfaceCheck.isSelected())
+        {
+            if(searchColumns.charAt(searchColumns.length()-2)=='t')
+            {
+                searchColumns += ("surfaceArea ");
+            }
+            else
+            {
+                searchColumns += (",surfaceArea ");
+            }
+        }
+        if(main.getGUI().getReportGUI().countryYearCheck.isSelected())
+        {
+            if(searchColumns.charAt(searchColumns.length()-2)=='t')
+            {
+                searchColumns += ("IndepYear ");
+            }
+            else
+            {
+                searchColumns += (",IndepYear ");
+            }
+        }
+        if(main.getGUI().getReportGUI().countryPopulationCheck.isSelected())
+        {
+            if(searchColumns.charAt(searchColumns.length()-2)=='t')
+            {
+                searchColumns += ("population ");
+            }
+            else
+            {
+                searchColumns += (",population ");
+            }
+        }
+        if(main.getGUI().getReportGUI().countryLifeExpectancyCheck.isSelected())
+        {
+            if(searchColumns.charAt(searchColumns.length()-2)=='t')
+            {
+                searchColumns += ("LifeExpectancy ");
+            }
+            else
+            {
+                searchColumns += (",LifeExpectancy ");
+            }
+        }
+        if(main.getGUI().getReportGUI().countryGNPCheck.isSelected())
+        {
+            if(searchColumns.charAt(searchColumns.length()-2)=='t')
+            {
+                searchColumns += ("GNP ");
+            }
+            else
+            {
+                searchColumns += (",GNP ");
+            }
+        }
+        if(main.getGUI().getReportGUI().countryGNPOldCheck.isSelected())
+        {
+            if(searchColumns.charAt(searchColumns.length()-2)=='t')
+            {
+                searchColumns += ("GNPOld ");
+            }
+            else
+            {
+                searchColumns += (",GNPOld ");
+            }
+        }
+        if(main.getGUI().getReportGUI().countryLocalNameCheck.isSelected())
+        {
+            if(searchColumns.charAt(searchColumns.length()-2)=='t')
+            {
+                searchColumns += ("LocalName ");
+            }
+            else
+            {
+                searchColumns += (",LocalName ");
+            }
+        }
+        if(main.getGUI().getReportGUI().countryGovernmentFormCheck.isSelected())
+        {
+            if(searchColumns.charAt(searchColumns.length()-2)=='t')
+            {
+                searchColumns += ("GovernmentForm ");
+            }
+            else
+            {
+                searchColumns += (",GovernmentForm ");
+            }
+        }
+        if(main.getGUI().getReportGUI().countryHeadOfStateCheck.isSelected())
+        {
+            if(searchColumns.charAt(searchColumns.length()-2)=='t')
+            {
+                searchColumns += ("HeadOfState ");
+            }
+            else
+            {
+                searchColumns += (",HeadOfState ");
+            }
+        }
+        if(main.getGUI().getReportGUI().countryCapitalCheck.isSelected())
+        {
+            if(searchColumns.charAt(searchColumns.length()-2)=='t')
+            {
+                searchColumns += ("Capital ");
+            }
+            else
+            {
+                searchColumns += (",Capital ");
+            }
+        }
+        if(main.getGUI().getReportGUI().countryCode2Check.isSelected())
+        {
+            if(searchColumns.charAt(searchColumns.length()-2)=='t')
+            {
+                searchColumns += ("Code2 ");
+            }
+            else
+            {
+                searchColumns += (",Code2 ");
+            }
+        }
+
+
+        searchColumns += ("from country where");
+        String searchCountry = searchColumns;
         if(code != null){
             searchCountry += (" code = '"+ code + "' ");
         }
@@ -143,6 +315,7 @@ public class Report {
                 searchCountry += (" AND code2 = '"+ code2 + "' ");
             }
         }
+
         return searchCountry;
 
     }

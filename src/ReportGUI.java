@@ -135,7 +135,7 @@ public class ReportGUI
 
     ImageIcon ico = new ImageIcon("src/log.png");
     
-    public ReportGUI() throws SQLException {
+    public ReportGUI() throws SQLException, ClassNotFoundException {
         reportFrame.setResizable(false);
         reportFrame.setSize(400,325);
         reportFrame.setTitle("REPORT");
@@ -148,27 +148,15 @@ public class ReportGUI
         enterButton.setFocusable(false);
         southPanel.add(enterButton);
         enterButton.addActionListener(e->{
-            try
-            {
-                countryQuery = report.reportCountry(countryCode.getSelectedItem(),countryName.getSelectedItem(),countryContinent.getSelectedItem(),countryRegion.getSelectedItem(),countrySurface.getSelectedItem(),countryYear.getSelectedItem(),countryPopulation.getSelectedItem(),countryLifeExpectancy.getSelectedItem(),countryGNP.getSelectedItem(),countryGNPOld.getSelectedItem(),countryLocalName.getSelectedItem(),countryGovernmentForm.getSelectedItem(),countryHeadOfState.getSelectedItem(),countryCapital.getSelectedItem(),countryCode2.getSelectedItem());
-                System.out.println(countryQuery);
-            }
-            catch (NullPointerException a)
-            {
-                a.printStackTrace();
-            }
-
             selectColumns();
             reportFrame.dispatchEvent(new WindowEvent(reportFrame,WindowEvent.WINDOW_CLOSING));
         });
         mainReportPanel.setLayout(new BorderLayout());
         northPanel.setPreferredSize(new Dimension(100,60));
 
-
         mainReportPanel.add(northPanel,BorderLayout.NORTH);
         mainReportPanel.add(centralPanel,BorderLayout.CENTER);
         mainReportPanel.add(southPanel,BorderLayout.SOUTH);
-
 
         //NorthPanel config
         northPanel.setLayout(new BorderLayout());
@@ -564,9 +552,19 @@ public class ReportGUI
         southP.add(panel,BorderLayout.SOUTH);
         columnSelectorButton.setFocusable(false);
         panel.add(columnSelectorButton);
+
         columnSelectorButton.addActionListener(e->{
             countryModel.setColumnCount(0);
             countryModel.setRowCount(0);
+            try
+            {
+                countryQuery = report.reportCountry(countryCode.getSelectedItem(),countryName.getSelectedItem(),countryContinent.getSelectedItem(),countryRegion.getSelectedItem(),countrySurface.getSelectedItem(),countryYear.getSelectedItem(),countryPopulation.getSelectedItem(),countryLifeExpectancy.getSelectedItem(),countryGNP.getSelectedItem(),countryGNPOld.getSelectedItem(),countryLocalName.getSelectedItem(),countryGovernmentForm.getSelectedItem(),countryHeadOfState.getSelectedItem(),countryCapital.getSelectedItem(),countryCode2.getSelectedItem());
+                System.out.println(countryQuery);
+            }
+            catch (NullPointerException a)
+            {
+                a.printStackTrace();
+            }
             tableView();
             columnsFrame.dispatchEvent(new WindowEvent(reportFrame,WindowEvent.WINDOW_CLOSING));
         });
@@ -592,12 +590,18 @@ public class ReportGUI
 
         scroll.setPreferredSize(new Dimension(1250,400));
 
-        table.setModel(countryModel);
-        for(int i = 0; i<fillCountryColumns().toArray().length;i++)
-            countryModel.addColumn(fillCountryColumns().get(i));
-        fillCountryData();
-
-        tableFrame.setVisible(true);
+        if(!countryQuery.equals("select * from country where"))
+        {
+            table.setModel(countryModel);
+            for(int i = 0; i<fillCountryColumns().toArray().length;i++)
+                countryModel.addColumn(fillCountryColumns().get(i));
+            fillCountryData();
+            tableFrame.setVisible(true);
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null,"INSERT MINIMUM ONE VALUE");
+        }
     }
     public ArrayList<String> fillCountryColumns()
     {
