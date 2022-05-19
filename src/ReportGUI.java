@@ -1,11 +1,17 @@
 import documents.MyComboBoxRenderer;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.sql.SQLException;
+import java.awt.event.WindowEvent;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class ReportGUI
 {
+    private final DataBase db= new DataBase();
+    private final Connection con = db.getConnection();
+
     JPanel countryPanel = new JPanel();
     JPanel countryNorthPanel = new JPanel();
     JPanel countryCentralPanel = new JPanel();
@@ -90,6 +96,14 @@ public class ReportGUI
     JLabel selectCheckbox = new JLabel("Select tables you want to use");
     JButton enterButton = new JButton("Generate report");
 
+    JFrame tableFrame = new JFrame();
+    JPanel panelCenter = new JPanel();
+    DefaultTableModel countryModel = new DefaultTableModel();
+    JTable table = new JTable();
+    JScrollPane scroll = new JScrollPane(table);
+    String countryQuery = "sss";
+
+
     ImageIcon ico = new ImageIcon("src/log.png");
     
     public ReportGUI() throws SQLException {
@@ -105,7 +119,18 @@ public class ReportGUI
         enterButton.setFocusable(false);
         southPanel.add(enterButton);
         enterButton.addActionListener(e->{
-            System.out.println(Objects.requireNonNull(countryName.getSelectedItem()).toString());
+            try
+            {
+                System.out.println(report.reportCountry(countryCode.getSelectedItem().toString(),countryName.getSelectedItem().toString(),countryContinent.getSelectedItem().toString(),countryRegion.getSelectedItem().toString(),countrySurface.getSelectedItem().toString(),countryName.getSelectedItem().toString(),countryYear.getSelectedItem().toString(),countryPopulation.getSelectedItem().toString(),countryLifeExpectancy.getSelectedItem().toString(),countryGNP.getSelectedItem().toString(),countryGNPOld.getSelectedItem().toString(),countryLocalName.getSelectedItem().toString(),countryGovernmentForm.getSelectedItem().toString(),countryHeadOfState.getSelectedItem().toString(),countryName.getSelectedItem().toString()));
+                //countryQuery = report.reportCountry(countryCode.getSelectedItem().toString(),countryName.getSelectedItem().toString(),countryContinent.getSelectedItem().toString(),countryRegion.getSelectedItem().toString(),countrySurface.getSelectedItem().toString(),countryName.getSelectedItem().toString(),countryYear.getSelectedItem().toString(),countryPopulation.getSelectedItem().toString(),countryLifeExpectancy.getSelectedItem().toString(),countryGNP.getSelectedItem().toString(),countryGNPOld.getSelectedItem().toString(),countryLocalName.getSelectedItem().toString(),countryGovernmentForm.getSelectedItem().toString(),countryHeadOfState.getSelectedItem().toString(),countryName.getSelectedItem().toString());
+            }
+            catch (NullPointerException a)
+            {
+                a.printStackTrace();
+            }
+
+            tableView();
+            reportFrame.dispatchEvent(new WindowEvent(reportFrame,WindowEvent.WINDOW_CLOSING));
         });
         mainReportPanel.setLayout(new BorderLayout());
         northPanel.setPreferredSize(new Dimension(100,60));
@@ -128,11 +153,6 @@ public class ReportGUI
         countryCheckbox.setFocusable(false);
         cityCheckbox.setFocusable(false);
         countryLanguageCheckbox.setFocusable(false);
-
-        //South panel config
-
-
-
 
         //Central panel config
         centralPanel.setLayout(new BoxLayout(centralPanel,BoxLayout.Y_AXIS));
@@ -423,18 +443,78 @@ public class ReportGUI
             }
         });
 
-
-
-
-
-
-
-
-
-
-
-
         reportFrame.setVisible(true);
+    }
+    public void tableView()
+    {
+
+        tableFrame.setResizable(false);
+        tableFrame.setSize(1300,750);
+        tableFrame.setTitle("REPORT");
+        tableFrame.setLayout(new BorderLayout());
+        tableFrame.setIconImage(ico.getImage());
+        tableFrame.setLocationRelativeTo(null);
+        panelCenter.add(scroll);
+
+        panelCenter.setPreferredSize(new Dimension(100,100));
+        panelCenter.setBorder(BorderFactory.createLineBorder(Color.darkGray,1));
+
+        tableFrame.add(panelCenter,BorderLayout.CENTER);
+        //.add(panelNorth,BorderLayout.NORTH);
+        //tableFrame.add(panelSouth,BorderLayout.SOUTH);
+        //tableFrame.add(panelEast,BorderLayout.EAST);
+        //tableFrame.add(panelWest,BorderLayout.WEST);
+
+        scroll.setPreferredSize(new Dimension(1300,750));
+
+        table.setModel(countryModel);
+        for(int i = 0; i<fillCountryColumns().toArray().length;i++)
+            countryModel.addColumn(fillCountryColumns().get(i));
+        fillCountryData();
+
+        tableFrame.setVisible(true);
+    }
+    public ArrayList<String> fillCountryColumns()
+    {
+
+        ArrayList<String> columns = new ArrayList<>();
+        /*
+        try {
+            Statement countryStatement = con.createStatement();
+            ResultSet countryRS = countryStatement.executeQuery(countryQuery);
+            ResultSetMetaData countryRSMD = countryRS.getMetaData();
+            for(int i=1;i<=countryRSMD.getColumnCount();i++)
+            {
+                columns.add(countryRSMD.getColumnName(i));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+         */
+
+        return columns;
+    }
+    public String[] fillCountryData()
+    {
+        String[] data = new String[fillCountryColumns().toArray().length];
+        /*
+        try {
+            Statement countryStatement = con.createStatement();
+            ResultSet countryRS = countryStatement.executeQuery(countryQuery);
+            while (countryRS.next())
+            {
+                for(int i = 0; i<fillCountryColumns().toArray().length;i++)
+                    data[i] = countryRS.getString(i + 1);
+                countryModel.addRow(data);
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+         */
+        return data;
     }
 
 }
