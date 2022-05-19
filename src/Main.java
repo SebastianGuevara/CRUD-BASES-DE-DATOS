@@ -20,7 +20,7 @@ public class Main {
     public static void main(String[] args) throws ClassNotFoundException, SQLException
     {
         GUI.GUISetup();
-        new Report().reportCountry("COL", null, "a", "b");
+        new Report().reportCountry(null, "Hola", "a", "a","a","a","a","a","a","a","d","d","e","r","t");
     }
 
     public static GUI getGUI() {

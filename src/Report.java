@@ -10,9 +10,6 @@ public class Report {
     private final DataBase db= new DataBase();
     private final Connection con = db.getConnection();
     public int cityCount;
-    public String  localName, governmentForm, headOfState, code2;
-    public int indepYear, population, capital;
-    public float surfaceArea, lifeExpectancy, GNP, GNPOld;
     public int ID, cityPopulation;
     public String cityName, cityCountryCode, district;
     public String countryCode, language, isOfficial;
@@ -26,9 +23,9 @@ public class Report {
         this.cityCount = count +1;
     }
 
-    public void reportCountry(String code, String name, String continent, String region) {
+    public void reportCountry(String code, String name, String continent, String region, String surfaceArea, String indepYear, String population, String lifeExpectancy,
+    String GNP, String GNPOld, String localName, String governmentForm, String headOfState, String capital, String code2) {
         String searchCountry = "select * from country where";
-        char lastChar = searchCountry.charAt(searchCountry.length()-1);
         try {
             PreparedStatement statement = con.prepareStatement(searchCountry);
             if(code != null){
@@ -38,64 +35,114 @@ public class Report {
                 if(searchCountry.charAt(searchCountry.length()-1) == 'e') {
                     searchCountry += (" name = '"+ name + "' ");
                 }
-                else if (searchCountry.charAt(searchCountry.length()-1) == ' ') {
-                    searchCountry += ("AND name = '"+ name + "'");
+                else {
+                    searchCountry += (" AND name = '"+ name + "' ");
                 }
             }
             if (continent != null){
-                if(lastChar == 'e') {
+                if(searchCountry.charAt(searchCountry.length()-1) == 'e')
+                {
                     searchCountry += (" continent = '"+ continent + "' ");
                 }
                 else {
-                    searchCountry += ("AND continent = '"+ continent + "' ");
+                    searchCountry += (" AND continent = '"+ continent + "' ");
                 }
             }
-            if (region != null){
-                if(lastChar == 'e') {
-                    searchCountry += (" region = '"+ region + "' ");
+            if (region != null) {
+                if (searchCountry.charAt(searchCountry.length() - 1) == 'e') {
+                    searchCountry += (" region = '" + region + "' ");
+                } else {
+                    searchCountry += (" AND region = '" + region + "' ");
+                }
+            }
+            if (surfaceArea != null){
+                if(searchCountry.charAt(searchCountry.length()-1) == 'e') {
+                    searchCountry += (" surfaceArea = '"+ surfaceArea + "' ");
                 }
                 else {
-                    searchCountry += ("AND region = '"+ region + "' ");
+                    searchCountry += (" AND surfaceArea = '"+ surfaceArea + "' ");
+                }
+            }
+            if (indepYear != null){
+                if(searchCountry.charAt(searchCountry.length()-1) == 'e') {
+                    searchCountry += (" indepYear = '"+ indepYear + "' ");
+                }
+                else {
+                    searchCountry += (" AND indepYear = '"+ indepYear + "' ");
+                }
+            }
+            if (population != null){
+                if(searchCountry.charAt(searchCountry.length()-1) == 'e') {
+                    searchCountry += (" population = '"+ population + "' ");
+                }
+                else {
+                    searchCountry += (" AND population = '"+ population + "' ");
+                }
+            }
+            if (lifeExpectancy != null){
+                if(searchCountry.charAt(searchCountry.length()-1) == 'e') {
+                    searchCountry += (" lifeExpectancy = '"+ lifeExpectancy + "' ");
+                }
+                else {
+                    searchCountry += (" AND lifeExpectancy = '"+ lifeExpectancy + "' ");
+                }
+            }
+            if (GNP != null){
+                if(searchCountry.charAt(searchCountry.length()-1) == 'e') {
+                    searchCountry += (" GNP = '"+ GNP + "' ");
+                }
+                else {
+                    searchCountry += (" AND GNP = '"+ GNP + "' ");
+                }
+            }
+            if (GNPOld != null){
+                if(searchCountry.charAt(searchCountry.length()-1) == 'e') {
+                    searchCountry += (" GNPOld = '"+ GNPOld + "' ");
+                }
+                else {
+                    searchCountry += (" AND GNPOld = '"+ GNPOld + "' ");
+                }
+            }
+            if (localName != null){
+                if(searchCountry.charAt(searchCountry.length()-1) == 'e') {
+                    searchCountry += (" localName = '"+ localName + "' ");
+                }
+                else {
+                    searchCountry += (" AND localName = '"+ localName + "' ");
+                }
+            }
+            if (governmentForm != null){
+                if(searchCountry.charAt(searchCountry.length()-1) == 'e') {
+                    searchCountry += (" governmentForm = '"+ governmentForm + "' ");
+                }
+                else {
+                    searchCountry += (" AND governmentForm = '"+ governmentForm + "' ");
+                }
+            }
+            if (headOfState != null) {
+                if (searchCountry.charAt(searchCountry.length() - 1) == 'e') {
+                    searchCountry += (" headOfState = '" + headOfState + "' ");
+                } else {
+                    searchCountry += (" AND headOfState = '" + headOfState + "' ");
+                }
+            }
+            if (capital != null){
+                if(searchCountry.charAt(searchCountry.length()-1) == 'e') {
+                    searchCountry += (" capital = '"+ capital + "' ");
+                }
+                else {
+                    searchCountry += (" AND capital = '"+ capital + "' ");
+                }
+            }
+            if (code2 != null){
+                if(searchCountry.charAt(searchCountry.length()-1) == 'e') {
+                    searchCountry += (" code2 = '"+ code2 + "' ");
+                }
+                else {
+                    searchCountry += (" AND code2 = '"+ code2 + "' ");
                 }
             }
             System.out.println(searchCountry);
-
-            if (surfaceArea != 0){
-                searchCountry += ("surfaceArea = '"+ surfaceArea + "'");
-            }
-            if (indepYear != 0){
-                searchCountry += ("indepYear = '"+ indepYear + "'");
-            }
-            if (population != 0){
-                searchCountry += ("population = '"+ population + "'");
-            }
-            if (lifeExpectancy != 0){
-                searchCountry += ("lifeExpectancy = '"+ lifeExpectancy + "'");
-            }
-            if (GNP != 0){
-                searchCountry += ("GNP = '"+ GNP + "'");
-            }
-            if (GNPOld != 0){
-                searchCountry += ("GNPOld = '"+ GNPOld + "'");
-            }
-            if (localName != null){
-                searchCountry += ("localName = '"+ localName + "'");
-            }
-            if (governmentForm != null){
-                searchCountry += ("governmentForm = '"+ governmentForm + "'");
-            }
-            if (headOfState != null){
-                searchCountry += ("headOfState = '"+ headOfState + "'");
-            }
-            if (lifeExpectancy != 0){
-                searchCountry += ("lifeExpectancy = '"+ lifeExpectancy + "'");
-            }
-            if (capital != 0){
-                searchCountry += ("capital = '"+ capital + "'");
-            }
-            if (code2 != null){
-                searchCountry += ("code2 = '"+ code2 + "'");
-            }
             //statement.setString(1,searchCountry);
             //statement.execute();
         }
@@ -483,7 +530,7 @@ public class Report {
         return data;
     }
     public ArrayList fillComboBoxCityDistrict() {
-        String query = "select district from city order by district";
+        String query = "select district from city group by district order by district";
         ArrayList data = new ArrayList();
 
         try

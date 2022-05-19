@@ -308,8 +308,54 @@ public class ReportGUI
         fillCountryCode.addAll(report.fillComboBoxCountryName());
         fillCountryName.removeAllElements();
         fillCountryName.addAll(report.fillComboBoxCountryName());
+        fillCountryContinent.removeAllElements();
+        fillCountryContinent.addAll(report.fillComboBoxCountryContinent());
+        fillCountryRegion.removeAllElements();
+        fillCountryRegion.addAll(report.fillComboBoxCountryRegion());
+        fillCountrySurface.removeAllElements();
+        fillCountrySurface.addAll(report.fillComboBoxCountrySurface());
+        fillCountryYear.removeAllElements();
+        fillCountryYear.addAll(report.fillComboBoxCountryYear());
+        fillCountryPopulation.removeAllElements();
+        fillCountryPopulation.addAll(report.fillComboBoxCountryPopulation());
+        fillCountryLifeExpectancy.removeAllElements();
+        fillCountryLifeExpectancy.addAll(report.fillComboBoxCountryLifeExpectancy());
+        fillCountryGNP.removeAllElements();
+        fillCountryGNP.addAll(report.fillComboBoxCountryGNP());
+        fillCountryGNPOld.removeAllElements();
+        fillCountryGNPOld.addAll(report.fillComboBoxCountryGNP());
+        fillCountryLocalName.removeAllElements();
+        fillCountryLocalName.addAll(report.fillComboBoxCountryLocalName());
+        fillCountryGovernmentForm.removeAllElements();
+        fillCountryGovernmentForm.addAll(report.fillComboBoxCountryGovernmentForm());
+        fillCountryHeadOfState.removeAllElements();
+        fillCountryHeadOfState.addAll(report.fillComboBoxCountryHeadOfState());
+        fillCountryCapital.removeAllElements();
+        fillCountryCapital.addAll(report.fillComboBoxCountryCapital());
+        fillCountryCode2.removeAllElements();
+        fillCountryCode2.addAll(report.fillComboBoxCountryCode2());
 
+        //CITY
+        fillCityID.removeAllElements();
+        fillCityID.addAll(report.fillComboBoxCityID());
+        fillCityName.removeAllElements();
+        fillCityName.addAll(report.fillComboBoxCityName());
+        fillCityCode.removeAllElements();
+        fillCityCode.addAll(report.fillComboBoxCityCode());
+        fillCityDistrict.removeAllElements();
+        fillCityDistrict.addAll(report.fillComboBoxCityDistrict());
+        fillCityPopulation.removeAllElements();
+        fillCityPopulation.addAll(report.fillComboBoxCityPopulation());
 
+        //COUNTRY LANGUAGE
+        fillCountryLCode.removeAllElements();
+        fillCountryLCode.addAll(report.fillComboBoxCountryLCode());
+        fillCountryLLanguage.removeAllElements();
+        fillCountryLLanguage.addAll(report.fillComboBoxCountryLLanguage());
+        fillCountryLIsOfficial.removeAllElements();
+        fillCountryLIsOfficial.addAll(report.fillComboBoxCountryLOfficial());
+        fillCountryLPercentage.removeAllElements();
+        fillCountryLPercentage.addAll(report.fillComboBoxCountryLPercentage());
 
         countryCheckbox.addActionListener(e->
         {
