@@ -864,7 +864,7 @@ public class Report {
 
     }
     public ArrayList fillComboBoxCountryLCode() {
-        String query = "select countryCode from countryLanguage order by countryCode";
+        String query = "select countryCode from countryLanguage group by countryCode order by countryCode";
         ArrayList data = new ArrayList();
 
         try
@@ -890,7 +890,7 @@ public class Report {
         return data;
     }
     public ArrayList fillComboBoxCountryLLanguage() {
-        String query = "select language from countryLanguage order by language";
+        String query = "select language from countryLanguage group by language order by language";
         ArrayList data = new ArrayList();
 
         try

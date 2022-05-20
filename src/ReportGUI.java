@@ -99,7 +99,17 @@ public class ReportGUI
     JFrame tableFrame = new JFrame();
     JPanel panelCenter = new JPanel();
     DefaultTableModel countryModel = new DefaultTableModel();
-    JTable table = new JTable();
+    JTable table = new JTable()
+    {
+        @Override
+        public void changeSelection(int rowIndex, int columnIndex, boolean toggle, boolean extend) {
+            if (convertColumnIndexToModel(columnIndex) != 0) {
+                return;
+            }
+            super.changeSelection(rowIndex, columnIndex, toggle, extend);
+        }
+    };
+
     JScrollPane scroll = new JScrollPane(table);
     String countryQuery = "select * from country";
 
@@ -225,7 +235,7 @@ public class ReportGUI
         countrySurface.setModel(fillCountrySurface);
         fillCountrySurface.addAll(report.fillComboBoxCountrySurface());
         countryYear.setPreferredSize(new Dimension(120,20));
-        countryYear.setRenderer(new MyComboBoxRenderer("Independation Year"));
+        countryYear.setRenderer(new MyComboBoxRenderer("Independence Year"));
         countryYear.setModel(fillCountryYear);
         fillCountryYear.addAll(report.fillComboBoxCountryYear());
         countryPopulation.setPreferredSize(new Dimension(120,20));
@@ -460,6 +470,40 @@ public class ReportGUI
             }
         });
 
+        countryCodeCheck.setFocusable(false);
+        countryNameCheck.setFocusable(false);
+        countryContinentCheck.setFocusable(false);
+        countryRegionCheck.setFocusable(false);
+        countrySurfaceCheck.setFocusable(false);
+        countryYearCheck.setFocusable(false);
+        countryPopulationCheck.setFocusable(false);
+        countryLifeExpectancyCheck.setFocusable(false);
+        countryGNPCheck.setFocusable(false);
+        countryGNPOldCheck.setFocusable(false);
+        countryLocalNameCheck.setFocusable(false);
+        countryGovernmentFormCheck.setFocusable(false);
+        countryHeadOfStateCheck.setFocusable(false);
+        countryCapitalCheck.setFocusable(false);
+        countryCode2Check.setFocusable(false);
+
+        cityIDCheck.setFocusable(false);
+        cityNameCheck.setFocusable(false);
+        cityCodeCheck.setFocusable(false);
+        cityDistrictCheck.setFocusable(false);
+        cityPopulationCheck.setFocusable(false);
+
+        countryLCodeCheck.setFocusable(false);
+        countryLLanguageCheck.setFocusable(false);
+        countryLIsCheck.setFocusable(false);
+        countryLPercentageCheck.setFocusable(false);
+
+        table.setRowSelectionAllowed(false);
+        table.setCellSelectionEnabled(false);
+        table.setDragEnabled(false);
+        table.setUpdateSelectionOnSort(false);
+        table.getTableHeader().setReorderingAllowed(false);
+        table.getTableHeader().setResizingAllowed(false);
+
         reportFrame.setVisible(true);
     }
     public void selectColumns()
@@ -520,6 +564,36 @@ public class ReportGUI
         northCentral.setLayout(new FlowLayout());
         centralCentral.setLayout(new FlowLayout());
         southCentral.setLayout(new FlowLayout());
+
+        countryCodeCheck.setSelected(true);
+        countryNameCheck.setSelected(true);
+        countryContinentCheck.setSelected(true);
+        countryRegionCheck.setSelected(true);
+        countrySurfaceCheck.setSelected(true);
+        countryYearCheck.setSelected(true);
+        countryPopulationCheck.setSelected(true);
+        countryLifeExpectancyCheck.setSelected(true);
+        countryGNPCheck.setSelected(true);
+        countryGNPOldCheck.setSelected(true);
+        countryLocalNameCheck.setSelected(true);
+        countryLocalNameCheck.setSelected(true);
+        countryGovernmentFormCheck.setSelected(true);
+        countryHeadOfStateCheck.setSelected(true);
+        countryCapitalCheck.setSelected(true);
+        countryCode2Check.setSelected(true);
+
+        cityIDCheck.setSelected(true);
+        cityNameCheck.setSelected(true);
+        cityCodeCheck.setSelected(true);
+        cityDistrictCheck.setSelected(true);
+        cityPopulationCheck.setSelected(true);
+
+
+        countryLCodeCheck.setSelected(true);
+        countryLLanguageCheck.setSelected(true);
+        countryLIsCheck.setSelected(true);
+        countryLPercentageCheck.setSelected(true);
+
 
         northCentral.add(countryCodeCheck);
         northCentral.add(countryNameCheck);
@@ -639,5 +713,6 @@ public class ReportGUI
 
         return data;
     }
+
 
 }

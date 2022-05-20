@@ -73,6 +73,7 @@ public class UpdateGUI
     final JLabel countryLLanguageLabel = new JLabel("Language:");
     final JLabel countryLIsOfficialLabel = new JLabel("Is official:");
     final JLabel countryLPercentageLabel = new JLabel("Percentage: ");
+
     //Other stuff
     final JLayeredPane mainupdatePanel = new JLayeredPane();
     private String tableSelection = "";
@@ -85,8 +86,9 @@ public class UpdateGUI
     private int countryCount = 0;
     private int cityCount = 0;
     private int countryLCount = 0;
+    Main main = new Main();
 
-    public UpdateGUI() throws SQLException {
+    public UpdateGUI() throws SQLException, ClassNotFoundException {
         //Frame config
         updateFrame.setResizable(false);
         updateFrame.setSize(400,325);
@@ -402,6 +404,10 @@ public class UpdateGUI
             countryHeadOfState.setText("");
             countryCapital.setText("");
             countryCode2.setText("");
+
+            main.getGUI().getTables().getCountryModel().setRowCount(0);
+            main.getGUI().getTables().getCountryModel().setColumnCount(0);
+            main.getGUI().getTables().countryTableConfig();
         });
 
 
@@ -515,6 +521,10 @@ public class UpdateGUI
             cityDistrict.setText("");
             cityPopulation.setText("");
 
+            main.getGUI().getTables().getCityModel().setRowCount(0);
+            main.getGUI().getTables().getCityModel().setColumnCount(0);
+            main.getGUI().getTables().cityTableConfig();
+
         });
 
     }
@@ -622,6 +632,9 @@ public class UpdateGUI
                 countryLLanguage.setText("");
                 countryLIsOfficial.setSelectedItem("");
                 countryLPercentage.setText("");
+                main.getGUI().getTables().getCountryLananguageModel().setRowCount(0);
+                main.getGUI().getTables().getCountryLananguageModel().setColumnCount(0);
+                main.getGUI().getTables().countryLanguagesTableConfig();
             }
 
         });
