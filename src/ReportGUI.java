@@ -634,7 +634,7 @@ public class ReportGUI
             countryModel.setRowCount(0);
             try
             {
-                countryQuery = report.reportCountry(countryCode.getSelectedItem(),countryName.getSelectedItem(),countryContinent.getSelectedItem(),countryRegion.getSelectedItem(),countrySurface.getSelectedItem(),countryYear.getSelectedItem(),countryPopulation.getSelectedItem(),countryLifeExpectancy.getSelectedItem(),countryGNP.getSelectedItem(),countryGNPOld.getSelectedItem(),countryLocalName.getSelectedItem(),countryGovernmentForm.getSelectedItem(),countryHeadOfState.getSelectedItem(),countryCapital.getSelectedItem(),countryCode2.getSelectedItem());
+                countryQuery = report.reportCountry(countryCode.getSelectedItem(),countryName.getSelectedItem(),countryContinent.getSelectedItem(),countryRegion.getSelectedItem(),countrySurface.getSelectedItem(),countryYear.getSelectedItem(),countryPopulation.getSelectedItem(),countryLifeExpectancy.getSelectedItem(),countryGNP.getSelectedItem(),countryGNPOld.getSelectedItem(),countryLocalName.getSelectedItem(),countryGovernmentForm.getSelectedItem(),countryHeadOfState.getSelectedItem(),countryCapital.getSelectedItem(),countryCode2.getSelectedItem(), cityID.getSelectedItem(),cityName.getSelectedItem(),cityCode.getSelectedItem(),cityDistrict.getSelectedItem(),cityPopulation.getSelectedItem(), countryLCode.getSelectedItem(), countryLLanguage.getSelectedItem(), countryLIsOfficial.getSelectedItem(), countryLPercentage.getSelectedItem());
                 System.out.println(countryQuery);
             }
             catch (NullPointerException a)
