@@ -33,9 +33,9 @@ public class ReportGUI
     private final JPanel centralPanel = new JPanel();
 
     //CheckBoxes
-    private final JCheckBox countryCheckbox = new JCheckBox("Country");
-    private final JCheckBox cityCheckbox = new JCheckBox("City");
-    private final JCheckBox countryLanguageCheckbox = new JCheckBox("Country Language");
+    public final JCheckBox countryCheckbox = new JCheckBox("Country");
+    public final JCheckBox cityCheckbox = new JCheckBox("City");
+    public final JCheckBox countryLanguageCheckbox = new JCheckBox("Country Language");
 
     //COUNTRY COMBO QUERY CONFIG
     JComboBox<String> countryCode = new JComboBox<>();

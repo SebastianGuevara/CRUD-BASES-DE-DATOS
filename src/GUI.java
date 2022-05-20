@@ -35,9 +35,9 @@ GUI
     JScrollPane countryLScroll = new JScrollPane(tables.getCountryLTable());
     ImageIcon ico = new ImageIcon("src/log.png");
     //GUI'S
-    public CreateGUI createGUI = new CreateGUI();
-    public DeleteGUI deleteGUI = new DeleteGUI();
-    public UpdateGUI updateGUI = new UpdateGUI();
+    CreateGUI createGUI = new CreateGUI();
+    DeleteGUI deleteGUI = new DeleteGUI();
+    UpdateGUI updateGUI = new UpdateGUI();
     public ReportGUI reportGUI = new ReportGUI();
     public GUI() throws ClassNotFoundException, SQLException
     {

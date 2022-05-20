@@ -18,6 +18,8 @@ public class Report {
     public String countryCode, language, isOfficial;
     public float percentage;
     public char[] columnsChar = new char[1];
+    private String searchColumns = "";
+    private String searchCountry = "";
     private final Main main = new Main();
 
 
@@ -31,292 +33,331 @@ public class Report {
 
     public String reportCountry(Object code, Object name, Object continent, Object region, Object surfaceArea, Object indepYear, Object population, Object lifeExpectancy,
     Object GNP, Object GNPOld, Object localName, Object governmentForm, Object headOfState, Object capital, Object code2) {
-        String searchColumns = "select ";
+        selectColumns();
+        if(code != null){
+            searchCountry += (" c.code = '"+ code + "' ");
+        }
+        if (name != null){
+            if(searchCountry.charAt(searchCountry.length()-1) == 'e') {
+                searchCountry += (" c.name = '"+ name + "' ");
+            }
+            else {
+                searchCountry += (" AND c.name = '"+ name + "' ");
+            }
+        }
+        if (continent != null){
+            if(searchCountry.charAt(searchCountry.length()-1) == 'e')
+            {
+                searchCountry += (" c.continent = '"+ continent + "' ");
+            }
+            else {
+                searchCountry += (" AND c.continent = '"+ continent + "' ");
+            }
+        }
+        if (region != null) {
+            if (searchCountry.charAt(searchCountry.length() - 1) == 'e') {
+                searchCountry += (" c.region = '" + region + "' ");
+            } else {
+                searchCountry += (" AND c.region = '" + region + "' ");
+            }
+        }
+        if (surfaceArea != null){
+            if(searchCountry.charAt(searchCountry.length()-1) == 'e') {
+                searchCountry += (" c.surfaceArea = '"+ surfaceArea + "' ");
+            }
+            else {
+                searchCountry += (" AND c.surfaceArea = '"+ surfaceArea + "' ");
+            }
+        }
+        if (indepYear != null){
+            if(searchCountry.charAt(searchCountry.length()-1) == 'e') {
+                searchCountry += (" c.indepYear = '"+ indepYear + "' ");
+            }
+            else {
+                searchCountry += (" AND c.indepYear = '"+ indepYear + "' ");
+            }
+        }
+        if (population != null){
+            if(searchCountry.charAt(searchCountry.length()-1) == 'e') {
+                searchCountry += (" c.population = '"+ population + "' ");
+            }
+            else {
+                searchCountry += (" AND c.population = '"+ population + "' ");
+            }
+        }
+        if (lifeExpectancy != null){
+            if(searchCountry.charAt(searchCountry.length()-1) == 'e') {
+                searchCountry += (" c.lifeExpectancy = '"+ lifeExpectancy + "' ");
+            }
+            else {
+                searchCountry += (" AND c.lifeExpectancy = '"+ lifeExpectancy + "' ");
+            }
+        }
+        if (GNP != null){
+            if(searchCountry.charAt(searchCountry.length()-1) == 'e') {
+                searchCountry += (" c.GNP = '"+ GNP + "' ");
+            }
+            else {
+                searchCountry += (" AND c.GNP = '"+ GNP + "' ");
+            }
+        }
+        if (GNPOld != null){
+            if(searchCountry.charAt(searchCountry.length()-1) == 'e') {
+                searchCountry += (" c.GNPOld = '"+ GNPOld + "' ");
+            }
+            else {
+                searchCountry += (" AND c.GNPOld = '"+ GNPOld + "' ");
+            }
+        }
+        if (localName != null){
+            if(searchCountry.charAt(searchCountry.length()-1) == 'e') {
+                searchCountry += (" c.localName = '"+ localName + "' ");
+            }
+            else {
+                searchCountry += (" AND c.localName = '"+ localName + "' ");
+            }
+        }
+        if (governmentForm != null){
+            if(searchCountry.charAt(searchCountry.length()-1) == 'e') {
+                searchCountry += (" c.governmentForm = '"+ governmentForm + "' ");
+            }
+            else {
+                searchCountry += (" AND c.governmentForm = '"+ governmentForm + "' ");
+            }
+        }
+        if (headOfState != null) {
+            if (searchCountry.charAt(searchCountry.length() - 1) == 'e') {
+                searchCountry += (" c.headOfState = '" + headOfState + "' ");
+            } else {
+                searchCountry += (" AND c.headOfState = '" + headOfState + "' ");
+            }
+        }
+        if (capital != null){
+            if(searchCountry.charAt(searchCountry.length()-1) == 'e') {
+                searchCountry += (" c.capital = '"+ capital + "' ");
+            }
+            else {
+                searchCountry += (" AND c.capital = '"+ capital + "' ");
+            }
+        }
+        if (code2 != null){
+            if(searchCountry.charAt(searchCountry.length()-1) == 'e') {
+                searchCountry += (" c.code2 = '"+ code2 + "' ");
+            }
+            else {
+                searchCountry += (" AND c.code2 = '"+ code2 + "' ");
+            }
+        }
+
+        return searchCountry;
+
+    }
+    public void selectColumns()
+    {
+        searchColumns = "select ";
         if(main.getGUI().getReportGUI().countryCodeCheck.isSelected())
         {
             if(searchColumns.charAt(searchColumns.length()-2)=='t')
             {
-                searchColumns += ("code ");
+                searchColumns += ("c.code ");
             }
             else
             {
-                searchColumns += (",code ");
+                searchColumns += (",c.code ");
             }
         }
         if(main.getGUI().getReportGUI().countryNameCheck.isSelected())
         {
             if(searchColumns.charAt(searchColumns.length()-2)=='t')
             {
-                searchColumns += ("name ");
+                searchColumns += ("c.name ");
             }
             else
             {
-                searchColumns += (",name ");
+                searchColumns += (",c.name ");
             }
         }
         if(main.getGUI().getReportGUI().countryContinentCheck.isSelected())
         {
             if(searchColumns.charAt(searchColumns.length()-2)=='t')
             {
-                searchColumns += ("continent ");
+                searchColumns += ("c.continent ");
             }
             else
             {
-                searchColumns += (",continent ");
+                searchColumns += (",c.continent ");
             }
         }
         if(main.getGUI().getReportGUI().countryRegionCheck.isSelected())
         {
-            if(searchColumns.charAt(searchColumns.length()-2)=='t')
+            if(searchColumns.charAt(searchColumns.length()-1)=='t')
             {
-                searchColumns += ("region ");
+                searchColumns += ("c.region ");
             }
             else
             {
-                searchColumns += (",region ");
+                searchColumns += (",c.region ");
             }
         }
         if(main.getGUI().getReportGUI().countrySurfaceCheck.isSelected())
         {
             if(searchColumns.charAt(searchColumns.length()-2)=='t')
             {
-                searchColumns += ("surfaceArea ");
+                searchColumns += ("c.surfaceArea ");
             }
             else
             {
-                searchColumns += (",surfaceArea ");
+                searchColumns += (",c.surfaceArea ");
             }
         }
         if(main.getGUI().getReportGUI().countryYearCheck.isSelected())
         {
             if(searchColumns.charAt(searchColumns.length()-2)=='t')
             {
-                searchColumns += ("IndepYear ");
+                searchColumns += ("c.IndepYear ");
             }
             else
             {
-                searchColumns += (",IndepYear ");
+                searchColumns += (",c.IndepYear ");
             }
         }
         if(main.getGUI().getReportGUI().countryPopulationCheck.isSelected())
         {
             if(searchColumns.charAt(searchColumns.length()-2)=='t')
             {
-                searchColumns += ("population ");
+                searchColumns += ("c.population ");
             }
             else
             {
-                searchColumns += (",population ");
+                searchColumns += (",c.population ");
             }
         }
         if(main.getGUI().getReportGUI().countryLifeExpectancyCheck.isSelected())
         {
             if(searchColumns.charAt(searchColumns.length()-2)=='t')
             {
-                searchColumns += ("LifeExpectancy ");
+                searchColumns += ("c.LifeExpectancy ");
             }
             else
             {
-                searchColumns += (",LifeExpectancy ");
+                searchColumns += (",c.LifeExpectancy ");
             }
         }
         if(main.getGUI().getReportGUI().countryGNPCheck.isSelected())
         {
             if(searchColumns.charAt(searchColumns.length()-2)=='t')
             {
-                searchColumns += ("GNP ");
+                searchColumns += ("c.GNP ");
             }
             else
             {
-                searchColumns += (",GNP ");
+                searchColumns += (",c.GNP ");
             }
         }
         if(main.getGUI().getReportGUI().countryGNPOldCheck.isSelected())
         {
             if(searchColumns.charAt(searchColumns.length()-2)=='t')
             {
-                searchColumns += ("GNPOld ");
+                searchColumns += ("c.GNPOld ");
             }
             else
             {
-                searchColumns += (",GNPOld ");
+                searchColumns += (",c.GNPOld ");
             }
         }
         if(main.getGUI().getReportGUI().countryLocalNameCheck.isSelected())
         {
             if(searchColumns.charAt(searchColumns.length()-2)=='t')
             {
-                searchColumns += ("LocalName ");
+                searchColumns += ("c.LocalName ");
             }
             else
             {
-                searchColumns += (",LocalName ");
+                searchColumns += (",c.LocalName ");
             }
         }
         if(main.getGUI().getReportGUI().countryGovernmentFormCheck.isSelected())
         {
             if(searchColumns.charAt(searchColumns.length()-2)=='t')
             {
-                searchColumns += ("GovernmentForm ");
+                searchColumns += ("c.GovernmentForm ");
             }
             else
             {
-                searchColumns += (",GovernmentForm ");
+                searchColumns += (",c.GovernmentForm ");
             }
         }
         if(main.getGUI().getReportGUI().countryHeadOfStateCheck.isSelected())
         {
             if(searchColumns.charAt(searchColumns.length()-2)=='t')
             {
-                searchColumns += ("HeadOfState ");
+                searchColumns += ("c.HeadOfState ");
             }
             else
             {
-                searchColumns += (",HeadOfState ");
+                searchColumns += (",c.HeadOfState ");
             }
         }
         if(main.getGUI().getReportGUI().countryCapitalCheck.isSelected())
         {
             if(searchColumns.charAt(searchColumns.length()-2)=='t')
             {
-                searchColumns += ("Capital ");
+                searchColumns += ("c.Capital ");
             }
             else
             {
-                searchColumns += (",Capital ");
+                searchColumns += (",c.Capital ");
             }
         }
         if(main.getGUI().getReportGUI().countryCode2Check.isSelected())
         {
             if(searchColumns.charAt(searchColumns.length()-2)=='t')
             {
-                searchColumns += ("Code2 ");
+                searchColumns += ("c.Code2 ");
             }
             else
             {
-                searchColumns += (",Code2 ");
+                searchColumns += (",c.Code2 ");
             }
         }
 
-
-        searchColumns += ("from country where");
-        String searchCountry = searchColumns;
-        if(code != null){
-            searchCountry += (" code = '"+ code + "' ");
-        }
-        if (name != null){
-            if(searchCountry.charAt(searchCountry.length()-1) == 'e') {
-                searchCountry += (" name = '"+ name + "' ");
-            }
-            else {
-                searchCountry += (" AND name = '"+ name + "' ");
-            }
-        }
-        if (continent != null){
-            if(searchCountry.charAt(searchCountry.length()-1) == 'e')
+        searchColumns += ("from");
+        if(main.getGUI().getReportGUI().countryCheckbox.isSelected())
+        {
+            if(searchColumns.charAt(searchColumns.length()-1)=='m')
             {
-                searchCountry += (" continent = '"+ continent + "' ");
+                searchColumns += (" country as c");
             }
-            else {
-                searchCountry += (" AND continent = '"+ continent + "' ");
-            }
-        }
-        if (region != null) {
-            if (searchCountry.charAt(searchCountry.length() - 1) == 'e') {
-                searchCountry += (" region = '" + region + "' ");
-            } else {
-                searchCountry += (" AND region = '" + region + "' ");
+            else
+            {
+                searchColumns += (" ,country as c");
             }
         }
-        if (surfaceArea != null){
-            if(searchCountry.charAt(searchCountry.length()-1) == 'e') {
-                searchCountry += (" surfaceArea = '"+ surfaceArea + "' ");
+        if(main.getGUI().getReportGUI().cityCheckbox.isSelected())
+        {
+            if(searchColumns.charAt(searchColumns.length()-1)=='m')
+            {
+                searchColumns += (" city as ci");
             }
-            else {
-                searchCountry += (" AND surfaceArea = '"+ surfaceArea + "' ");
-            }
-        }
-        if (indepYear != null){
-            if(searchCountry.charAt(searchCountry.length()-1) == 'e') {
-                searchCountry += (" indepYear = '"+ indepYear + "' ");
-            }
-            else {
-                searchCountry += (" AND indepYear = '"+ indepYear + "' ");
+            else
+            {
+                searchColumns += (" ,city as ci");
             }
         }
-        if (population != null){
-            if(searchCountry.charAt(searchCountry.length()-1) == 'e') {
-                searchCountry += (" population = '"+ population + "' ");
+        if(main.getGUI().getReportGUI().countryLanguageCheckbox.isSelected())
+        {
+            if(searchColumns.charAt(searchColumns.length()-1)=='m')
+            {
+                searchColumns += (" countryLanguage as cl");
             }
-            else {
-                searchCountry += (" AND population = '"+ population + "' ");
-            }
-        }
-        if (lifeExpectancy != null){
-            if(searchCountry.charAt(searchCountry.length()-1) == 'e') {
-                searchCountry += (" lifeExpectancy = '"+ lifeExpectancy + "' ");
-            }
-            else {
-                searchCountry += (" AND lifeExpectancy = '"+ lifeExpectancy + "' ");
-            }
-        }
-        if (GNP != null){
-            if(searchCountry.charAt(searchCountry.length()-1) == 'e') {
-                searchCountry += (" GNP = '"+ GNP + "' ");
-            }
-            else {
-                searchCountry += (" AND GNP = '"+ GNP + "' ");
-            }
-        }
-        if (GNPOld != null){
-            if(searchCountry.charAt(searchCountry.length()-1) == 'e') {
-                searchCountry += (" GNPOld = '"+ GNPOld + "' ");
-            }
-            else {
-                searchCountry += (" AND GNPOld = '"+ GNPOld + "' ");
-            }
-        }
-        if (localName != null){
-            if(searchCountry.charAt(searchCountry.length()-1) == 'e') {
-                searchCountry += (" localName = '"+ localName + "' ");
-            }
-            else {
-                searchCountry += (" AND localName = '"+ localName + "' ");
-            }
-        }
-        if (governmentForm != null){
-            if(searchCountry.charAt(searchCountry.length()-1) == 'e') {
-                searchCountry += (" governmentForm = '"+ governmentForm + "' ");
-            }
-            else {
-                searchCountry += (" AND governmentForm = '"+ governmentForm + "' ");
-            }
-        }
-        if (headOfState != null) {
-            if (searchCountry.charAt(searchCountry.length() - 1) == 'e') {
-                searchCountry += (" headOfState = '" + headOfState + "' ");
-            } else {
-                searchCountry += (" AND headOfState = '" + headOfState + "' ");
-            }
-        }
-        if (capital != null){
-            if(searchCountry.charAt(searchCountry.length()-1) == 'e') {
-                searchCountry += (" capital = '"+ capital + "' ");
-            }
-            else {
-                searchCountry += (" AND capital = '"+ capital + "' ");
-            }
-        }
-        if (code2 != null){
-            if(searchCountry.charAt(searchCountry.length()-1) == 'e') {
-                searchCountry += (" code2 = '"+ code2 + "' ");
-            }
-            else {
-                searchCountry += (" AND code2 = '"+ code2 + "' ");
+            else
+            {
+                searchColumns += (" ,countryLanguage as cl");
             }
         }
 
-        return searchCountry;
+        searchColumns += " where";
+        searchCountry = searchColumns;
 
     }
 
