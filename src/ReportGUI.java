@@ -1,4 +1,6 @@
 import documents.MyComboBoxRenderer;
+import documents.TextPrompt;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -44,17 +46,29 @@ public class ReportGUI
     JComboBox<String> countryName = new JComboBox<>();
     JComboBox<String> countryContinent = new JComboBox<>();
     JComboBox<String> countryRegion = new JComboBox<>();
-    JComboBox<String> countrySurface = new JComboBox<>();
-    JComboBox<String> countryYear = new JComboBox<>();
-    JComboBox<String> countryPopulation= new JComboBox<>();
-    JComboBox<String> countryLifeExpectancy= new JComboBox<>();
-    JComboBox<String> countryGNP = new JComboBox<>();
-    JComboBox<String> countryGNPOld= new JComboBox<>();
+    JLabel countrySurfaceLabel = new JLabel("Surface Area:");
+    JTextField countrySurface = new JTextField();
+    JTextField countrySurfaceUp = new JTextField();
+    JLabel countryYearLabel = new JLabel("Independence year:");
+    JTextField countryYear = new JTextField();
+    JTextField countryYearUp = new JTextField();
+    JLabel countryPopulationLabel = new JLabel("Population");
+    JTextField countryPopulation = new JTextField();
+    JTextField countryPopulationUp = new JTextField();
+    JLabel countryLifeExpectancyLabel = new JLabel("Life Expectancy");
+    JTextField countryLifeExpectancy = new JTextField();
+    JTextField countryLifeExpectancyUp = new JTextField();
+    JLabel countryGNPLabel = new JLabel("GNP");
+    JTextField countryGNP = new JTextField();
+    JTextField countryGNPUp = new JTextField();
+    JLabel countryGNPOldLabel = new JLabel("Old GNP");
+    JTextField countryGNPOld = new JTextField();
+    JTextField countryGNPOldUp = new JTextField();
     JComboBox<String> countryLocalName = new JComboBox<>();
     JComboBox<String> countryGovernmentForm = new JComboBox<>();
     JComboBox<String> countryHeadOfState = new JComboBox<>();
     JComboBox<String> countryCapital = new JComboBox<>();
-    JComboBox<String> countryCode2= new JComboBox<>();
+    JComboBox<String> countryCode2 = new JComboBox<>();
     DefaultComboBoxModel fillCountryCode = new DefaultComboBoxModel();
     DefaultComboBoxModel fillCountryName = new DefaultComboBoxModel();
     DefaultComboBoxModel fillCountryContinent = new DefaultComboBoxModel();
@@ -76,7 +90,9 @@ public class ReportGUI
     JComboBox<String> cityName = new JComboBox<>();
     JComboBox<String> cityCode = new JComboBox<>();
     JComboBox<String> cityDistrict = new JComboBox<>();
-    JComboBox<String> cityPopulation = new JComboBox<>();
+    JLabel cityPopulationLabel = new JLabel("Population");
+    JTextField cityPopulation = new JTextField();
+    JTextField cityPopulationUp = new JTextField();
     DefaultComboBoxModel fillCityID = new DefaultComboBoxModel();
     DefaultComboBoxModel fillCityName = new DefaultComboBoxModel();
     DefaultComboBoxModel fillCityCode = new DefaultComboBoxModel();
@@ -87,7 +103,10 @@ public class ReportGUI
     JComboBox<String> countryLCode = new JComboBox<>();
     JComboBox<String> countryLLanguage = new JComboBox<>();
     JComboBox<String> countryLIsOfficial = new JComboBox<>();
-    JComboBox<String> countryLPercentage = new JComboBox<>();
+    JLabel countryLPercentageLabel = new JLabel("Percentage");
+    JTextField countryLPercentage = new JTextField();
+    JTextField countryLPercentageUp = new JTextField();
+
     DefaultComboBoxModel fillCountryLCode= new DefaultComboBoxModel();
     DefaultComboBoxModel fillCountryLLanguage = new DefaultComboBoxModel();
     DefaultComboBoxModel fillCountryLIsOfficial = new DefaultComboBoxModel();
@@ -184,7 +203,7 @@ public class ReportGUI
         countryLanguageCheckbox.setFocusable(false);
 
         //Central panel config
-        centralPanel.setLayout(new BoxLayout(centralPanel,BoxLayout.Y_AXIS));
+        centralPanel.setLayout(new BoxLayout(centralPanel,BoxLayout.X_AXIS));
 
         centralPanel.add(countryCentralPanel);
         centralPanel.add(cityCentralPanel);
@@ -194,9 +213,54 @@ public class ReportGUI
         cityCentralPanel.setLayout(new BorderLayout());
         countryLCentralPanel.setLayout(new BorderLayout());
 
-        countryPanel.setLayout(new FlowLayout());
-        cityPanel.setLayout(new FlowLayout());
-        countryLPanel.setLayout(new FlowLayout());
+        countryPanel.setLayout(new GridBagLayout());
+        cityPanel.setLayout(new GridBagLayout());
+        countryLPanel.setLayout(new GridBagLayout());
+
+        GridBagConstraints countryCodeConstraints = new GridBagConstraints();
+        GridBagConstraints countryNameConstraints = new GridBagConstraints();
+        GridBagConstraints countryContinentConstraints = new GridBagConstraints();
+        GridBagConstraints countryRegionConstraints = new GridBagConstraints();
+        GridBagConstraints countrySurfaceConstraints = new GridBagConstraints();
+        GridBagConstraints countryYearConstraints = new GridBagConstraints();
+        GridBagConstraints countryPopulationConstraints = new GridBagConstraints();
+        GridBagConstraints countryLifeExpectancyConstraints = new GridBagConstraints();
+        GridBagConstraints countryGNPConstraints = new GridBagConstraints();
+        GridBagConstraints countryGNPOLdConstraints = new GridBagConstraints();
+        GridBagConstraints countryLocalNameConstraints = new GridBagConstraints();
+        GridBagConstraints countryGovernmentFormConstraints = new GridBagConstraints();
+        GridBagConstraints countryHeadStateConstraints = new GridBagConstraints();
+        GridBagConstraints countryCapitalConstraints = new GridBagConstraints();
+        GridBagConstraints countryCode2Constraints = new GridBagConstraints();
+
+        GridBagConstraints cityConstraintsID = new GridBagConstraints();
+        GridBagConstraints cityConstraintsName = new GridBagConstraints();
+        GridBagConstraints cityConstraintsCode = new GridBagConstraints();
+        GridBagConstraints cityConstraintsDistrict = new GridBagConstraints();
+        GridBagConstraints cityConstraintsPopulation = new GridBagConstraints();
+
+        GridBagLayout countryLLayout = new GridBagLayout();
+        GridBagConstraints countryLCodeConstraints = new GridBagConstraints();
+        GridBagConstraints countryLLanguageConstraints = new GridBagConstraints();
+        GridBagConstraints countryLIsOfficialConstraints = new GridBagConstraints();
+        GridBagConstraints countryLPercentageConstraints = new GridBagConstraints();
+
+        new TextPrompt("From",countrySurface);
+        new TextPrompt("To",countrySurfaceUp);
+        new TextPrompt("From",countryYear);
+        new TextPrompt("To",countryYearUp);
+        new TextPrompt("From",countryPopulation);
+        new TextPrompt("To",countryPopulationUp);
+        new TextPrompt("From",countryLifeExpectancy);
+        new TextPrompt("To",countryLifeExpectancyUp);
+        new TextPrompt("From",countryGNP);
+        new TextPrompt("To",countryGNPUp);
+        new TextPrompt("From",countryGNPOld);
+        new TextPrompt("To",countryGNPOldUp);
+        new TextPrompt("From",cityPopulation);
+        new TextPrompt("To",cityPopulationUp);
+        new TextPrompt("From",countryLPercentage);
+        new TextPrompt("To",countryLPercentageUp);
 
 
         countryNorthPanel.setPreferredSize(new Dimension(20,20));
@@ -232,29 +296,23 @@ public class ReportGUI
         countryRegion.setRenderer(new MyComboBoxRenderer("Region"));
         countryRegion.setModel(fillCountryRegion);
         fillCountryRegion.addAll(report.fillComboBoxCountryRegion());
-        countrySurface.setPreferredSize(new Dimension(120,20));
-        countrySurface.setRenderer(new MyComboBoxRenderer("Surface"));
-        countrySurface.setModel(fillCountrySurface);
+        countrySurface.setPreferredSize(new Dimension(58,20));
+        countrySurfaceUp.setPreferredSize(new Dimension(58,20));
         fillCountrySurface.addAll(report.fillComboBoxCountrySurface());
-        countryYear.setPreferredSize(new Dimension(120,20));
-        countryYear.setRenderer(new MyComboBoxRenderer("Independence Year"));
-        countryYear.setModel(fillCountryYear);
+        countryYear.setPreferredSize(new Dimension(58,20));
+        countryYearUp.setPreferredSize(new Dimension(58,20));
         fillCountryYear.addAll(report.fillComboBoxCountryYear());
-        countryPopulation.setPreferredSize(new Dimension(120,20));
-        countryPopulation.setRenderer(new MyComboBoxRenderer("Population"));
-        countryPopulation.setModel(fillCountryPopulation);
+        countryPopulation.setPreferredSize(new Dimension(58,20));
+        countryPopulationUp.setPreferredSize(new Dimension(58,20));
         fillCountryPopulation.addAll(report.fillComboBoxCountryPopulation());
-        countryLifeExpectancy.setPreferredSize(new Dimension(120,20));
-        countryLifeExpectancy.setRenderer(new MyComboBoxRenderer("Life Expectancy"));
-        countryLifeExpectancy.setModel(fillCountryLifeExpectancy);
+        countryLifeExpectancy.setPreferredSize(new Dimension(58,20));
+        countryLifeExpectancyUp.setPreferredSize(new Dimension(58,20));
         fillCountryLifeExpectancy.addAll(report.fillComboBoxCountryLifeExpectancy());
-        countryGNP.setPreferredSize(new Dimension(120,20));
-        countryGNP.setRenderer(new MyComboBoxRenderer("GNP"));
-        countryGNP.setModel(fillCountryGNP);
+        countryGNP.setPreferredSize(new Dimension(58,20));
+        countryGNPUp.setPreferredSize(new Dimension(58,20));
         fillCountryGNP.addAll(report.fillComboBoxCountryGNP());
-        countryGNPOld.setPreferredSize(new Dimension(120,20));
-        countryGNPOld.setRenderer(new MyComboBoxRenderer("Old GNP"));
-        countryGNPOld.setModel(fillCountryGNPOld);
+        countryGNPOld.setPreferredSize(new Dimension(58,20));
+        countryGNPOldUp.setPreferredSize(new Dimension(58,20));
         fillCountryGNPOld.addAll(report.fillComboBoxCountryGNPOld());
         countryLocalName.setPreferredSize(new Dimension(120,20));
         countryLocalName.setRenderer(new MyComboBoxRenderer("Local Name"));
@@ -277,21 +335,124 @@ public class ReportGUI
         countryCode2.setModel(fillCountryCode2);
         fillCountryCode2.addAll(report.fillComboBoxCountryCode2());
 
-        countryPanel.add(countryCode);
-        countryPanel.add(countryName);
-        countryPanel.add(countryContinent);
-        countryPanel.add(countryRegion);
-        countryPanel.add(countrySurface);
-        countryPanel.add(countryYear);
-        countryPanel.add(countryPopulation);
-        countryPanel.add(countryLifeExpectancy);
-        countryPanel.add(countryGNP);
-        countryPanel.add(countryGNPOld);
-        countryPanel.add(countryLocalName);
-        countryPanel.add(countryGovernmentForm);
-        countryPanel.add(countryHeadOfState);
-        countryPanel.add(countryCapital);
-        countryPanel.add(countryCode2);
+        countryCodeConstraints.gridx = -1;
+        countryCodeConstraints.gridy = 0;
+        countryCodeConstraints.insets.bottom = 10;
+        countryCodeConstraints.insets.right = 7;
+        countryCodeConstraints.gridwidth = GridBagConstraints.RELATIVE;
+        countryCodeConstraints.fill = GridBagConstraints.HORIZONTAL;
+        countryNameConstraints.gridx = -1;
+        countryNameConstraints.gridy = 1;
+        countryNameConstraints.insets.bottom = 10;
+        countryNameConstraints.insets.right = 7;
+        countryNameConstraints.gridwidth = GridBagConstraints.RELATIVE;
+        countryNameConstraints.fill = GridBagConstraints.HORIZONTAL;
+        countryContinentConstraints.gridx = -1;
+        countryContinentConstraints.gridy = 2;
+        countryContinentConstraints.insets.bottom = 10;
+        countryContinentConstraints.insets.right = 7;
+        countryContinentConstraints.gridwidth = GridBagConstraints.RELATIVE;
+        countryContinentConstraints.fill = GridBagConstraints.HORIZONTAL;
+        countryRegionConstraints.gridx = -1;
+        countryRegionConstraints.gridy = 3;
+        countryRegionConstraints.insets.bottom = 10;
+        countryRegionConstraints.insets.right = 7;
+        countryRegionConstraints.gridwidth = GridBagConstraints.RELATIVE;
+        countryRegionConstraints.fill = GridBagConstraints.HORIZONTAL;
+        countrySurfaceConstraints.gridx = -1;
+        countrySurfaceConstraints.gridy = 4;
+        countrySurfaceConstraints.insets.bottom = 10;
+        countrySurfaceConstraints.insets.right = 7;
+        countrySurfaceConstraints.gridwidth = GridBagConstraints.RELATIVE;
+        countrySurfaceConstraints.fill = GridBagConstraints.HORIZONTAL;
+        countryYearConstraints.gridx = -1;
+        countryYearConstraints.gridy = 5;
+        countryYearConstraints.insets.bottom = 10;
+        countryYearConstraints.insets.right = 7;
+        countryYearConstraints.gridwidth = GridBagConstraints.RELATIVE;
+        countryYearConstraints.fill = GridBagConstraints.HORIZONTAL;
+        countryPopulationConstraints.gridx = -1;
+        countryPopulationConstraints.gridy = 6;
+        countryPopulationConstraints.insets.bottom = 10;
+        countryPopulationConstraints.insets.right = 7;
+        countryPopulationConstraints.gridwidth = GridBagConstraints.RELATIVE;
+        countryPopulationConstraints.fill = GridBagConstraints.HORIZONTAL;
+        countryLifeExpectancyConstraints.gridx = -1;
+        countryLifeExpectancyConstraints.gridy = 7;
+        countryLifeExpectancyConstraints.insets.bottom = 10;
+        countryLifeExpectancyConstraints.insets.right = 7;
+        countryLifeExpectancyConstraints.gridwidth = GridBagConstraints.RELATIVE;
+        countryLifeExpectancyConstraints.fill = GridBagConstraints.HORIZONTAL;
+        countryGNPConstraints.gridx = -1;
+        countryGNPConstraints.gridy = 8;
+        countryGNPConstraints.insets.bottom = 10;
+        countryGNPConstraints.insets.right = 7;
+        countryGNPConstraints.gridwidth = GridBagConstraints.RELATIVE;
+        countryGNPConstraints.fill = GridBagConstraints.HORIZONTAL;
+        countryGNPOLdConstraints.gridx = -1;
+        countryGNPOLdConstraints.gridy = 9;
+        countryGNPOLdConstraints.insets.bottom = 10;
+        countryGNPOLdConstraints.insets.right = 7;
+        countryGNPOLdConstraints.gridwidth = GridBagConstraints.RELATIVE;
+        countryGNPOLdConstraints.fill = GridBagConstraints.HORIZONTAL;
+        countryLocalNameConstraints.gridx = -1;
+        countryLocalNameConstraints.gridy = 10;
+        countryLocalNameConstraints.insets.bottom = 10;
+        countryLocalNameConstraints.insets.right = 7;
+        countryLocalNameConstraints.gridwidth = GridBagConstraints.RELATIVE;
+        countryLocalNameConstraints.fill = GridBagConstraints.HORIZONTAL;
+        countryGovernmentFormConstraints.gridx = -1;
+        countryGovernmentFormConstraints.gridy = 11;
+        countryGovernmentFormConstraints.insets.bottom = 10;
+        countryGovernmentFormConstraints.insets.right = 7;
+        countryGovernmentFormConstraints.gridwidth = GridBagConstraints.RELATIVE;
+        countryGovernmentFormConstraints.fill = GridBagConstraints.HORIZONTAL;
+        countryHeadStateConstraints.gridx = -1;
+        countryHeadStateConstraints.gridy = 12;
+        countryHeadStateConstraints.insets.bottom = 10;
+        countryHeadStateConstraints.insets.right = 7;
+        countryHeadStateConstraints.gridwidth = GridBagConstraints.RELATIVE;
+        countryHeadStateConstraints.fill = GridBagConstraints.HORIZONTAL;
+        countryCapitalConstraints.gridx = -1;
+        countryCapitalConstraints.gridy = 13;
+        countryCapitalConstraints.insets.bottom = 10;
+        countryCapitalConstraints.insets.right = 7;
+        countryCapitalConstraints.gridwidth = GridBagConstraints.RELATIVE;
+        countryCapitalConstraints.fill = GridBagConstraints.HORIZONTAL;
+        countryCode2Constraints.gridx = -1;
+        countryCode2Constraints.gridy = 14;
+        countryCode2Constraints.insets.bottom = 10;
+        countryCode2Constraints.insets.right = 7;
+        countryCode2Constraints.gridwidth = GridBagConstraints.RELATIVE;
+        countryCode2Constraints.fill = GridBagConstraints.HORIZONTAL;
+
+        countryPanel.add(countryCode,countryCodeConstraints);
+        countryPanel.add(countryName,countryNameConstraints);
+        countryPanel.add(countryContinent,countryContinentConstraints);
+        countryPanel.add(countryRegion,countryRegionConstraints);
+        countryPanel.add(countrySurfaceLabel,countrySurfaceConstraints);
+        countryPanel.add(countrySurface,countrySurfaceConstraints);
+        countryPanel.add(countrySurfaceUp,countrySurfaceConstraints);
+        countryPanel.add(countryYearLabel,countryYearConstraints);
+        countryPanel.add(countryYear,countryYearConstraints);
+        countryPanel.add(countryYearUp,countryYearConstraints);
+        countryPanel.add(countryPopulationLabel,countryPopulationConstraints);
+        countryPanel.add(countryPopulation,countryPopulationConstraints);
+        countryPanel.add(countryPopulationUp,countryPopulationConstraints);
+        countryPanel.add(countryLifeExpectancyLabel,countryLifeExpectancyConstraints);
+        countryPanel.add(countryLifeExpectancy,countryLifeExpectancyConstraints);
+        countryPanel.add(countryLifeExpectancyUp,countryLifeExpectancyConstraints);
+        countryPanel.add(countryGNPLabel,countryGNPConstraints);
+        countryPanel.add(countryGNP,countryGNPConstraints);
+        countryPanel.add(countryGNPUp,countryGNPConstraints);
+        countryPanel.add(countryGNPOldLabel,countryGNPOLdConstraints);
+        countryPanel.add(countryGNPOld,countryGNPOLdConstraints);
+        countryPanel.add(countryGNPOldUp,countryGNPOLdConstraints);
+        countryPanel.add(countryLocalName,countryLocalNameConstraints);
+        countryPanel.add(countryGovernmentForm,countryGovernmentFormConstraints);
+        countryPanel.add(countryHeadOfState,countryHeadStateConstraints);
+        countryPanel.add(countryCapital,countryCapitalConstraints);
+        countryPanel.add(countryCode2,countryCode2Constraints);
 
         cityID.setPreferredSize(new Dimension(120,20));
         cityID.setRenderer(new MyComboBoxRenderer("ID"));
@@ -309,16 +470,48 @@ public class ReportGUI
         cityDistrict.setRenderer(new MyComboBoxRenderer("District"));
         cityDistrict.setModel(fillCityDistrict);
         fillCityDistrict.addAll(report.fillComboBoxCityDistrict());
-        cityPopulation.setPreferredSize(new Dimension(120,20));
-        cityPopulation.setRenderer(new MyComboBoxRenderer("Population"));
-        cityPopulation.setModel(fillCityPopulation);
+        cityPopulation.setPreferredSize(new Dimension(58,20));
+        cityPopulationUp.setPreferredSize(new Dimension(58,20));
         fillCityPopulation.addAll(report.fillComboBoxCityPopulation());
 
-        cityPanel.add(cityID);
-        cityPanel.add(cityName);
-        cityPanel.add(cityCode);
-        cityPanel.add(cityDistrict);
-        cityPanel.add(cityPopulation);
+        cityConstraintsID.gridx = -1;
+        cityConstraintsID.gridy = 0;
+        cityConstraintsID.insets.bottom = 10;
+        cityConstraintsID.insets.right = 7;
+        cityConstraintsID.gridwidth = GridBagConstraints.RELATIVE;
+        cityConstraintsID.fill = GridBagConstraints.HORIZONTAL;
+        cityConstraintsName.gridx = -1;
+        cityConstraintsName.gridy = 1;
+        cityConstraintsName.insets.bottom = 10;
+        cityConstraintsName.insets.right = 7;
+        cityConstraintsName.gridwidth = GridBagConstraints.RELATIVE;
+        cityConstraintsName.fill = GridBagConstraints.HORIZONTAL;
+        cityConstraintsCode.gridx = -1;
+        cityConstraintsCode.gridy = 2;
+        cityConstraintsCode.insets.bottom = 10;
+        cityConstraintsCode.insets.right = 7;
+        cityConstraintsCode.gridwidth = GridBagConstraints.RELATIVE;
+        cityConstraintsCode.fill = GridBagConstraints.HORIZONTAL;
+        cityConstraintsDistrict.gridx = -1;
+        cityConstraintsDistrict.gridy = 3;
+        cityConstraintsDistrict.insets.bottom = 10;
+        cityConstraintsDistrict.insets.right = 7;
+        cityConstraintsDistrict.gridwidth = GridBagConstraints.RELATIVE;
+        cityConstraintsDistrict.fill = GridBagConstraints.HORIZONTAL;
+        cityConstraintsPopulation.gridx = -1;
+        cityConstraintsPopulation.gridy = 4;
+        cityConstraintsPopulation.insets.bottom = 10;
+        cityConstraintsPopulation.insets.right = 7;
+        cityConstraintsPopulation.gridwidth = GridBagConstraints.RELATIVE;
+        cityConstraintsPopulation.fill = GridBagConstraints.HORIZONTAL;
+
+        cityPanel.add(cityID,cityConstraintsID);
+        cityPanel.add(cityName,cityConstraintsName);
+        cityPanel.add(cityCode,cityConstraintsCode);
+        cityPanel.add(cityDistrict,cityConstraintsDistrict);
+        cityPanel.add(cityPopulationLabel,cityConstraintsPopulation);
+        cityPanel.add(cityPopulation,cityConstraintsPopulation);
+        cityPanel.add(cityPopulationUp,cityConstraintsPopulation);
 
         countryLCode.setPreferredSize(new Dimension(120,20));
         countryLCode.setRenderer(new MyComboBoxRenderer("Country Code"));
@@ -332,15 +525,41 @@ public class ReportGUI
         countryLIsOfficial.setRenderer(new MyComboBoxRenderer("Is official?"));
         countryLIsOfficial.setModel(fillCountryLIsOfficial);
         fillCountryLIsOfficial.addAll(report.fillComboBoxCountryLOfficial());
-        countryLPercentage.setPreferredSize(new Dimension(120,20));
-        countryLPercentage.setRenderer(new MyComboBoxRenderer("Percentage"));
-        countryLPercentage.setModel(fillCountryLPercentage);
+        countryLPercentage.setPreferredSize(new Dimension(58,20));
+        countryLPercentageUp.setPreferredSize(new Dimension(58,20));
         fillCountryLPercentage.addAll(report.fillComboBoxCountryLPercentage());
 
-        countryLPanel.add(countryLCode);
-        countryLPanel.add(countryLLanguage);
-        countryLPanel.add(countryLIsOfficial);
-        countryLPanel.add(countryLPercentage);
+        countryLCodeConstraints.gridx = -1;
+        countryLCodeConstraints.gridy = 0;
+        countryLCodeConstraints.insets.bottom = 10;
+        countryLCodeConstraints.insets.right = 7;
+        countryLCodeConstraints.gridwidth = GridBagConstraints.RELATIVE;
+        countryLCodeConstraints.fill = GridBagConstraints.HORIZONTAL;
+        countryLLanguageConstraints.gridx = -1;
+        countryLLanguageConstraints.gridy = 1;
+        countryLLanguageConstraints.insets.bottom = 10;
+        countryLLanguageConstraints.insets.right = 7;
+        countryLLanguageConstraints.gridwidth = GridBagConstraints.RELATIVE;
+        countryLLanguageConstraints.fill = GridBagConstraints.HORIZONTAL;
+        countryLIsOfficialConstraints.gridx = -1;
+        countryLIsOfficialConstraints.gridy = 2;
+        countryLIsOfficialConstraints.insets.bottom = 10;
+        countryLIsOfficialConstraints.insets.right = 7;
+        countryLIsOfficialConstraints.gridwidth = GridBagConstraints.RELATIVE;
+        countryLIsOfficialConstraints.fill = GridBagConstraints.HORIZONTAL;
+        countryLPercentageConstraints.gridx = -1;
+        countryLPercentageConstraints.gridy = 3;
+        countryLPercentageConstraints.insets.bottom = 10;
+        countryLPercentageConstraints.insets.right = 7;
+        countryLPercentageConstraints.gridwidth = GridBagConstraints.RELATIVE;
+        countryLPercentageConstraints.fill = GridBagConstraints.HORIZONTAL;
+
+        countryLPanel.add(countryLCode,countryLCodeConstraints);
+        countryLPanel.add(countryLLanguage,countryLLanguageConstraints);
+        countryLPanel.add(countryLIsOfficial,countryLIsOfficialConstraints);
+        countryLPanel.add(countryLPercentageLabel,countryLPercentageConstraints);
+        countryLPanel.add(countryLPercentage,countryLPercentageConstraints);
+        countryLPanel.add(countryLPercentageUp,countryLPercentageConstraints);
     }
     public void mainSetup()
     {
@@ -406,19 +625,25 @@ public class ReportGUI
         fillCountryLPercentage.removeAllElements();
         fillCountryLPercentage.addAll(report.fillComboBoxCountryLPercentage());
 
+        int x = 1200;
+        int y = 650;
         countryCheckbox.addActionListener(e->
         {
+
             if(countryCheckbox.isSelected())
             {
                 countryCentralPanel.setVisible(true);
-                reportFrame.setSize(660,325);
+                reportFrame.setSize(x,y);
                 if(countryCheckbox.isSelected()&&cityCheckbox.isSelected()&&countryLanguageCheckbox.isSelected())
                 {
-                    reportFrame.setSize(658,355);
+                    reportFrame.setSize(x,y);
                 }
                 else if(countryCheckbox.isSelected()&&countryLanguageCheckbox.isSelected())
                 {
-                    reportFrame.setSize(658,332);
+                    reportFrame.setSize(x,y);
+                } else if (countryCheckbox.isSelected()&&cityCheckbox.isSelected())
+                {
+                    reportFrame.setSize(x,y);
                 }
 
             }
@@ -432,14 +657,14 @@ public class ReportGUI
             if(cityCheckbox.isSelected())
             {
                 cityCentralPanel.setVisible(true);
-                reportFrame.setSize(660,325);
+                reportFrame.setSize(x,y);
                 if(countryCheckbox.isSelected()&&cityCheckbox.isSelected()&&countryLanguageCheckbox.isSelected())
                 {
-                    reportFrame.setSize(658,355);
+                    reportFrame.setSize(x,y);
                 }
                 else if(cityCheckbox.isSelected()&&countryLanguageCheckbox.isSelected())
                 {
-                    reportFrame.setSize(658,325);
+                    reportFrame.setSize(x,y);
                 }
             }
             else
@@ -452,18 +677,18 @@ public class ReportGUI
             if(countryLanguageCheckbox.isSelected())
             {
                 countryLCentralPanel.setVisible(true);
-                reportFrame.setSize(550,325);
+                reportFrame.setSize(x,y);
                 if(countryCheckbox.isSelected()&&cityCheckbox.isSelected()&&countryLanguageCheckbox.isSelected())
                 {
-                    reportFrame.setSize(658,355);
+                    reportFrame.setSize(x,y);
                 }
                 else if(countryCheckbox.isSelected()&&countryLanguageCheckbox.isSelected())
                 {
-                    reportFrame.setSize(658,332);
+                    reportFrame.setSize(x,y);
                 }
                 else if(cityCheckbox.isSelected()&&countryLanguageCheckbox.isSelected())
                 {
-                    reportFrame.setSize(658,325);
+                    reportFrame.setSize(x,y);
                 }
             }
             else
@@ -634,7 +859,7 @@ public class ReportGUI
             countryModel.setRowCount(0);
             try
             {
-                countryQuery = report.reportCountry(countryCode.getSelectedItem(),countryName.getSelectedItem(),countryContinent.getSelectedItem(),countryRegion.getSelectedItem(),countrySurface.getSelectedItem(),countryYear.getSelectedItem(),countryPopulation.getSelectedItem(),countryLifeExpectancy.getSelectedItem(),countryGNP.getSelectedItem(),countryGNPOld.getSelectedItem(),countryLocalName.getSelectedItem(),countryGovernmentForm.getSelectedItem(),countryHeadOfState.getSelectedItem(),countryCapital.getSelectedItem(),countryCode2.getSelectedItem(), cityID.getSelectedItem(),cityName.getSelectedItem(),cityCode.getSelectedItem(),cityDistrict.getSelectedItem(),cityPopulation.getSelectedItem(), countryLCode.getSelectedItem(), countryLLanguage.getSelectedItem(), countryLIsOfficial.getSelectedItem(), countryLPercentage.getSelectedItem());
+                countryQuery = report.reportCountry(countryCode.getSelectedItem(),countryName.getSelectedItem(),countryContinent.getSelectedItem(),countryRegion.getSelectedItem(),countrySurface.getText(),countryYear.getText(),countryPopulation.getText(),countryLifeExpectancy.getText(),countryGNP.getText(),countryGNPOld.getText(),countryLocalName.getSelectedItem(),countryGovernmentForm.getSelectedItem(),countryHeadOfState.getSelectedItem(),countryCapital.getSelectedItem(),countryCode2.getSelectedItem(), cityID.getSelectedItem(),cityName.getSelectedItem(),cityCode.getSelectedItem(),cityDistrict.getSelectedItem(),cityPopulation.getText(), countryLCode.getSelectedItem(), countryLLanguage.getSelectedItem(), countryLIsOfficial.getSelectedItem(), countryLPercentage.getText());
                 System.out.println(countryQuery);
             }
             catch (NullPointerException a)

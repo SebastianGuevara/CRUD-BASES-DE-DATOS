@@ -43,7 +43,6 @@ public class Report {
         searchCountry = searchColumns;
         if(main.getGUI().getReportGUI().countryCheckbox.isSelected()) {
 
-
             if (code != null) {
                 searchCountry += (" c.code = '" + code + "' ");
             }
