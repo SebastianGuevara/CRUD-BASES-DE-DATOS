@@ -203,11 +203,20 @@ public class ReportGUI
         countryLanguageCheckbox.setFocusable(false);
 
         //Central panel config
-        centralPanel.setLayout(new BoxLayout(centralPanel,BoxLayout.X_AXIS));
+        BoxLayout box = new BoxLayout(centralPanel,BoxLayout.X_AXIS);
+        centralPanel.setLayout(box);
 
         centralPanel.add(countryCentralPanel);
         centralPanel.add(cityCentralPanel);
         centralPanel.add(countryLCentralPanel);
+
+        countryCentralPanel.setBorder(BorderFactory.createBevelBorder(1));
+        cityCentralPanel.setBorder(BorderFactory.createBevelBorder(1));
+        countryLCentralPanel.setBorder(BorderFactory.createBevelBorder(1));
+
+        countryCentralPanel.setPreferredSize(new Dimension(100,100));
+        cityCentralPanel.setPreferredSize(new Dimension(100,100));
+        countryLCentralPanel.setPreferredSize(new Dimension(100,100));
 
         countryCentralPanel.setLayout(new BorderLayout());
         cityCentralPanel.setLayout(new BorderLayout());
@@ -625,25 +634,23 @@ public class ReportGUI
         fillCountryLPercentage.removeAllElements();
         fillCountryLPercentage.addAll(report.fillComboBoxCountryLPercentage());
 
-        int x = 1200;
-        int y = 650;
         countryCheckbox.addActionListener(e->
         {
 
             if(countryCheckbox.isSelected())
             {
                 countryCentralPanel.setVisible(true);
-                reportFrame.setSize(x,y);
+                reportFrame.setSize(350,650);
                 if(countryCheckbox.isSelected()&&cityCheckbox.isSelected()&&countryLanguageCheckbox.isSelected())
                 {
-                    reportFrame.setSize(x,y);
+                    reportFrame.setSize(1200,650);
                 }
                 else if(countryCheckbox.isSelected()&&countryLanguageCheckbox.isSelected())
                 {
-                    reportFrame.setSize(x,y);
+                    reportFrame.setSize(850,650);
                 } else if (countryCheckbox.isSelected()&&cityCheckbox.isSelected())
                 {
-                    reportFrame.setSize(x,y);
+                    reportFrame.setSize(850,650);
                 }
 
             }
@@ -657,14 +664,18 @@ public class ReportGUI
             if(cityCheckbox.isSelected())
             {
                 cityCentralPanel.setVisible(true);
-                reportFrame.setSize(x,y);
+                reportFrame.setSize(350,350);
                 if(countryCheckbox.isSelected()&&cityCheckbox.isSelected()&&countryLanguageCheckbox.isSelected())
                 {
-                    reportFrame.setSize(x,y);
+                    reportFrame.setSize(1200,650);
                 }
                 else if(cityCheckbox.isSelected()&&countryLanguageCheckbox.isSelected())
                 {
-                    reportFrame.setSize(x,y);
+                    reportFrame.setSize(850,350);
+                }
+                else if(cityCheckbox.isSelected()&&countryCheckbox.isSelected())
+                {
+                    reportFrame.setSize(850,650);
                 }
             }
             else
@@ -677,18 +688,18 @@ public class ReportGUI
             if(countryLanguageCheckbox.isSelected())
             {
                 countryLCentralPanel.setVisible(true);
-                reportFrame.setSize(x,y);
+                reportFrame.setSize(350,300);
                 if(countryCheckbox.isSelected()&&cityCheckbox.isSelected()&&countryLanguageCheckbox.isSelected())
                 {
-                    reportFrame.setSize(x,y);
+                    reportFrame.setSize(1200,650);
                 }
                 else if(countryCheckbox.isSelected()&&countryLanguageCheckbox.isSelected())
                 {
-                    reportFrame.setSize(x,y);
+                    reportFrame.setSize(850,650);
                 }
                 else if(cityCheckbox.isSelected()&&countryLanguageCheckbox.isSelected())
                 {
-                    reportFrame.setSize(x,y);
+                    reportFrame.setSize(850,350);
                 }
             }
             else
