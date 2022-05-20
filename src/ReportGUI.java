@@ -360,7 +360,7 @@ public class ReportGUI
         fillCountryGNP.removeAllElements();
         fillCountryGNP.addAll(report.fillComboBoxCountryGNP());
         fillCountryGNPOld.removeAllElements();
-        fillCountryGNPOld.addAll(report.fillComboBoxCountryGNP());
+        fillCountryGNPOld.addAll(report.fillComboBoxCountryGNPOld());
         fillCountryLocalName.removeAllElements();
         fillCountryLocalName.addAll(report.fillComboBoxCountryLocalName());
         fillCountryGovernmentForm.removeAllElements();

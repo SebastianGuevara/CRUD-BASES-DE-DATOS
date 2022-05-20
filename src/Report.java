@@ -34,6 +34,13 @@ public class Report {
     public String reportCountry(Object code, Object name, Object continent, Object region, Object surfaceArea, Object indepYear, Object population, Object lifeExpectancy,
     Object GNP, Object GNPOld, Object localName, Object governmentForm, Object headOfState, Object capital, Object code2) {
         selectColumns();
+
+        if(!(code == null&&name==null&&continent==null&&region==null&&surfaceArea==null&&indepYear==null&&population==null&&lifeExpectancy==null&&GNP==null&&GNPOld==null&&localName==null&&governmentForm==null&&headOfState==null&&capital==null&&code2==null))
+        {
+            searchColumns += " where";
+        }
+        searchCountry = searchColumns;
+
         if(code != null){
             searchCountry += (" c.code = '"+ code + "' ");
         }
@@ -356,8 +363,6 @@ public class Report {
             }
         }
 
-        searchColumns += " where";
-        searchCountry = searchColumns;
 
     }
 
