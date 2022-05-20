@@ -5,6 +5,7 @@ import javax.swing.*;
 import javax.swing.plaf.nimbus.State;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Report {
     private final DataBase db= new DataBase();
@@ -67,42 +68,42 @@ public class Report {
                     searchCountry += (" AND c.region = '" + region + "' ");
                 }
             }
-            if (surfaceArea != null) {
+            if (!Objects.equals(surfaceArea, "")) {
                 if (searchCountry.charAt(searchCountry.length() - 1) == 'e') {
                     searchCountry += (" c.surfaceArea = '" + surfaceArea + "' ");
                 } else {
                     searchCountry += (" AND c.surfaceArea = '" + surfaceArea + "' ");
                 }
             }
-            if (indepYear != null) {
+            if (!Objects.equals(indepYear, "")) {
                 if (searchCountry.charAt(searchCountry.length() - 1) == 'e') {
                     searchCountry += (" c.indepYear = '" + indepYear + "' ");
                 } else {
                     searchCountry += (" AND c.indepYear = '" + indepYear + "' ");
                 }
             }
-            if (population != null) {
+            if (!Objects.equals(population, "")) {
                 if (searchCountry.charAt(searchCountry.length() - 1) == 'e') {
                     searchCountry += (" c.population = '" + population + "' ");
                 } else {
                     searchCountry += (" AND c.population = '" + population + "' ");
                 }
             }
-            if (lifeExpectancy != null) {
+            if (!Objects.equals(lifeExpectancy, "")) {
                 if (searchCountry.charAt(searchCountry.length() - 1) == 'e') {
                     searchCountry += (" c.lifeExpectancy = '" + lifeExpectancy + "' ");
                 } else {
                     searchCountry += (" AND c.lifeExpectancy = '" + lifeExpectancy + "' ");
                 }
             }
-            if (GNP != null) {
+            if (!Objects.equals(GNP, "")) {
                 if (searchCountry.charAt(searchCountry.length() - 1) == 'e') {
                     searchCountry += (" c.GNP = '" + GNP + "' ");
                 } else {
                     searchCountry += (" AND c.GNP = '" + GNP + "' ");
                 }
             }
-            if (GNPOld != null) {
+            if (!Objects.equals(GNPOld, "")) {
                 if (searchCountry.charAt(searchCountry.length() - 1) == 'e') {
                     searchCountry += (" c.GNPOld = '" + GNPOld + "' ");
                 } else {
@@ -176,7 +177,7 @@ public class Report {
                     searchCountry += ("AND ci.district = '" + cityDistrict + "' ");
                 }
             }
-            if (cityPopulation != null) {
+            if (!Objects.equals(cityPopulation, "")) {
                 if (searchCountry.charAt(searchCountry.length() - 1) == 'e') {
                     searchCountry += (" ci.population = '" + cityPopulation + "' ");
                 } else {
@@ -207,7 +208,7 @@ public class Report {
                     searchCountry += ("AND cl.isOfficial = '" + clIsOfficial + "' ");
                 }
             }
-            if (clPercentage != null) {
+            if (!Objects.equals(clPercentage, "")) {
                 if (searchCountry.charAt(searchCountry.length() - 1) == 'e') {
                     searchCountry += (" cl.percentage = '" + clPercentage + "' ");
                 } else {
@@ -691,6 +692,8 @@ public class Report {
     public ArrayList<String> fillComboBoxCountryCapital() {
         String query = "select capital from country group by capital order by capital";
         ArrayList<String> data = new ArrayList<>();
+
+        data.add("ci.id");
 
         try
         {

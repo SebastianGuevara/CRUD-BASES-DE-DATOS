@@ -4,6 +4,8 @@ import documents.TextPrompt;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
@@ -271,7 +273,180 @@ public class ReportGUI
         new TextPrompt("From",countryLPercentage);
         new TextPrompt("To",countryLPercentageUp);
 
-
+        countrySurface.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char input = e.getKeyChar();
+                if(!Character.isDigit(input)&&!(input==KeyEvent.VK_BACK_SPACE)&&!(input==KeyEvent.VK_DELETE))
+                {
+                    e.consume();
+                    JOptionPane.showMessageDialog(null,"THIS SPACE ONLY ACCEPTS NUMBERS");
+                }
+            }
+        });
+        countrySurfaceUp.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char input = e.getKeyChar();
+                if(!Character.isDigit(input)&&!(input==KeyEvent.VK_BACK_SPACE)&&!(input==KeyEvent.VK_DELETE))
+                {
+                    e.consume();
+                    JOptionPane.showMessageDialog(null,"THIS SPACE ONLY ACCEPTS NUMBERS");
+                }
+            }
+        });
+        countryYear.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char input = e.getKeyChar();
+                if(!Character.isDigit(input)&&!(input==KeyEvent.VK_BACK_SPACE)&&!(input==KeyEvent.VK_DELETE))
+                {
+                    e.consume();
+                    JOptionPane.showMessageDialog(null,"THIS SPACE ONLY ACCEPTS NUMBERS");
+                }
+            }
+        });countryYearUp.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char input = e.getKeyChar();
+                if(!Character.isDigit(input)&&!(input==KeyEvent.VK_BACK_SPACE)&&!(input==KeyEvent.VK_DELETE))
+                {
+                    e.consume();
+                    JOptionPane.showMessageDialog(null,"THIS SPACE ONLY ACCEPTS NUMBERS");
+                }
+            }
+        });
+        countryPopulation.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char input = e.getKeyChar();
+                if(!Character.isDigit(input)&&!(input==KeyEvent.VK_BACK_SPACE)&&!(input==KeyEvent.VK_DELETE))
+                {
+                    e.consume();
+                    JOptionPane.showMessageDialog(null,"THIS SPACE ONLY ACCEPTS NUMBERS");
+                }
+            }
+        });
+        countryPopulationUp.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char input = e.getKeyChar();
+                if(!Character.isDigit(input)&&!(input==KeyEvent.VK_BACK_SPACE)&&!(input==KeyEvent.VK_DELETE))
+                {
+                    e.consume();
+                    JOptionPane.showMessageDialog(null,"THIS SPACE ONLY ACCEPTS NUMBERS");
+                }
+            }
+        });
+        countryLifeExpectancy.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char input = e.getKeyChar();
+                if(!Character.isDigit(input)&&!(input==KeyEvent.VK_BACK_SPACE)&&!(input==KeyEvent.VK_DELETE)&&!(input==KeyEvent.VK_PERIOD))
+                {
+                    e.consume();
+                    JOptionPane.showMessageDialog(null,"THIS SPACE ONLY ACCEPTS NUMBERS");
+                }
+            }
+        });
+        countryLifeExpectancyUp.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char input = e.getKeyChar();
+                if(!Character.isDigit(input)&&!(input==KeyEvent.VK_BACK_SPACE)&&!(input==KeyEvent.VK_DELETE)&&!(input==KeyEvent.VK_PERIOD))
+                {
+                    e.consume();
+                    JOptionPane.showMessageDialog(null,"THIS SPACE ONLY ACCEPTS NUMBERS");
+                }
+            }
+        });
+        countryGNP.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char input = e.getKeyChar();
+                if(!Character.isDigit(input)&&!(input==KeyEvent.VK_BACK_SPACE)&&!(input==KeyEvent.VK_DELETE)&&!(input==KeyEvent.VK_PERIOD))
+                {
+                    e.consume();
+                    JOptionPane.showMessageDialog(null,"THIS SPACE ONLY ACCEPTS NUMBERS");
+                }
+            }
+        });countryGNPUp.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char input = e.getKeyChar();
+                if(!Character.isDigit(input)&&!(input==KeyEvent.VK_BACK_SPACE)&&!(input==KeyEvent.VK_DELETE)&&!(input==KeyEvent.VK_PERIOD))
+                {
+                    e.consume();
+                    JOptionPane.showMessageDialog(null,"THIS SPACE ONLY ACCEPTS NUMBERS");
+                }
+            }
+        });
+        countryGNPOld.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char input = e.getKeyChar();
+                if(!Character.isDigit(input)&&!(input==KeyEvent.VK_BACK_SPACE)&&!(input==KeyEvent.VK_DELETE)&&!(input==KeyEvent.VK_PERIOD))
+                {
+                    e.consume();
+                    JOptionPane.showMessageDialog(null,"THIS SPACE ONLY ACCEPTS NUMBERS");
+                }
+            }
+        });
+        countryGNPOldUp.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char input = e.getKeyChar();
+                if(!Character.isDigit(input)&&!(input==KeyEvent.VK_BACK_SPACE)&&!(input==KeyEvent.VK_DELETE)&&!(input==KeyEvent.VK_PERIOD))
+                {
+                    e.consume();
+                    JOptionPane.showMessageDialog(null,"THIS SPACE ONLY ACCEPTS NUMBERS");
+                }
+            }
+        });
+        cityPopulation.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char input = e.getKeyChar();
+                if(!Character.isDigit(input)&&!(input==KeyEvent.VK_BACK_SPACE)&&!(input==KeyEvent.VK_DELETE))
+                {
+                    e.consume();
+                    JOptionPane.showMessageDialog(null,"THIS SPACE ONLY ACCEPTS NUMBERS");
+                }
+            }
+        });
+        cityPopulationUp.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char input = e.getKeyChar();
+                if(!Character.isDigit(input)&&!(input==KeyEvent.VK_BACK_SPACE)&&!(input==KeyEvent.VK_DELETE))
+                {
+                    e.consume();
+                    JOptionPane.showMessageDialog(null,"THIS SPACE ONLY ACCEPTS NUMBERS");
+                }
+            }
+        });
+        countryLPercentage.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char input = e.getKeyChar();
+                if(!Character.isDigit(input)&&!(input==KeyEvent.VK_BACK_SPACE)&&!(input==KeyEvent.VK_DELETE)&&!(input==KeyEvent.VK_PERIOD))
+                {
+                    e.consume();
+                    JOptionPane.showMessageDialog(null,"THIS SPACE ONLY ACCEPTS NUMBERS");
+                }
+            }
+        });
+        countryLPercentageUp.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char input = e.getKeyChar();
+                if(!Character.isDigit(input)&&!(input==KeyEvent.VK_BACK_SPACE)&&!(input==KeyEvent.VK_DELETE)&&!(input==KeyEvent.VK_PERIOD))
+                {
+                    e.consume();
+                    JOptionPane.showMessageDialog(null,"THIS SPACE ONLY ACCEPTS NUMBERS");
+                }
+            }
+        });
         countryNorthPanel.setPreferredSize(new Dimension(20,20));
         cityNorthPanel.setPreferredSize(new Dimension(20,20));
         cityCentralPanel.setPreferredSize(new Dimension(20,10));

@@ -281,16 +281,16 @@ public class CreateGUI
             }
         });
         countryYear.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-                char input = e.getKeyChar();
-                if(!Character.isDigit(input)&&!(input==KeyEvent.VK_BACK_SPACE)&&!(input==KeyEvent.VK_DELETE))
-                {
-                    e.consume();
-                    JOptionPane.showMessageDialog(null,"THIS SPACE ONLY ACCEPTS NUMBERS");
-                }
+        @Override
+        public void keyTyped(KeyEvent e) {
+            char input = e.getKeyChar();
+            if(!Character.isDigit(input)&&!(input==KeyEvent.VK_BACK_SPACE)&&!(input==KeyEvent.VK_DELETE))
+            {
+                e.consume();
+                JOptionPane.showMessageDialog(null,"THIS SPACE ONLY ACCEPTS NUMBERS");
             }
-        });
+        }
+    });
         countryPopulation.addKeyListener(new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent e) {
