@@ -231,9 +231,9 @@ public class Report {
             }
             if (!(Objects.equals(clPercentageLow,"") && Objects.equals(clPercentageHigh,""))) {
                 if (searchCountry.charAt(searchCountry.length() - 1) == 'e') {
-                    searchCountry += (" cl.percentage >=" + clPercentageLow +" AND ci.percentage <= " + clPercentageHigh + " ");
+                    searchCountry += (" cl.percentage >=" + clPercentageLow +" AND cl.percentage <= " + clPercentageHigh + " ");
                 } else {
-                    searchCountry += ("AND cl.percentage >=" + clPercentageLow +" AND ci.percentage <= " + clPercentageHigh + " ");
+                    searchCountry += ("AND cl.percentage >=" + clPercentageLow +" AND cl.percentage <= " + clPercentageHigh + " ");
                 }
             }
         }
