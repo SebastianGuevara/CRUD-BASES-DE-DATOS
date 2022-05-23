@@ -1,13 +1,18 @@
 import documents.MyComboBoxRenderer;
 import documents.TextPrompt;
 
+import javax.imageio.plugins.jpeg.JPEGImageReadParam;
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
@@ -165,6 +170,8 @@ public class ReportGUI
     public JCheckBox countryLPercentageCheck= new JCheckBox("Percentage",true);
 
     JButton columnSelectorButton = new JButton("Generate Report");
+
+    JButton exportButton = new JButton("Export to excel");
 
     ImageIcon ico = new ImageIcon("src/log.png");
     
@@ -1061,6 +1068,7 @@ public class ReportGUI
     }
     public void tableView()
     {
+        JPanel panelSouth = new JPanel();
 
         tableFrame.setResizable(false);
         tableFrame.setSize(1275,450);
@@ -1068,7 +1076,18 @@ public class ReportGUI
         tableFrame.setLayout(new BorderLayout());
         tableFrame.setIconImage(ico.getImage());
         tableFrame.setLocationRelativeTo(null);
+        tableFrame.add(panelSouth,BorderLayout.SOUTH);
+        panelSouth.add(exportButton);
         panelCenter.add(scroll);
+        exportButton.setFocusable(false);
+        exportButton.addActionListener(e-> {
+            try {
+                writeToExcel();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        });
+
 
         panelCenter.setPreferredSize(new Dimension(100,100));
         panelCenter.setBorder(BorderFactory.createLineBorder(Color.darkGray,1));
@@ -1125,6 +1144,43 @@ public class ReportGUI
         }
 
         return data;
+    }
+    public void writeToExcel() throws IOException {
+        JFileChooser chooser = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Excel file", "xls");
+
+        chooser.setFileFilter(filter);
+        chooser.setDialogTitle("Save file");
+        chooser.setAcceptAllFileFilterUsed(false);
+
+        if(chooser.showSaveDialog(null)==JFileChooser.APPROVE_OPTION)
+        {
+            String fileR = chooser.getSelectedFile().toString().concat(".xls");
+            File file = new File(fileR);
+            FileWriter out = new FileWriter(file);
+            BufferedWriter bw = new BufferedWriter(out);
+            for(int i =0;i<countryModel.getColumnCount();i++)
+            {
+                bw.write(countryModel.getColumnName(i)+"\t");
+            }
+
+
+            bw.write("\n");
+
+            for(int i =0;i<countryModel.getRowCount();i++)
+            {
+                for(int j =0;j<countryModel.getColumnCount();j++)
+                {
+                    if(countryModel.getValueAt(i,j)!=null)
+                    {
+                        bw.write(countryModel.getValueAt(i,j).toString()+"\t");
+                    }
+                }
+                bw.write("\n");
+            }
+            bw.close();
+
+        }
     }
 
 }
