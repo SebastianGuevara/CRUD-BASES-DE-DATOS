@@ -54,7 +54,18 @@ public class Report {
         if(main.getGUI().getReportGUI().countryCheckbox.isSelected()) {
 
             if (code != null) {
-                searchCountry += (" c.code = '" + code + "' ");
+                if (code == "City Country Code")
+                {
+                    searchCountry += " c.code = ci.countryCode";
+                }
+                else if (code == "Country Language Country Code")
+                {
+                    searchCountry += " c.code = cl.countryCode";
+                }
+                else
+                {
+                    searchCountry += (" c.code = '" + code + "' ");
+                }
             }
             if (name != null) {
                 if (searchCountry.charAt(searchCountry.length() - 1) == 'e') {
@@ -143,7 +154,7 @@ public class Report {
             if (capital != null) {
                 if (capital == "City ID")
                 {
-                    if (searchCountry.charAt(searchCountry.length() - 1) == 'e') {
+                    if (searchCountry.charAt(searchCountry.length() - 2) == 'e') {
                         searchCountry += (" c.capital = ci.id");
                     } else {
                         searchCountry += (" AND c.capital = ci.id");
@@ -170,6 +181,7 @@ public class Report {
 
         if(main.getGUI().getReportGUI().cityCheckbox.isSelected()) {
             if (cityID != null) {
+
                 if (searchCountry.charAt(searchCountry.length() - 1) == 'e') {
                     searchCountry += ("ci.ID = '" + cityID + "' ");
                 } else {
@@ -185,10 +197,25 @@ public class Report {
                 }
             }
             if (cityCode != null) {
-                if (searchCountry.charAt(searchCountry.length() - 1) == 'e') {
-                    searchCountry += (" ci.countryCode = '" + cityCode + "' ");
-                } else {
-                    searchCountry += ("AND ci.countryCode = '" + cityCode + "' ");
+                if (cityCode == "Country Code")
+                {
+                    searchCountry += " c.code = ci.countryCode";
+                }
+                else if (cityCode == "Country Language Country Code")
+                {
+                    if (searchCountry.charAt(searchCountry.length() - 1) == 'e') {
+                        searchCountry += (" ci.countryCode = '" + cityCode + "' ");
+                    } else {
+                        searchCountry += ("AND ci.countryCode = '" + cityCode + "' ");
+                    }
+                }
+                else
+                {
+                    if (searchCountry.charAt(searchCountry.length() - 1) == 'e') {
+                        searchCountry += (" ci.countryCode = '" + cityCode + "' ");
+                    } else {
+                        searchCountry += ("AND ci.countryCode = '" + cityCode + "' ");
+                    }
                 }
             }
             if (cityDistrict != null) {
@@ -464,6 +491,8 @@ public class Report {
     public ArrayList<String> fillComboBoxCountryCode() {
         String query = "select code from country group by code order by code";
         ArrayList<String> data = new ArrayList<>();
+        data.add("City Country Code");
+        data.add("Country Language Country Code");
 
         try
         {
