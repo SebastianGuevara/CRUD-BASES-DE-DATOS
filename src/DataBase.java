@@ -34,12 +34,7 @@ public class DataBase
 
 
         String url = "jdbc:mysql://localhost:3306/world";
-        con= DriverManager.getConnection(url,"root","12345");
-        PreparedStatement st1 = con.prepareStatement("SET FOREIGN_KEY_CHECKS=1");
-        PreparedStatement st2 = con.prepareStatement("SET GLOBAL FOREIGN_KEY_CHECKS=1");
-        st1.execute();
-        st2.execute();
-
+        con= DriverManager.getConnection(url,username,password);
     }
 
     public Connection getConnection()

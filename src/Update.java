@@ -3,8 +3,8 @@ import java.sql.*;
 
 public class Update {
 
-    private DataBase db = new DataBase();
-    private Connection con = db.getConnection();
+    Main main = new Main();
+    private Connection con = main.db.getConnection();
     public String updatedCountryCode, updatedCountryName, updatedCountryContinent, updatedCountryRegion, updatedCountryLocalName, updatedCountryGovernmentForm, updatedCountryHeadOfState, updatedCountryCode2;
     public int updatedCountryYear, updatedCountryPopulation, updatedCountryCapital;
     public String updatedCityName, updatedCityCode, updatedCityDistrict,updatedCityID;
@@ -12,7 +12,7 @@ public class Update {
     public String updatedCountryLCode, updatedCountryLLanguage, updatedCountryLIsOfficial;
     public float updatedCountryLPercentage;
     public float updatedCountrySurface, updatedCountryLifeExpectancy, updatedCountryGNP, updatedCountryGNPOld;
-    public Update() throws SQLException {
+    public Update() throws SQLException, ClassNotFoundException {
 
     }
 

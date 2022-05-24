@@ -8,8 +8,9 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class Report {
-    private final DataBase db= new DataBase();
-    private final Connection con = db.getConnection();
+
+    private final Main main = new Main();
+    private final Connection con = main.db.getConnection();
     public int cityCount;
     public String  localName, governmentForm, headOfState, code2;
     public int indepYear, population, capital;
@@ -21,7 +22,7 @@ public class Report {
     public char[] columnsChar = new char[1];
     private String searchColumns = "";
     private String searchCountry = "";
-    private final Main main = new Main();
+
 
 
     public Report() throws SQLException, ClassNotFoundException {

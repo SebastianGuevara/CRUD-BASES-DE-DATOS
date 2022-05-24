@@ -1,6 +1,17 @@
+import javax.swing.*;
 import java.sql.SQLException;
 public class Main {
 
+
+    public static DataBase db;
+
+    static {
+        try {
+            db = new DataBase();
+        } catch (SQLException throwables) {
+            JOptionPane.showMessageDialog(null,"Incorrect username or password");
+        }
+    }
 
     private static final GUI GUI;
 
@@ -19,6 +30,7 @@ public class Main {
 
     public static void main(String[] args) throws ClassNotFoundException, SQLException
     {
+        db.getConnection();
         GUI.GUISetup();
     }
 

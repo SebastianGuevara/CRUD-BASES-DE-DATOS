@@ -7,8 +7,9 @@ import java.sql.Statement;
 
 public class Tables
 {
-   // private final GUI gui = new GUI();
-    public DataBase db;
+    Main main = new Main();
+   Connection con = main.db.getConnection();
+
     public DefaultTableModel cityModel = new DefaultTableModel()
     {
         @Override
@@ -16,15 +17,6 @@ public class Tables
             return false;
         }
     };
-
-    {
-        try {
-            db = new DataBase();
-        } catch (SQLException throwables) {
-            JOptionPane.showMessageDialog(null, "Usuario o clave incorrectos");
-            //throwables.printStackTrace();
-        }
-    }
 
     final JTable cityTable = new JTable()
     {
@@ -57,7 +49,7 @@ public class Tables
         }
     };
 
-    public Tables() throws ClassNotFoundException {
+    public Tables() throws ClassNotFoundException, SQLException {
         cityTableConfig();
         countryLanguagesTableConfig();
         countryTableConfig();
@@ -78,7 +70,6 @@ public class Tables
         try
         {
 
-            Connection con = db.getConnection();
             Statement st;
             st = con.createStatement();
             ResultSet result = st.executeQuery("SELECT * FROM city");
@@ -125,7 +116,6 @@ public class Tables
         try
         {
 
-            Connection con = db.getConnection();
             Statement st;
             st = con.createStatement();
             ResultSet result = st.executeQuery("SELECT * FROM city");
@@ -172,7 +162,6 @@ public class Tables
         String[] data = new String[4];
         try
         {
-            Connection con = db.getConnection();
             Statement st;
             st = con.createStatement();
             ResultSet result = st.executeQuery("SELECT * FROM countryLanguage");
@@ -229,7 +218,6 @@ public class Tables
 
         try
         {
-            Connection con = db.getConnection();
             Statement st;
             st = con.createStatement();
             ResultSet result = st.executeQuery("SELECT * FROM country");

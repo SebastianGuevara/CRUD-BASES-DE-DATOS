@@ -4,7 +4,6 @@ import java.sql.*;
 
 public class Delete
 {
-    private final DataBase db=new DataBase();
     private Main main = new Main();
 
 
@@ -12,7 +11,7 @@ public class Delete
     public int cityCount;
     public String oldCountryCode,oldCountryLLanguage,oldCountryLCode;
     public int oldCityID;
-    private final Connection con = db.getConnection();
+    private final Connection con = main.db.getConnection();
     public Delete() throws SQLException, ClassNotFoundException {
         Statement idStatement = con.createStatement();
         ResultSet rs = idStatement.executeQuery("select id from city order by id desc limit 1;");

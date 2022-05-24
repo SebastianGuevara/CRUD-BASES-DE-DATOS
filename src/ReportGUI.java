@@ -20,8 +20,8 @@ import java.util.Objects;
 
 public class ReportGUI
 {
-    private final DataBase db= new DataBase();
-    private final Connection con = db.getConnection();
+    Main main = new Main();
+    private final Connection con = main.db.getConnection();
 
     JPanel countryPanel = new JPanel();
     JPanel countryNorthPanel = new JPanel();

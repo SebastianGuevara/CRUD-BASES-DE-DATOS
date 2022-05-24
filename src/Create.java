@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public class Create
 {
     //private Connection con;
-    private final DataBase db = new DataBase();
+    Main main = new Main();
     public int newCityPopulation;
     public String newCityName,newCityCode,newCityDistrict;
     public String newCountryLCode,newCountryLLanguage,newCountryLIsOfficial;
@@ -13,9 +13,9 @@ public class Create
     public float newCountrySurface,newCountryLifeExpectancy,newCountryGNP,newCountryGNPOld;
     public int newCountryYear,newCountryPopulation,newCountryCapital;
     public int cityCount;
-    private final Connection con = db.getConnection();
+    private final Connection con = main.db.getConnection();
 
-    public Create() throws SQLException {
+    public Create() throws SQLException, ClassNotFoundException {
         Statement idStatement = con.createStatement();
         ResultSet rs = idStatement.executeQuery("select id from city order by id desc limit 1;");
         rs.next();
